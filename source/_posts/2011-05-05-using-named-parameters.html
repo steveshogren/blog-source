@@ -1,0 +1,82 @@
+---
+layout: post
+title: Using Named Parameters
+categories: []
+tags:
+- php
+- programming
+- python
+- vbnet
+status: publish
+type: post
+published: true
+meta:
+  _original_post_id: ''
+  _original_import_author: Steve Shogren
+---
+<p>
+  Up until recently, most of my programming was in php, which does not
+  support named parameters
+  (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ch06_05.htm"
+  target="_blank">this</a> doesn't count, and it will get you lynched)
+  so while switching to VB.NET and python, I have come to really
+  appreciate this handy feature.
+</p>
+<p>
+ Named parameters is one of those handy little things that can make
+  your life a little easier. Say, in python, you have a function that
+  takes a boolean value. Normally, I would create a variable just to
+  hold that boolean value, then pass it in, to try to be easier for
+  the next guy to understand.
+</p>
+``` python
+def do_stuff():
+    window(true)
+```
+<p>
+  Who knows what window's parameter is? What the heck is true anyway,
+  the window? <a href="http://www.jetbrains.com/pycharm/"
+  target="_blank">PyCharm</a> knows (and if you are using python
+  without it, I implore you to treat yourself to the demo) otherwise
+  you have to look up the function <em>like a barbarian</em> to see
+  what is going on. Sure, you can make it more clear with:
+</p>
+
+``` python
+def do_stuff():
+    collapse = true
+    window(collapse)
+```
+
+<p>Better then nothing, but still lame.</p>
+
+``` python
+def do_stuff():
+    window(collapse=true)
+```
+
+<p>
+  Boom! Way easier to read, no extra variables hanging around making
+  trouble. Many times I have made function parameters, called them one
+  thing, then made a variable with a slightly different name to pass
+  in for legibility, but no more of that crap! Now, when I have the
+  inclination to make a variable just to clarify something, I just
+  name the parameter and pass in the value right there, like a
+  civilized gentleman should.
+
+</p>
+<p>
+ Additionally, VB.NET has this too, with the slightly goofier
+  syntax of the ":="
+</p>
+
+``` vb.net
+Authenticate(pAllowBackupPassword:=True)
+```
+
+<p>
+  My cohort Daniel Miladinov pointed out that this is calling the
+  assignment operator directly, since calling it with just the equals
+  would perform
+  an <a href="http://en.wikipedia.org/wiki/Equals_sign#In_computer_programming">equality operator</a>. Smart guy, Dan.
+</p>
