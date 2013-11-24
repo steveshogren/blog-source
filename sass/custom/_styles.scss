@@ -1,2 +1,17 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+html {
+background: #f2f2f2;
+}
+.about-me {
+          overflow: hidden;
+          float: none;
+}
+.about-me .about-text {
+          width: 65%;	
+          float: left;
+}
+.about-me .gravatar {
+          width: 35%;	
+          float: right;
+}
