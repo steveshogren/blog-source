@@ -1,0 +1,29 @@
+---
+layout: post
+title: ORM Turning
+categories:
+- Programming
+tags:
+- programming
+status: publish
+type: post
+published: true
+---
+
+<p>
+  "... and it has to return 45,000 records a minute, or we are all screwed."
+</p> <p>
+  Monday morning, we inherited a legacy codebase. Tuesday, the word came down on stone tablets. Forty-five thousand records a minute, and no amount of political manuevering or incremental gains were going to save us. Too many broken promises. The last team mass quit over three months, leaving us the two most junior developers. Someone high up promised big, and we had to figure it out or we were going to lose the account.
+</p> <p>
+  "Does anyone even know how many it does now?"
+</p> <p>
+  We still don't even have the dumb thing running on our machines yet. Two weeks later we have enough data to test it. 2500 records a minute. We are all screwed.
+</p> <p>
+  Most of us are front-end developers who stepped forward when everyone else stepped back. Databases are a distent memory, something we maybe did a few jobs back. You "join" tables, right? What we know of this process is it selects from 2-3 dozen databases using an ORM while running through an engine that does some calcuations on the data, returning a message with several hundred fields.
+</p> <p>
+  "We need a new architecture, with read-optimized databases and queue-based messaging."
+</p> <p>
+  None of us have ever built such a system, but we have read about it, and like the faithful we nod solomnly in agreement. Why not? If the database is read-optimized, surely it will perform like we need. But a few dissist. 
+</p> <p>
+
+ 
