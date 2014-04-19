@@ -2,7 +2,7 @@
 layout: post
 title: "Dangerous Clojure Macros"
 date: 2014-02-04 16:56
-comments: true
+comments: false
 categories: 
 ---
 
