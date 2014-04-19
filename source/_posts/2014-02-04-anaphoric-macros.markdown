@@ -2,8 +2,11 @@
 layout: post
 title: "Dangerous Clojure Macros"
 date: 2014-02-04 16:56
-comments: false
+comments: true
 categories: 
+status: publish
+type: post
+published: false
 ---
 
 Clojure allows you to write macros that mutate the world.
