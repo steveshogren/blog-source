@@ -69,16 +69,18 @@ If we had this pattern matching, with a way to get the first and rest
 of a list, we could rewrite our code even more sucinctly.
 
 ``` csharp
-public IEnumerable<U> map<T, U>(Func<T, U> f, IEnumerable<T> list.Count() == 0) {
+public IEnumerable<U> map<T, U>(Func<T, U> f, IEnumerable<T> EMPTY) {
     return new List<string>();
 }
 public IEnumerable<U> map<T, U>(Func<T, U> f, IEnumerable<T> [first : rest]) {
-    return f(first).Concat(map(rest));
+    return map(rest).Add(f(first));
 }
 ```
 
-Here is the same code in Haskell, which does have that pattern
-matching. Don't worry, it is just as type safe as the C# example.
+The return is much more explicit, basically showing a declarative
+result for a given input. Here is the same code in Haskell, which does
+have that pattern matching. Don't worry, it is just as type safe as
+the C# example.
 
 ``` haskell
 map :: (a -> b) -> List a -> List b
@@ -121,7 +123,10 @@ b). The second parameter is a "List a". We decompose that list of "a"
 into the first and the rest. The ":." composes a new list, with the
 left side being the new first, and the right side being the new rest.
 
-In this way, pattern matching was able to remove the
+In this way, pattern matching is able to clearly remove edge cases: we
+just have a different function for each edge case. What would
+otherwise be an "if" statement deep inside the definition we are able
+to simplify considerably.
 
 
 
