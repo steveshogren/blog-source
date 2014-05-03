@@ -217,10 +217,10 @@ let convert(number, lang) =
         | Language.Spanish, x when x > 5 -> "Grande!"
 ``` 
 
-Here we introduce the "_" which is equivalent to a "default" in a C#
+Here we introduce the "\_" which is equivalent to a "default" in a C#
 "switch/case" statement. The bug in the code here is the missing
 Language.Spanish with numbers 1-5. The compiler dutifully points out
-the missing case: "(_, 1)", indicating that some combination of a
+the missing case: "(\_, 1)", indicating that some combination of a
 Language with the number 1 is likely to be missing. While not able to
 perfectly detect which Language it is, the fact that it detects it at
 all is astonishingly helpful. Imagine how much safer this makes all
