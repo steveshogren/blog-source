@@ -229,10 +229,10 @@ Lastly, let's show the final result of converting our original
 function to F#. If your entire function is just a single pattern
 match, you can remove the `match/with` line and use the `function`
 keyword, and simply match against the parameters (which I reversed for
-clarity).
+clarity, but do not need to be written).
 
 ```fsharp
-let convert(lang, number) = function
+let convert = function
     | Language.English, 0 -> "zero" 
     | Language.English, 1 -> "one"
     | Language.English, _ -> "..."
