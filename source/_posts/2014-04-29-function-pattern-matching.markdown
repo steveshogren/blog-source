@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Pattern Matching - Make Compiler Work for You"
+title: "Pattern Matching - Make the Compiler Work for You"
 date: 2014-04-28 22:05
 comments: true
 categories: 
