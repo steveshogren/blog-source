@@ -90,8 +90,8 @@ single behavior (adding a new function, changing a function's api,
 removing a function) are easier, because they are all grouped
 together. A change to the api of the `GetAll` function is harder in
 the traditional OO interface structure, requiring modifying several
-files. That same changing with pattern matching is very easy, only
-requiring changes to a few lines of code.
+files. That same change an a pattern matching structure is very easy,
+only requiring changes to a few lines of code.
 
 Similarly, a change requiring adding a new type is difficult in a
 pattern matching structure, as it will require finding every pattern
@@ -107,12 +107,13 @@ compiler checks both for us, letting us use the best tool for the job!
 |**OO Interfaces/Classes**  |  Easier  | Harder 
 |**Pattern Matching Types**  |         Harder  | Easier 
 
-I almost always find myself modifying the API of an interface more
-than I find myself adding new types. Anecdotally, I find that most
-often the changes I make are: adding new dependencies, changing the
-return type, or adding a new parameter that one of the subclasses
-need. For that use case, pattern matching is probably the better
-choice.
+<br />
+I almost always find myself modifying the functions of an
+interface more than I find myself adding new types. Anecdotally, I
+find that most often the changes I make are: adding new dependencies,
+changing the return type, or adding a new parameter that one of the
+subclasses need. For that use case, pattern matching is probably the
+better choice.
 
 Consider the change where we want to add a new function to the
 `IPaymentRepository` interface and change the location of the in
@@ -188,3 +189,6 @@ data". Whichever way your system is likely to change the most, that is
 the way you want to optimize your type. The good news is: in F# you
 can have a mix of both, and it is relatively easy to convert back and
 forth depending on how your system is changing the most.
+
+If you want additional reading on this topic, check out <a
+href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.
