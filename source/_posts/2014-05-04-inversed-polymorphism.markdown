@@ -39,7 +39,7 @@ is probably familiar to everyone: getting a database connection.
     // RepositoryFactory.cs
 	public class RepositoryFactory {
 		public static IPaymentRepository GetPaymentRepo () {
-			if (Config.configuration["database"] == "inmemory") {
+			if (Config.configuration["useInMemory"] == "true") {
 				return new InMemory();
 			} else {
 				return new Postgres();
@@ -70,9 +70,9 @@ let GetAll = function
     | Postgres -> raise(NotImplementedException())
         
 let GetPaymentRepo = 
-    match Config.configuration.["database"] with
-        | "inmemory" -> InMemory
-        | "postgres" -> Postgres 
+    match Config.configuration.["useInMemory"] with
+        | "true" -> InMemory
+        | _ -> Postgres 
 
 // somewhere in the code ...
 let repo = Payments.GetPaymentRepo
@@ -80,40 +80,45 @@ let payments = Payments.GetAll repo
 ```
 
 Notice how we separated our behavior from our types? The
-`PaymentRepository.InMemory` and the `PaymentRepository.Postgres` now are just empty
-types, much like an `Enum`. We are still able to get polymorphic
-behavior from them, using `match`! But why would we want to store our
-behavior separate from the type?
+`PaymentRepository.InMemory` and the `PaymentRepository.Postgres` now
+are just empty types, much like an `Enum`. We are still able to get
+polymorphic behavior from them, using `match`. 
+
+But why would we want to store our behavior separate from the type?
 
 By storing the behavior separate from the type, changes that effect a
 single behavior (adding a new function, changing a function's api,
 removing a function) are easier, because they are all grouped
 together. A change to the api of the `GetAll` function is harder in
 the traditional OO interface structure, requiring modifying several
-files. That same change an a pattern matching structure is very easy,
-only requiring changes to a few lines of code.
+files.
 
 Similarly, a change requiring adding a new type is difficult in a
 pattern matching structure, as it will require finding every pattern
-match and adding in the additional case. Without the power of the
-compiler to find missing cases, the pattern match dispatch is
-dangerous: it would be easy to miss a case. For the same reason, if
-the compiler did not verify that all implementors of an interface were
-valid, interfaces would be dangerous to change. Thankfully, the F#
-compiler checks both for us, letting us use the best tool for the job!
+match and adding in the additional case. Thankfully, the F# compiler
+checks both pattern matches and interfaces for us, letting us use the
+best tool for the job!
 
-|| Modifying a Type  | Modifying Behavior |
+As to safety, adding a new type is easy with interfaces, but the
+developer is left to find all places the concrete classes are
+instantiated themselves. Niether compiler will offer any warnings for
+a new interface subclass. For pattern matching polymorphism, the
+compiler will warn that there are missing cases every place a change
+needs to be made.
+
+|| Adding a Type  | Modifying Behavior |
 |------------- |------------- | ------------- |
-|**OO Interfaces/Classes**  |  Easier  | Harder 
-|**Pattern Matching Types**  |         Harder  | Easier 
+|**OO Interfaces/Classes**  |  Easier / Less Safe  | Harder / Safe 
+|**Pattern Matching Types**  |  Harder / Safe  | Easier / Safe
 
 <br />
 I almost always find myself modifying the functions of an
-interface more than I find myself adding new types. Anecdotally, I
-find that most often the changes I make are: adding new dependencies,
-changing the return type, or adding a new parameter that one of the
-subclasses need. For that use case, pattern matching is probably the
-better choice.
+interface more than I find myself adding new types. For that typical
+use case, pattern matching is probably the better choice.
+
+
+The biggest difference in safety is adding a new type will cause a
+warning, but adding a new type will not.
 
 Consider the change where we want to add a new function to the
 `IPaymentRepository` interface and change the location of the in
@@ -147,19 +152,14 @@ classes example, that requires editing _three separate files_.
 	}
 ```
 
-In the pattern matching example, all the behavior for the types are in
-one file, but we could just as easily write it anywhere. Since the
-compiler will warn us if there are any missing cases, if in the future
-we add a new type to PaymentRepository, all the places in the code
-that are missing that type will show up in the warning list. This of
-course would require editing every file that has a pattern match on
-the PaymentRepostiory.
-
 In case you were concerned that these F# types do not have any state,
-they actually can have fields just like regular classes. The new field
-does not need to be named until used in a pattern match, so the only
-time it is named is `payments` inside the `Add` and `GetAll`
-functions.
+they actually can have fields just like regular classes. Notice the
+`Dictionary<int, IPayment>` next to the `InMemory` type? That is a
+field! The new field does not need to be named until used in a pattern
+match, so the only time it is named is `payments` inside the `Add` and
+`GetAll` functions after we pattern match `InMemory`. In fact, if we
+didn't add it in the pattern match, the compiler would give us a
+warning!
 
 ``` fsharp
 type PaymentRepository = 
@@ -174,12 +174,6 @@ let Add db (payment:IPayment) =
 let GetAll = function
         | InMemory payments -> payments.Values;
         | Postgres -> raise(NotImplementedException())
-
-let GetPaymentRepo = 
-    match Config.configuration.["database"] with
-        // adding the empty dictionary to the InMemory type constructor
-        | "inmemory" -> InMemory(new Dictionary<int, IPayment>())
-        | "postgres" -> Postgres 
 ```
 
 Between the options of traditional interfaces verses pattern matching,
@@ -190,5 +184,13 @@ the way you want to optimize your type. The good news is: in F# you
 can have a mix of both, and it is relatively easy to convert back and
 forth depending on how your system is changing the most.
 
+Additionally, as a value judgement, I find the F# pattern matching to
+be significantly easier to read. The same code in C# requires twice
+the lines in three separate files, which adds a complexity burden for
+no reason. The F# code is even safer than the C# equivalent, as adding
+a new type will cause the compiler to give us warnings on any missing
+cases.
+
 If you want additional reading on this topic, check out <a
-href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.
+href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section
+2.4</a> in SICP.
