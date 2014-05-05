@@ -183,12 +183,17 @@ the way you want to optimize your type. The good news is: in F# you
 can have a mix of both, and it is relatively easy to convert back and
 forth depending on how your system is changing the most.
 
-Personally, I find the F# pattern matching to be significantly easier
-to read. The same code in C# requires twice the lines in three
-separate files, which adds a complexity burden for no reason. The F#
-code is safer than the C# equivalent, as adding a new type will create
-compiler warnings on any missing cases.
+Personally, I find F# pattern matching to be significantly easier to
+read. The same code in C# requires twice the lines in three separate
+files, which adds a complexity burden that brings no benefit. The F#
+code is safer, smaller, and easier to read than the C# equivalent.
 
-If you want additional reading on this topic, check out <a
-href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section
-2.4</a> in SICP.
+If you write code in C# or VB.NET right now, you could add in a
+project in F# today. All three languages are callable from the other
+two, so you could start by breaking out a small library that uses
+these feature immediately. F# modules and classes are callable from C#
+just like any other DLL library. In my mind, this is what sets F#
+apart from the pack: its powerful interop on such a mature stack.
+
+If you want additional reading on the topic of polymorphism, check out
+<a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.
