@@ -100,11 +100,12 @@ checks both pattern matches and interfaces for us, letting us use the
 best tool for the job!
 
 As to safety, adding a new type is easy with interfaces, but the
-developer is left to find all places the concrete classes are
-instantiated themselves. Niether compiler will offer any warnings for
-a new interface subclass. For pattern matching polymorphism, the
-compiler will warn that there are missing cases every place a change
-needs to be made.
+developer is left without assistance to find all places the concrete
+classes are instantiated and add the new type. Niether compiler will
+offer any warnings for a new interface subclass. For pattern matching
+polymorphism, the compiler will warn that there are missing cases
+every place a change needs to be made. So while harder to add a new
+type with pattern matching, it is safer.
 
 || Adding a Type  | Modifying Behavior |
 |------------- |------------- | ------------- |
@@ -115,10 +116,6 @@ needs to be made.
 I almost always find myself modifying the functions of an
 interface more than I find myself adding new types. For that typical
 use case, pattern matching is probably the better choice.
-
-
-The biggest difference in safety is adding a new type will cause a
-warning, but adding a new type will not.
 
 Consider the change where we want to add a new function to the
 `IPaymentRepository` interface and change the location of the in
@@ -152,14 +149,7 @@ classes example, that requires editing _three separate files_.
 	}
 ```
 
-In case you were concerned that these F# types do not have any state,
-they actually can have fields just like regular classes. Notice the
-`Dictionary<int, IPayment>` next to the `InMemory` type? That is a
-field! The new field does not need to be named until used in a pattern
-match, so the only time it is named is `payments` inside the `Add` and
-`GetAll` functions after we pattern match `InMemory`. In fact, if we
-didn't add it in the pattern match, the compiler would give us a
-warning!
+Here is the change to add a new function in the pattern matching example:
 
 ``` fsharp
 type PaymentRepository = 
@@ -176,6 +166,15 @@ let GetAll = function
         | Postgres -> raise(NotImplementedException())
 ```
 
+In case you were concerned that these F# types do not have any state,
+they actually can have fields just like regular classes. Notice the
+`Dictionary<int, IPayment>` next to the `InMemory` type? That is a
+field! The new field does not need to be named until used in a pattern
+match, so the only time it is named is `payments` inside the `Add` and
+`GetAll` functions after we pattern match `InMemory`. In fact, if we
+didn't add it in the pattern match, the compiler would give us a
+warning!
+
 Between the options of traditional interfaces verses pattern matching,
 neither way is truely the best for every circumstance: each comes with
 a trade-off. I liken the trade-offs to the "grain of the
@@ -184,12 +183,11 @@ the way you want to optimize your type. The good news is: in F# you
 can have a mix of both, and it is relatively easy to convert back and
 forth depending on how your system is changing the most.
 
-Additionally, as a value judgement, I find the F# pattern matching to
-be significantly easier to read. The same code in C# requires twice
-the lines in three separate files, which adds a complexity burden for
-no reason. The F# code is even safer than the C# equivalent, as adding
-a new type will cause the compiler to give us warnings on any missing
-cases.
+Personally, I find the F# pattern matching to be significantly easier
+to read. The same code in C# requires twice the lines in three
+separate files, which adds a complexity burden for no reason. The F#
+code is safer than the C# equivalent, as adding a new type will create
+compiler warnings on any missing cases.
 
 If you want additional reading on this topic, check out <a
 href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section
