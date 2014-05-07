@@ -193,7 +193,8 @@ project in F# today. All three languages are callable from the other
 two, so you could start by breaking out a small library that uses
 these feature immediately. F# modules and classes are callable from C#
 just like any other DLL library. In my mind, this is what sets F#
-apart from the pack: its powerful interop on such a mature stack.
+apart from other languages: it is more powerful and safe than C#, but
+with high performance and interoperability with existing C# libraries.
 
 If you want additional reading on the topic of polymorphism, check out
 <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.
