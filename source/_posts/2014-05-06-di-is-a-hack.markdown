@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Good Design, Java, or TDD. Pick two."
+title: "Good Design, Java, or Unit Testing. Pick two."
 date: 2014-05-06 12:05
 comments: true
 categories: 
@@ -9,27 +9,28 @@ tags:
 - programming
 status: publish
 type: post
-published: true
+published: false
 ---
 
 Every codebase I have seen or heard of that uses dependency injection
-for all dependencies also performs strict test driven development. Why
-is that?  What about unit testing and DI are so linked?
+for all dependencies also performs strict unit testing. Why is that?
+What about unit testing and DI are so linked?
 
 You cannot have unit testing in Java/C# without dependency injection.
 
-If you see a codebase in Java/C# that has ten injected classes, right
-there, you have a codebase that does heavy unit testing. If you are
-deep into the unit testing culture, you will have been told to say,
-"but it is good design to use DI everywhere!" Is it really? Do the
-contortions required to do DI make your code easier to
+If you have ever seen a codebase in Java/C# that has ten injected
+classes, right there, you have a codebase that does heavy unit
+testing. If you are deep into the unit testing culture, you will have
+been taught that it is a good design to use DI everywhere. Is it
+really? Do the contortions required to do DI make your code easier to
 use/reuse/refactor? Or do you do it because you have to? Can you think
 of a single time where DI made anything easier?
 
-The TDD proponents realized that you cannot perform unit testing
-without DI in Java/C#, and so they have convinced us that a completely
-dependency injected codebase is a good design. In reality, DI for unit
-testing is a hack because Java/C# are so ill-suited to unit testing.
+The TDD proponents realized that you cannot reasonably perform unit
+testing without DI in Java/C#, and so they have argued that a
+completely dependency injected codebase is a good design. In reality,
+DI for unit testing is a hack because Java/C# are so ill-suited to
+unit testing.
 
 For example, how would we unit test a function that talks to the
 database in C# without a framework that requires mappings and global
@@ -66,13 +67,14 @@ namespace Repositories
 
 Tests grow in maintenance difficulty with the size of the function
 being tested. Often this leads to a design with many small
-one-function classes. Rather than having a single reason to change,
-these classes have a single reason to "test". Usually, such a design
-will have several classes in a row that each only calls the next. This
-"chain" of classes together are cohesive, but instead of being a
-single class together, they are all split apart. Such a functional
-design would normally be fine, except every function needs a twenty line
-wrapper of namespaces, imports, interfaces, and constructors.
+one-function classes. This is actually not a bad thing! Rather than
+having a single reason to change, these classes have a single reason
+to "test". Usually, such a design will have several classes in a row
+that each only calls the next. This "chain" of classes together are
+cohesive, but instead of being a single class together, they are all
+split apart. Such a functional design would normally be fine, except
+every function needs a twenty line wrapper of namespaces, imports,
+interfaces, and constructors.
 
 Comparatively, in languages like Javascript, Ruby, and Clojure,
 replacing a function for testing is easy! Every function does not need
@@ -87,6 +89,6 @@ function getConnection() { return new DatabaseConnection(); }
 getConnection = function() { return { Execute: function(sql) {}}};
 ```
 
-I am now able to test my "Insert" function without being afraid of it
-calling any other dependencies. My design can take whatever shape
-best fits the problem.
+I am now able to test my "Insert" function without it calling the real
+dependencies. My design can take whatever shape best fits the problem,
+without constraining itself to "what works for testing".
