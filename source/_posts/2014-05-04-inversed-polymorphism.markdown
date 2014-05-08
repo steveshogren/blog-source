@@ -12,9 +12,9 @@ type: post
 published: true
 ---
 
-In my last post we saw how powerful the `match` statement is in
-F#. Using `match` allows the compiler to give us warnings for missing
-cases, no matter what the type.
+In my last post on the power of pattern matching, we saw how powerful
+the `match` statement is in F#. Using `match` allows the compiler to
+give us warnings for missing cases, no matter what the type.
 
 Let's look at how pattern matching changes our design, allowing for an
 inversion of the usual OO way of polymorphism. Here is an example that
@@ -104,8 +104,8 @@ developer is left without assistance to find all places the concrete
 classes are instantiated and add the new type. Niether compiler will
 offer any warnings for a new interface subclass. For pattern matching
 polymorphism, the compiler will warn that there are missing cases
-every place a change needs to be made. So while harder to add a new
-type with pattern matching, it is safer.
+every place a change needs to be made. While harder to add a new type
+with pattern matching, it is safer.
 
 || Adding a Type  | Modifying Behavior |
 |------------- |------------- | ------------- |
@@ -185,8 +185,8 @@ forth depending on how your system is changing the most.
 
 Personally, I find F# pattern matching to be significantly easier to
 read. The same code in C# requires twice the lines in three separate
-files, which adds a complexity burden that brings no benefit. The F#
-code is safer, smaller, and easier to read than the C# equivalent.
+files, which adds a complexity burden for no reason. The F# code is
+safer, smaller, and easier to modify than the C# equivalent.
 
 If you write code in C# or VB.NET right now, you could add in a
 project in F# today. All three languages are callable from the other
