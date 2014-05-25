@@ -6,6 +6,7 @@ comments: true
 categories: 
 - Programming
 - Technical Skills
+- F#
 tags:
 - programming
 status: publish
