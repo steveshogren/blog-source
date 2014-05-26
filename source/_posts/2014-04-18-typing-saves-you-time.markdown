@@ -4,7 +4,7 @@ title: "Typing Saves You Time"
 date: 2014-04-18 22:05
 comments: true
 categories: 
-- Programming
+- Technical Skills
 tags:
 - programming
 status: publish

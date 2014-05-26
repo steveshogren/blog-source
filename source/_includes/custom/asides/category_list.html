@@ -1,0 +1,11 @@
+<section>
+  <h1>Categories</h1>
+  <ul id="recent_posts">
+    {% for category in site.categories %}
+    {% capture category_url %}{{ site.category_dir }}/{{ category | first | slugize | downcase | replace:' ','-' | replace: '#','-number' | append:'/'}}{% endcapture %}
+    <li class="post">
+      <a href="{{ root_url | append:'/' | append:category_url }}"><span>{{ category | first }}</span><span style="float:right">{{ category | last | size }}</span></a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>

@@ -4,7 +4,6 @@ title: "Inverted Polymorphism with Pattern Matching"
 date: 2014-04-28 22:05
 comments: true
 categories: 
-- Programming
 - Technical Skills
 - F#
 tags:

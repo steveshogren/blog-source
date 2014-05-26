@@ -4,7 +4,7 @@ title: "Good Design, Java, or Unit Testing. Pick two."
 date: 2014-05-06 12:05
 comments: true
 categories: 
-- Programming
+- Unit Testing
 tags:
 - programming
 status: publish
