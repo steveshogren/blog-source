@@ -33,7 +33,23 @@ cost.
 
 Most skills fall along a continuum of tactical to strategic.
 
-A skill
+What are some tactical skills?
+* Typing speed 
+* Typing accuracy
+* Editor shortcuts
+* "Mouse-free" editing systems: Vim, Emacs
+* Refactoring tools
+* Debugging
+* Unit testing
+
+Some strategic skills?
+* Gathering accurate requirements
+* Building abstractions 
+* Training developers
+* Organizing teams
+* Thinking
+* Learning new languages/frameworks
+* 
 
 ## Languages ##
 
