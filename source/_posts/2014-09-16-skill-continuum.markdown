@@ -9,8 +9,7 @@ categories:
 type: post
 ---
 
-        Learning Vim is a waste of time; I can and will prove it! -
-        Coworker
+        Learning Vim is a waste of time; I can prove it! - Anonymous
         
 I recently had a gentle discussion with a new teammate about whether
 or not they should learn to use Vim. My team uses a Vim emulator
@@ -26,33 +25,83 @@ because we were slower by using it.
 
 As any such localized experiments go, he never really came up with
 anything conclusive either way. Personally, I suspect he spent more
-mental energy trying to figure out why Vim was worse than if he had
-just learned it. We mostly shrugged it off, and that was that. It got
-me thinking about skills we learn as developers, and how much they
-cost.
+time and mental energy trying to figure out why Vim was worse than if
+he had just buckled down and learned it. This got me thinking about
+skills we learn as developers, and how much they cost.
 
 Most skills fall along a continuum of tactical to strategic.
 
-What are some tactical skills?
-* Typing speed 
-* Typing accuracy
+Tactical Skills
+* Typing speed/accuracy
 * Editor shortcuts
 * "Mouse-free" editing systems: Vim, Emacs
+* Clean coding practices
 * Refactoring tools
+* Repl Driven Development
+
+Midway Skills
 * Debugging
 * Unit testing
+* Building abstractions
 
-Some strategic skills?
-* Gathering accurate requirements
-* Building abstractions 
+Strategic Skills
+* Gathering requirements
 * Training developers
 * Organizing teams
-* Thinking
-* Learning new languages/frameworks
-* 
+* Understanding the real problem
+* Learning new languages and frameworks
+* Automating tasks
+* Designing simple solutions
 
-## Languages ##
+The more strategic the skills, the "softer" they become. The reason
+for this is that soft skills often allow for the greatest leverage on
+a project.
 
-        "A language that doesn't affect the way you think about programming,
-        is not worth knowing." - Alan Perlis
+Why is this?
+
+Consider the developer, who by more accurately gathering requirements
+for a few days, realizes that the stakeholder can use a preexisting
+solution instead of a six month planned project. If you consider how
+many keystrokes he saved, there is no way he could have possibly typed
+fast enough or refactored efficiently enough to make up for that saved
+six months of effort. Unless he could've typed out a six month project
+in those few days, his time was better spent where it was. Obviously,
+these opportunities do not happen all the time, but they _do_ happen.
+
+Think about the return on investment for training developers. If you
+have an evenly distributed team, there is a good chance you have some
+lower performing developers. I have witnessed times where a few weeks of
+pairing to brush up the skills of a less skilled developer caused them
+to suddenly become much more productive. In terms of total company
+effort, that small investment paid back many times before the end of
+the year as the newly trained developer was able to tackle their work
+with a renewed vigor that comes from a greater mastery of their domain.
+
+Similarly, I have seen the judicious use of automation for deployment,
+testing, and building greatly reduce the friction of development for
+entire teams.
+
+That being said, I think there comes a point where you have to put
+fingers to keyboard and actually produce working software. Of course,
+the fastest and best software is the software you never have to
+write. But, when you absolutely must write new software, the skill to
+actually execute becomes very important. Tactical skills increase in
+significance the closer you get to work.
+
+While a fast software tactician will never "beat" a great strategist
+in terms of raw business value, a great strategist that is a terrible
+tactician will be significantly hampered. A strategist who forgets or
+ignores good tactics or works counter to the main purpose of adding
+business value is what we call an "architecture astronaut" or an
+"ivory tower architect".
+
+I think a developer who wants to improve should make sure they are
+improving all across the spectrum. Don't fall into the trap of
+focusing more on strategic skills, letting the tactical skill
+atrophy. 
+
+Lastly, on the subject of "what to study". I think it is possible to
+study a number of subjects all across the continuum all at
+once. Unless you have weeks where you never type any code at all,  
+
 
