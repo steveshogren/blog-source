@@ -102,6 +102,19 @@ atrophy.
 
 Lastly, on the subject of "what to study". I think it is possible to
 study a number of subjects all across the continuum all at
-once. Unless you have weeks where you never type any code at all,  
+once. Unless you have weeks where you never type any code at all, you
+can practice and learn new tactical techniques all the time. If it
+slows you down today, but speeds you up next week, chances are it is
+worth it. Even if it slowed you down to a quarter your usual speed for
+two weeks, but then gives you a measly 5% boost to productively
+after that, you'll earn that time back by the end of the year, plus
+some. And 5% is not hard to do. I'd guess learning a few new
+navigation or refactoring shortcuts would net you 5% easily.
+
+When studying more strategic skills, the same holds, but they are
+harder to learn. The best way I have found for learning strategic
+skills is to read books about it, and try to work around others who
+are good at it. Neither books or working with others will get you all
+the way there, you also have to apply it yourself.
 
 
