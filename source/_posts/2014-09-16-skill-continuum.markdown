@@ -179,11 +179,11 @@ The hardest thing I think a more senior developer has to deal with is
 humbling themselves to learn a perceived "entry-level" skill. I have
 another post brewing about this very topic, so I'll not get too much
 into it here. But if you have gotten to a place where you feel like
-you are so senior some skills are too "entry-level" for you to learn,
-I think you need to humble yourself and learn them. Nothing can be
-gained from pretending like they are not valuable. Additionally, the
-assumption that your time is now so valuable that it is "a waste" to
-spend it on learning tactical skills is absurd. 
+you are so senior that some skills are too "entry-level" for you to
+learn, I think you need to humble yourself and learn them. Nothing can
+be gained from pretending like they are not valuable. Additionally,
+the assumption that your time is now so valuable that it is "a waste"
+to spend it on learning tactical skills is absurd.
 
 Claiming you are too good to waste on low level skills not only
 belittles everyone around you, but belies a deep misunderstanding of
@@ -192,11 +192,14 @@ and edit code isn't just spending longer to do that task, but they are
 paying a missed opportunity cost in time they could have spent in more
 strategic endeavors. They could have been training, planning,
 gathering requirements, building better automation, etc, instead they
-stubbornly claim "typing isn't what software is about", but by giving
-it so little credence, they have made it most of their actual mental
-effort! The developer who doesn't have to think about moving a file or
-editing a structure finds themselves quickly through the tactical
-efforts, free to think.
+stubbornly claim "typing isn't what software is about". By giving it
+so little credence, they have made it most of their actual mental
+effort! Take simple touch-typing. Imagine how much mental effort it
+takes the hunt-and-peck typist to write out a single line of
+code. That is mental overhead that is simply wasted. The developer who
+doesn't have to think about how to move a file or edit a structure
+finds themselves quickly through the tactical efforts with little
+distraction, free to think deeply.
 
 # Resources
 
