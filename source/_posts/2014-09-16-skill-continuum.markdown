@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Software Skills Continuum"
-date: 2014-07-26 11:46
+date: 2014-12-02 7:26
 comments: true
 categories: 
 - Technical Skills
