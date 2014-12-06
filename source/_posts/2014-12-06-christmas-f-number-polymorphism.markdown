@@ -10,7 +10,7 @@ status: publish
 published: true
 ---
 
-One of my favorite things of F# is how it lets you choose how you want
+One of my favorite things about F# is how it lets you choose how you want
 to align your data.
 
 In the previous posts highlighting on
