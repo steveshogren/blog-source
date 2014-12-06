@@ -4,6 +4,7 @@ title: "Software is Too Hard"
 date: 2014-12-02 16:47
 comments: true
 categories: 
+published: false
 ---
 
 I think I have figured out why everyone hates everyone else's code.
@@ -14,7 +15,8 @@ I think I have figured out why everyone hates everyone else's code.
 follow all the trends, and read all the blogs. Don't lump me in with
 the slackers, the architecture astronauts, the language enthusiasts!"
 
-I promise you I can find a pile of developers who will hate your code. 
+I promise you I can find other equally good developers who will hate
+your code.
 
 As an industry, we all muddle along, and most of the time, we can
 produce more value than we consume. I personally know I have been
@@ -30,13 +32,13 @@ have written? Did it scale, was it easy to hand-off, was it tested,
 was it secure, did it come out in time? Chances are, no, it didn't.
 
 So, programming is too hard for humans. Now what? I think we need to
-start simplifying the craft. I think we need to start consolidating
-languages, databases, tools. Instead of adding another mustache
-library or blog platform, we need to start focusing our efforts. 
+start simplifying the craft. Accepting our limitations is the first
+step to working around them. The developer who doesn't trust their own
+abilites to build "good software" will take even greater care. The
+humble developer keeps up with good practices, keeps refining their
+understanding of what makes code "good" and keeps 
 
-I think the language designers need to start making languages simpler
-and safer to use. I started learning Haskell and F# this year, and was
-amazed at how much easier it was to get right. 
+
 
 
 
