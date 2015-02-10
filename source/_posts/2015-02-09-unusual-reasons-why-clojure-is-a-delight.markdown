@@ -103,10 +103,10 @@ also possible to get a similar value with something called multimethods.
 ;; => "mow says Mr Cat"
 ```
 
-In here we use the :type keyword to be the function to "route" using,
+In this example, we use the :type keyword to be the "route" function,
 and the two methods fill in two of the possible concrete types. We are
-not limited to just the :type, we can dispatch on anything on the
-passed map, even if the id is odd or not.
+not limited to just a keyword, we can dispatch on anything on the
+passed map, for example, the oddness of the id:
 
 ``` clojure
 (defmulti odds? (comp odd? :id))
@@ -121,4 +121,44 @@ passed map, even if the id is odd or not.
 
 While both examples are a bit silly, they should demonstrate the power
 of simple polymorphism. But you might think, what about inheritance?
-Multimethods have that too!
+Multimethods allow that too!
+
+# Simple Hierarchical Polymorphism
+
+First, a simple hierarchy of keywords using a built-in function
+```derive```.
+
+``` clojure
+(derive ::cat ::mammal)
+(derive ::dog ::mammal)
+(derive ::poodle ::dog)
+
+(isa? ::poodle ::mammal)
+;; => true
+(isa? ::poodle ::cat)
+;; => false
+```
+
+With a built in ability to make arbitrary hierarchies, we can have
+inherited behavior with even greater flexibility, because we are not
+limited to a single type, but rather any number of attributes in the
+data.
+
+``` clojure
+(defmulti speak :animal)
+(defmethod speak ::poodle [d] "chirps")
+(defmethod speak ::mammal [c] "breathes")
+
+(speak {:animal ::poodle :id 1 :name "Spike"})
+;; => "chirps"
+(speak {:animal ::dog :id 2 :name "Mr Dog"})
+;; => "breathes"
+```
+
+We can see the ::dog keyword doesn't have an explicit speak
+implementation, which is fine, because it will then use the next
+parent implementation, which returns "breathes".
+
+This is possible because the default equality check of multimethod is
+the ```isa?``` function!  Uses of multimethod hierarchies will now
+correctly have inherited behavior for complex structures.
