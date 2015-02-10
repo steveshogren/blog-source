@@ -93,17 +93,17 @@ is possible to achieve a similar effect by passing functions, it is
 also possible to get a similar value with something called multimethods.
 
 ``` clojure
-(defmulti speak :type)
+(defmulti speak :animal)
 (defmethod speak :dog [d] (str "woof says " (:name d)))
 (defmethod speak :cat [c] (str "mow says " (:name c)))
 
-(speak {:type :dog :id 1 :name "Spike"})
+(speak {:animal :dog :id 1 :name "Spike"})
 ;; => "woof says Spike"
-(speak {:type :cat :id 2 :name "Mr Cat"})
+(speak {:animal :cat :id 2 :name "Mr Cat"})
 ;; => "mow says Mr Cat"
 ```
 
-In this example, we use the :type keyword to be the "route" function,
+In this example, we use the :animal keyword to be the "route" function,
 and the two methods fill in two of the possible concrete types. We are
 not limited to just a keyword, we can dispatch on anything on the
 passed map, for example, the oddness of the id:
@@ -113,9 +113,9 @@ passed map, for example, the oddness of the id:
 (defmethod odds? true [d] "odd id")
 (defmethod odds? false [c] "even id")
 
-(odds? {:type :dog :id 1 :name "Spike"})
+(odds? {:animal :dog :id 1 :name "Spike"})
 ;; => "odd id"
-(odds? {:type :cat :id 2 :name "Mr Cat"})
+(odds? {:animal :cat :id 2 :name "Mr Cat"})
 ;; => "even id"
 ```
 
@@ -123,10 +123,12 @@ While both examples are a bit silly, they should demonstrate the power
 of simple polymorphism. But you might think, what about inheritance?
 Multimethods allow that too!
 
-# Simple Hierarchical Polymorphism
+# Simple Inheritance
 
-First, a simple hierarchy of keywords using a built-in function
-```derive```.
+We don't build inheritance on a single type, but on a hierarchy of
+keywords. Those can be dispatched on just like any other
+keyword. First, an example hierarchy of keywords using the built-in
+functions ```derive``` and ```isa?```.
 
 ``` clojure
 (derive ::cat ::mammal)
@@ -137,12 +139,16 @@ First, a simple hierarchy of keywords using a built-in function
 ;; => true
 (isa? ::poodle ::cat)
 ;; => false
+
+::cat
+;; => :clojure-getting-started.db/cat
 ```
 
-With a built in ability to make arbitrary hierarchies, we can have
-inherited behavior with even greater flexibility, because we are not
-limited to a single type, but rather any number of attributes in the
-data.
+These ```::``` keywords are namespaced, which prevents
+collisions. With a built in ability to make arbitrary hierarchies, we
+can have inherited behavior with even greater flexibility, because we
+are not limited to a single type, but rather any number of attributes
+in the data.
 
 ``` clojure
 (defmulti speak :animal)
@@ -160,5 +166,43 @@ implementation, which is fine, because it will then use the next
 parent implementation, which returns "breathes".
 
 This is possible because the default equality check of multimethod is
-the ```isa?``` function!  Uses of multimethod hierarchies will now
-correctly have inherited behavior for complex structures.
+the ```isa?``` function! Because of this, uses of multimethod
+hierarchies can have inherited behavior for complex structures.
+
+# Mostly Monadic
+
+Languages like Haskell and F# have tools like the maybe monad that
+help add safety to operations. Using the maybe monad can completely
+prevent null reference exceptions by making you "unpack" the value
+every time, or "lift" the function. This is very powerful in the day
+to day.
+
+What does Clojure doe for this? In a typical Clojure feature which
+gives 80% of the value for 20% of the effort, Clojure has a great
+relationship with empty lists and nil. Rather than wrapping every
+value that is nullable, Clojure's default functions all _mostly_ deal
+with nil without throwing an exception. For example:
+
+``` clojure
+(get {:id 5} :id)
+;; => 5
+(get nil :id)
+;; => nil
+
+(first [3 2 1])
+;; => 3
+(first nil)
+;; => nil
+```
+
+Since for most of the core functions are smart like this, it is
+possible to gain much of the value and safety of monads without most
+of the hassle.
+
+
+# Conclusion
+
+These are a few simple features that keep me coming back to Clojure,
+even from languages like F# and Haskell. While Clojure is a bit more
+wordy than the ML family, and maybe not as safe, the simplicity of
+these features keep me coming back for more!
