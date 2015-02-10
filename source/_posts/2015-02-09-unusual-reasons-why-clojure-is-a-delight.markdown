@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Unusual Reasons Why Clojure Is a Delight"
+title: "Six Unusual Reasons Why Clojure Is a Delight"
 date: 2015-02-09 11:36
 comments: false
 categories: 
@@ -11,19 +11,19 @@ categories:
 tags:
 - programming
 categories: 
+published: true
 ---
 
 Clojure is a delightful language, but I rarely hear anyone talk about
 these simple reasons it is such an unusually delightful language to
 use.
 
-# Unit Testing
+## 1 - Unit Testing
 
 Clojure is the easiest language to unit test I have ever seen. To
 "mock" a function in a test only requires a simple replacement of the
 function definition to be replaced. No extraneous interfaces, no
-dependency injection, no mocking framework. The built in
-```with-redefs``` function will replace any function in any library or
+dependency injection, no mocking framework. The built in ```with-redefs``` function will replace any function in any library or
 namespace with a new definition.
 
 ``` clojure
@@ -43,7 +43,7 @@ the scope of the with-redefs. Couldn't be more simple! The binding
 only is in scope for code inside and called by the s-expression of the
 with-redefs, so no need to re-bind it or anything after the test.
 
-# Amazing Editing
+## 2 - Amazing Editing
 
 Many arguments have been made over those contentious
 parenthesis. While the most powerful use of s-expressions is to easily
@@ -55,16 +55,14 @@ move, replace, grow, or shrink any s-expression, string, map, or
 list. Languages that don't have a surrounding delimiter for
 expressions leave you jumping around with the cursor a whole lot more,
 which is a mental burden. Think about it, it is so much easier to
-write a parser to select ```(add 1 2)``` than it is for ```add(1,
-2)```. The reason being, what if you got the add function out of a
+write a parser to select ```(add 1 2)``` than it is for ```add(1, 2)```. The reason being, what if you got the add function out of a
 list?  Something like: ```functions[0](1,2)``` in s-expressions still
-has those surrounding parens for easy parsing: ```((first functions) 1
-2)```. Easy parsing means better tools, and no tool I have seen comes
+has those surrounding parens for easy parsing: ```((first functions) 1 2)```. Easy parsing means better tools, and no tool I have seen comes
 close to Vim+Paredit for almost speed of thought editing. Paredit also
 prevents "unmatched" delimiters of any kind, so everything always
 stays auto-balanced.
 
-# Live Attached Repl
+## 3 - Live Attached Repl
 
 Developing a in Clojure against a running version of the program is a
 huge bonus for speed. While possible to get similar behavior with an
@@ -80,7 +78,7 @@ If a debugger sheds light on a single line at a time when running an
 application, a live attached repl sheds light on the entire
 application.
 
-# No-fuss Polymorphism
+## 4 - No-fuss Polymorphism
 
 One of the best claims about "traditional" Java OO is
 polymorphism. The ability to make an interface with concrete classes
@@ -123,7 +121,7 @@ While both examples are a bit silly, they should demonstrate the power
 of simple polymorphism. But you might think, what about inheritance?
 Multimethods allow that too!
 
-# Simple Inheritance
+## 5 - Simple Multiple Inheritance
 
 We don't build inheritance on a single type, but on a hierarchy of
 keywords. Those can be dispatched on just like any other
@@ -133,6 +131,7 @@ functions ```derive``` and ```isa?```.
 ``` clojure
 (derive ::cat ::mammal)
 (derive ::dog ::mammal)
+(derive ::dog ::hairy)
 (derive ::poodle ::dog)
 
 (isa? ::poodle ::mammal)
@@ -159,17 +158,29 @@ in the data.
 ;; => "chirps"
 (speak {:animal ::dog :id 2 :name "Mr Dog"})
 ;; => "breathes"
+
+(defmulti shave :animal)
+(defmethod shave ::poodle [d] "shivers")
+(defmethod shave ::hairy [c] "stuggles")
+
+(shave {:animal ::poodle :id 1 :name "Spike"})
+;; => "shivers"
+(shave {:animal ::dog :id 2 :name "Rufs"})
+;; => "stuggles"
 ```
 
-We can see the ::dog keyword doesn't have an explicit speak
+We can see the ::dog keyword doesn't have an explicit speak or shave
 implementation, which is fine, because it will then use the next
-parent implementation, which returns "breathes".
+parent implementation, which returns "breathes" for speak or
+"struggles" for shave. Since we can have a keyword be the child of
+multiple parents, we get a multiple inherited behavior, where the
+first match is the one returned.
 
 This is possible because the default equality check of multimethod is
 the ```isa?``` function! Because of this, uses of multimethod
 hierarchies can have inherited behavior for complex structures.
 
-# Mostly Monadic
+## 6 - Mostly Monadic
 
 Languages like Haskell and F# have tools like the maybe monad that add
 safety to operations. For example, using the maybe monad can
@@ -206,7 +217,7 @@ of the hassle. Ultimately, a more rich type system allows for custom
 types which can be domain specific, but the the day-to-day primitive
 safety is still a huge win.
 
-# Conclusion
+## Conclusion
 
 These are a few simple features that keep me coming back to Clojure,
 even from languages like F# and Haskell. While Clojure is a bit more
