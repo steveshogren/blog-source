@@ -171,17 +171,17 @@ hierarchies can have inherited behavior for complex structures.
 
 # Mostly Monadic
 
-Languages like Haskell and F# have tools like the maybe monad that
-help add safety to operations. Using the maybe monad can completely
-prevent null reference exceptions by making you "unpack" the value
-every time, or "lift" the function. This is very powerful in the day
-to day.
+Languages like Haskell and F# have tools like the maybe monad that add
+safety to operations. For example, using the maybe monad can
+completely prevent null reference exceptions by making you ensure you
+"unpack" the value every time.
 
-What does Clojure doe for this? In a typical Clojure feature which
-gives 80% of the value for 20% of the effort, Clojure has a great
+How does Clojure address this? In a typical Clojure way, which gives
+80% of the value for 20% of the effort, Clojure has a great
 relationship with empty lists and nil. Rather than wrapping every
-value that is nullable, Clojure's default functions all _mostly_ deal
-with nil without throwing an exception. For example:
+value that is nullable in a type, Clojure's default functions all
+_mostly_ deal with nil and empty without throwing exceptions. For
+example:
 
 ``` clojure
 (get {:id 5} :id)
@@ -193,12 +193,18 @@ with nil without throwing an exception. For example:
 ;; => 3
 (first nil)
 ;; => nil
+(count nil)
+;; => 0
 ```
+
+This allows functions to be chained without fear that along the way a
+nil will get returned.
 
 Since for most of the core functions are smart like this, it is
 possible to gain much of the value and safety of monads without most
-of the hassle.
-
+of the hassle. Ultimately, a more rich type system allows for custom
+types which can be domain specific, but the the day-to-day primitive
+safety is still a huge win.
 
 # Conclusion
 
