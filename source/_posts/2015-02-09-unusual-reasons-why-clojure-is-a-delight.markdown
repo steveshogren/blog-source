@@ -14,16 +14,16 @@ categories:
 published: true
 ---
 
-Clojure is a delightful language, but I rarely hear anyone talk about
-these simple reasons it is such an unusually delightful language to
-use.
+Clojure is a delightful language, and here are six uncommonly
+discussed reasons why.
 
 ## 1 - Unit Testing
 
-Clojure is the easiest language to unit test I have ever seen. To
-"mock" a function in a test only requires a simple replacement of the
-function definition to be replaced. No extraneous interfaces, no
-dependency injection, no mocking framework. The built in ```with-redefs``` function will replace any function in any library or
+Clojure is the easiest language to unit test I have ever
+seen. "Mocking" a function in a test only requires a simple
+replacement of the function definition. No extraneous interfaces, no
+dependency injection, no mocking framework.  The built in function ```with-redefs```
+will replace any function in any library or
 namespace with a new definition.
 
 ``` clojure
@@ -31,11 +31,10 @@ namespace with a new definition.
   (+ 1 (get-current-id connection)))
 
 (testing "next-id"
-  ;; set get-current-id to be a function that
-  ;; always returns 4 and ignores its argument
+  ;; bind get-current-id to a function that always returns 4 
   (with-redefs [get-current-id (fn [_] 4)]
     (is (= (next-id "fake connection")
-           5))))
+           
 ```
 
 We "mock" the ```get-current-id``` function to always return 4 inside
@@ -50,29 +49,33 @@ parenthesis. While the most powerful use of s-expressions is to easily
 allow macros, for the day to day, s-expressions have a very important
 use: amazing editing!
 
-With Paredit (available in most editors), it is trivial to select,
+{% img center http://danmidwood.com/assets/animated-paredit/paredit-slurp-barf.gif 'image' 'images' %}
+
+With ParEdit (available in most editors), it is trivial to select,
 move, replace, grow, or shrink any s-expression, string, map, or
-list. Languages that don't have a surrounding delimiter for
-expressions leave you jumping around with the cursor a whole lot more,
-which is a mental burden. Think about it, it is so much easier to
-write a parser to select ```(add 1 2)``` than it is for ```add(1, 2)```. The reason being, what if you got the add function out of a
-list?  Something like: ```functions[0](1,2)``` in s-expressions still
-has those surrounding parens for easy parsing: ```((first functions) 1 2)```. Easy parsing means better tools, and no tool I have seen comes
-close to Vim+Paredit for almost speed of thought editing. Paredit also
-prevents "unmatched" delimiters of any kind, so everything always
-stays auto-balanced.
+list. [This animated guide](http://danmidwood.com/content/2014/11/21/animated-paredit.html)
+shows excellent examples of ParEdit that are too
+complex to explain here.
+
+Languages that don't have a surrounding delimiter for expressions
+leave you jumping around with the mouse and arrow keys a whole lot more.
+Because it is so much easier to write a parser to select ```(add 1 2)```
+than it is for ```add(1, 2)```, the tooling is so much better.
+
+No local editing tool I have seen comes close to Vim with ParEdit for
+effective editing. 
 
 ## 3 - Live Attached Repl
 
-Developing a in Clojure against a running version of the program is a
-huge bonus for speed. While possible to get similar behavior with an
-attached debugger in other languages, the fluidity of an always-on
-live attached repl is incredible. At any point, it is possible to run
-and rerun any given expression to see the results. More than once, I
-have seen an exception caused by calling a certain function. I trace
-that function to see the exact inputs that cause the exception, and am
-able to quickly run every line of the offending function to see the
-source.
+Developing in Clojure against a running version of the program is a
+huge bonus for development speed. While possible to get similar
+behavior with an attached debugger in other languages, the fluidity of
+an always-on live attached repl is incredible. At any point, it is
+possible to run and rerun any given expression to see the
+results. More than once, I have seen an exception caused by calling a
+certain function. I trace that function to see the exact inputs that
+cause the exception, and am able to quickly run every line of the
+offending function to see the source.
 
 If a debugger sheds light on a single line at a time when running an
 application, a live attached repl sheds light on the entire
@@ -162,6 +165,8 @@ in the data.
 (defmulti shave :animal)
 (defmethod shave ::poodle [d] "shivers")
 (defmethod shave ::hairy [c] "stuggles")
+(defmethod shave ::mammal [c] "maybe cant be shaved!")
+(prefer-method shave ::hairy ::mammal)
 
 (shave {:animal ::poodle :id 1 :name "Spike"})
 ;; => "shivers"
@@ -169,12 +174,12 @@ in the data.
 ;; => "stuggles"
 ```
 
-We can see the ::dog keyword doesn't have an explicit speak or shave
-implementation, which is fine, because it will then use the next
+We can see the ```::dog``` keyword doesn't have an explicit speak or shave
+implementation, which is fine, because it will then use the "preferred"
 parent implementation, which returns "breathes" for speak or
 "struggles" for shave. Since we can have a keyword be the child of
 multiple parents, we get a multiple inherited behavior, where the
-first match is the one returned.
+preferred match is the one returned.
 
 This is possible because the default equality check of multimethod is
 the ```isa?``` function! Because of this, uses of multimethod
