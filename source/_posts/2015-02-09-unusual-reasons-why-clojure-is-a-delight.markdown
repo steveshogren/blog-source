@@ -38,7 +38,7 @@ namespace with a new definition.
 ```
 
 We "mock" the ```get-current-id``` function to always return 4 inside
-the scope of the with-redefs. Couldn't be more simple! The binding
+the scope of ```with-redefs```. Couldn't be more simple! The binding
 only is in scope for code inside and called by the s-expression of the
 with-redefs, so no need to re-bind it or anything after the test.
 
@@ -85,9 +85,7 @@ application.
 
 One of the best claims about "traditional" Java OO is
 polymorphism. The ability to make an interface with concrete classes
-gives the powerful ability to replace behavior dynamically. A function
-that takes an IRunner interface can be given anything that matches
-that interface!
+gives the powerful ability to replace behavior dynamically.
 
 While most of the time, in any language with first class functions, it
 is possible to achieve a similar effect by passing functions, it is
@@ -95,8 +93,8 @@ also possible to get a similar value with something called multimethods.
 
 ``` clojure
 (defmulti speak :animal)
-(defmethod speak :dog [d] (str "woof says " (:name d)))
-(defmethod speak :cat [c] (str "mow says " (:name c)))
+(defmethod speak :dog [this] (str "woof says " (:name this)))
+(defmethod speak :cat [this] (str "mow says " (:name this)))
 
 (speak {:animal :dog :id 1 :name "Spike"})
 ;; => "woof says Spike"
@@ -104,7 +102,7 @@ also possible to get a similar value with something called multimethods.
 ;; => "mow says Mr Cat"
 ```
 
-In this example, we use the :animal keyword to be the "route" function,
+In this example, we use the ```:animal``` keyword to be the "route" function,
 and the two methods fill in two of the possible concrete types. We are
 not limited to just a keyword, we can dispatch on anything on the
 passed map, for example, the oddness of the id:
@@ -129,7 +127,8 @@ Multimethods allow that too!
 We don't build inheritance on a single type, but on a hierarchy of
 keywords. Those can be dispatched on just like any other
 keyword. First, an example hierarchy of keywords using the built-in
-functions ```derive``` and ```isa?```.
+functions ```derive``` and ```isa?```. These ```::``` keywords are
+namespaced, which prevents collisions.
 
 ``` clojure
 (derive ::cat ::mammal)
@@ -137,20 +136,21 @@ functions ```derive``` and ```isa?```.
 (derive ::dog ::hairy)
 (derive ::poodle ::dog)
 
+(isa? ::poodle ::dog)
+;; => true
 (isa? ::poodle ::mammal)
+;; => true
+(isa? ::poodle ::hairy)
 ;; => true
 (isa? ::poodle ::cat)
 ;; => false
-
-::cat
-;; => :clojure-getting-started.db/cat
+(isa? ::mammal ::hairy)
+;; => false
 ```
 
-These ```::``` keywords are namespaced, which prevents
-collisions. With a built in ability to make arbitrary hierarchies, we
-can have inherited behavior with even greater flexibility, because we
-are not limited to a single type, but rather any number of attributes
-in the data.
+A ```::dog``` is-a ```::mammal``` and is-a ```::hairy```, the
+classical diamond problem (without the common ancestor, which is
+possible, but unneeded for the example).
 
 ``` clojure
 (defmulti speak :animal)
@@ -182,7 +182,7 @@ multiple parents, we get a multiple inherited behavior, where the
 preferred match is the one returned.
 
 This is possible because the default equality check of multimethod is
-the ```isa?``` function! Because of this, uses of multimethod
+the ```isa?``` function. Because of this, uses of multimethod
 hierarchies can have inherited behavior for complex structures.
 
 ## 6 - Mostly Monadic
@@ -218,13 +218,13 @@ nil will get returned.
 
 Since for most of the core functions are smart like this, it is
 possible to gain much of the value and safety of monads without most
-of the hassle. Ultimately, a more rich type system allows for custom
-types which can be domain specific, but the the day-to-day primitive
-safety is still a huge win.
+of the hassle. Ultimately, a more rich type system would allow for
+custom types which can be domain specific, but in day-to-day working,
+primitive safety is still a huge win.
 
 ## Conclusion
 
 These are a few simple features that keep me coming back to Clojure,
 even from languages like F# and Haskell. While Clojure is a bit more
-wordy than the ML family, and maybe not as safe, the simplicity of
+wordy than the ML family, and not as type safe, the simplicity of
 these features keep me coming back for more!
