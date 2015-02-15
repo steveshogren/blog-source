@@ -85,7 +85,13 @@ application.
 
 One of the best claims about "traditional" Java OO is
 polymorphism. The ability to make an interface with concrete classes
-gives the powerful ability to replace behavior dynamically.
+gives the powerful ability to replace behavior dynamically. The
+trouble is, the polymorphic dynamic dispatch is single dispatch - the
+decision of which method to call is limited to a single thing: the
+type of the callee. If this was the only type of dynamic dispatch you
+ever knew of, it might be hard for you to consciously realize it was
+ever a limitation, especially if you've never seen examples of
+multiple dispatch.
 
 While most of the time, in any language with first class functions, it
 is possible to achieve a similar effect by passing functions, it is
@@ -216,10 +222,10 @@ example:
 This allows functions to be chained without fear that along the way a
 nil will get returned.
 
-Since for most of the core functions are smart like this, it is
-possible to gain much of the value and safety of monads without most
-of the hassle. Ultimately, a more rich type system would allow for
-custom types which can be domain specific, but in day-to-day working,
+Since most of the core functions are "smart" about nil, you gain much
+of the value and safety of monads without most of the
+hassle. Ultimately, a more rich type system would allow for custom
+types which can be domain specific, but in day-to-day working,
 primitive safety is still a huge win.
 
 ## Conclusion
