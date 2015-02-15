@@ -17,7 +17,7 @@ published: true
 Clojure is a delightful language, and here are six uncommonly
 discussed reasons why.
 
-## 1 - Unit Testing
+## 1 - Dead Simple Unit Test Mocking
 
 Clojure is the easiest language to unit test I have ever
 seen. "Mocking" a function in a test only requires a simple
