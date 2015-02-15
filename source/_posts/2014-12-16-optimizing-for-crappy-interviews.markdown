@@ -4,6 +4,7 @@ title: "Opimizing for Crappy Interviews"
 date: 2014-12-27 13:41
 comments: true
 categories: 
+published: false
 ---
 
 Have you noticed that there are so many different styles of
