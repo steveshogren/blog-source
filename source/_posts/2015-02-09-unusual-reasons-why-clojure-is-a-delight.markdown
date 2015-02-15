@@ -22,7 +22,7 @@ discussed reasons why.
 Clojure is the easiest language to unit test I have ever
 seen. "Mocking" a function in a test only requires a simple
 replacement of the function definition. No extraneous interfaces, no
-dependency injection, no mocking framework.  The built in function ```with-redefs```
+dependency injection, no mocking framework.  The built-in function ```with-redefs```
 will replace any function in any library or
 namespace with a new definition.
 
