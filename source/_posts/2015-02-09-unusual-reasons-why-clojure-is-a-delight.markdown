@@ -40,7 +40,7 @@ namespace with a new definition.
 We "mock" the ```get-current-id``` function to always return 4 inside
 the scope of ```with-redefs```. Couldn't be more simple! The binding
 only is in scope for code inside and called by the s-expression of the
-with-redefs, so no need to re-bind it or anything after the test.
+with-redefs, so no need to unbind it after the test.
 
 ## 2 - Amazing Editing
 
@@ -86,7 +86,7 @@ application.
 One of the best claims about "traditional" Java OO is
 polymorphism. The ability to make an interface with concrete classes
 gives the powerful ability to replace behavior dynamically. The
-trouble is, the polymorphic dynamic dispatch is single dispatch - the
+trouble is, Java's polymorphic dynamic dispatch is single dispatch - the
 decision of which method to call is limited to a single thing: the
 type of the callee. If this was the only type of dynamic dispatch you
 ever knew of, it might be hard for you to consciously realize it was
