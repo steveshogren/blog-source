@@ -45,7 +45,7 @@ with-redefs, so no need to re-bind it or anything after the test.
 ## 2 - Amazing Editing
 
 Many arguments have been made over those contentious
-parenthesis. While the most powerful use of s-expressions is to easily
+parentheses. While the most powerful use of s-expressions is to easily
 allow macros, for the day to day, s-expressions have a very important
 use: amazing editing!
 
@@ -60,7 +60,7 @@ complex to explain here.
 Languages that don't have a surrounding delimiter for expressions
 leave you jumping around with the mouse and arrow keys a whole lot more.
 Because it is so much easier to write a parser to select ```(add 1 2)```
-than it is for ```add(1, 2)```, the tooling is so much better.
+than it is for ```add(1, 2)```, the tooling can be so much better.
 
 No local editing tool I have seen comes close to Vim with ParEdit for
 effective editing. 
