@@ -16,17 +16,16 @@ if it is possible to achieve a level of safety in a language but by
 doing something uncommon, that should not be counted. 
 
 To score a language, simply figure out how many characters it costs to
-"prevent" a certain type of error, and add that to the total. If it is
-idiomatic to include newlines, count those as one each. Spaces or tabs
-do not count, but all other punctuation does. If a specific check is
-compiler enforced, like F#'s Option, that is only scored as half as
-many characters, to weight the fact that this is "safer" code. If
-something needs a library to function, we will not count the import
-either, as the importing the namespace will have a negligible effect
-on the code size and complexity.
+"prevent" a certain type of error, and add that to the total. Do not
+count newlines. Spaces or tabs do not count, but all other punctuation
+does. If a specific check is compiler enforced, like F#'s Option, that
+is only scored as half as many characters, to weight the fact that
+this is "safer" code. If something needs a library to function, we
+will not count the import either, as the importing the namespace will
+have a negligible effect on the code size and complexity.
 
 If there is a safety feature that is not possible to achieve
-programmatically, we will add +20 for a "every change run and debug to
+programmatically, we will add +30 for a "every change run and debug to
 fix" cost.
 
 For example, lets score C# and F#:
@@ -34,7 +33,9 @@ For example, lets score C# and F#:
 ### Null Reference Method/Field Invocation
 
 ``` csharp
+    //1234567890123456789012345678901234567890
     //if(l!=null){}else{}
+
     if (l != null) {
         <consequent>
     } else {
@@ -42,22 +43,22 @@ For example, lets score C# and F#:
     }
 ```
 
-I count 19 characters and 4 newlines, so +23. You could remove the
-newlines or curly brackets, but it is idiomatic to write it this
-way. It is possible to use the ternary operator as well, but a quick
-SO search shows a lot of comments cautioning against using them "too
-much", so we will count the traditional "if-else" for the most
-idiomatic way of checking if the field is null before using it.
+I count 19 characters, so +19. It is possible to use the ternary
+operator as well, but a quick StackOverflow search shows a lot of
+comments cautioning against using them "too much", so we will count
+the traditional "if-else" for the most idiomatic way of checking if
+the field is null before using it.
 
 In F#, it is idiomatic to use Option instead of null (most classes
-cannot be made null without special effort). The library function
-"sequential application" written: (<*>) automatically tests for Some
-or None, and applies the consequent only if the value is Some.
+cannot be made null without special effort). The FSharpx library
+function "sequential application" written: (<*>) automatically tests
+for Some or None, and applies the consequent only if the value is
+Some.
 
 ``` fsharp
-open FSharpx.Option
     //1234567890123456789012345678901234567890
     //<*>l
+
     <consequent> <*> l
 ```
 
@@ -68,9 +69,9 @@ that by 2 for +2.
 
 ### Null List Iteration
 
-In C#, one would need to perform the same check as above: +23.
+In C#, one would need to perform the same check as above: +19.
 
-In F#, the idiomatic list cannot be made null, so there is no check: 0.
+In F#, the idiomatic list cannot be made null, so there is no check: +0.
 
 ### Putting wrong type into variable
 
@@ -81,6 +82,7 @@ C# and F# - Compiler enforced. +0
 ``` csharp
     //12345678901234567890123456789012345678901234567890
     //if(l.Count()>i){}else{}
+
     if (l.Count() > i) {
         <consequent>
     } else {
@@ -88,7 +90,7 @@ C# and F# - Compiler enforced. +0
     }
 ```
 
-C# has 23 and 4 newlines for +27.
+C# has +23.
 
 ``` fsharp
     //12345678901234567890123456789012345678901234567890
@@ -98,7 +100,7 @@ C# has 23 and 4 newlines for +27.
     else <alternative>
 ```
 
-F# has 21 and 2 newlines for +23.
+F# has +21.
 
 ### Incorrect Type Casting
 
@@ -113,17 +115,18 @@ F# has 21 and 2 newlines for +23.
     }
 ```
 
-C# - 29 characters and 6 newlines. +35.
+C# has +29.
 
 ``` fsharp
     //1234567890123456789012345678901234567890
     //matchowith|:?Tasm->|_->
+
     match o with
         | :? T as m -> <consequent>
         | _ -> <alternative>
 ```
 
-F# - 23 characters and 2 newlines. +25.
+F# has +23.
 
 ### Passing Wrong Type to Method
 
@@ -137,16 +140,39 @@ Both C# and F# compilers check for this: +0
 
 For example, using a switch-case in C# to dispatch on an enum
 value. If you add a new value, the compiler does nothing, so no
-safety. It isn't idiomatically possible to prevent this error, so +20.
+safety. It isn't idiomatically possible to prevent this error, so +30.
 
 In F#, the compiler offers this as a warning with no extra code (but
 it is unenforced): +0.
+
+### Unexpected Variable Mutation 
+
+For example, I pass a reference to a class to a function, will the
+class come back the same as I passed it, or will it have mutated in
+some way? To prevent this, in C#, one would need to make the field
+readonly.
+
+``` csharp
+    //123456789012345678901234567890123456789012345678901234567890
+    //publicclassT{readonlystringn;publicArticle(stringi){n=i;}}
+
+    public class T {
+        readonly string n;
+
+        public Article(string i)    {
+            n = i; 
+        }
+    }
+```
+
+C# - +58
+
 
 ### Deadlock prevention
 
 As far as I know, neither C# nor F# provide any way to prevent
 deadlocks at the compiler level, and it may not be possible, but it
-gets scored: +20.
+gets scored: +30.
 
 ### Memory Deallocation
 
@@ -163,5 +189,10 @@ penalty: +0.
 F# recursive functions calls are converted into loop constructs by the
 compiler automatically: +0
 
+## Totals
+
+| C#  | F# |
+|------------- |------------- | 
+| 150 | 76|
 
 
