@@ -30,6 +30,26 @@ fix" cost.
 
 For example, lets score C# and F#:
 
+## Totals
+
+| Safety Check | C#  | F# |
+|--|------------- |------------- | 
+| Null Reference Method/Field Invocation| 19 | 2 
+| Null List Iteration                   | 19 | 0 
+| Putting wrong type into variable      | 0  | 0 
+| Missing List Element                  | 23 | 21 
+| Incorrect Type Casting                | 29 | 23 
+| Passing Wrong Type to Method          | 0 | 0 
+| Calling Missing Method/Field/Function/Variable/Constant | 0 | 0 
+| Missing Enum Dispatch Implementation  | 30  | 0 
+| Unexpected Variable Mutation          | 40 | 0 
+| Deadlock prevention                   | 30 | 30 
+| Memory Deallocation                   | 0 | 0 
+| Stack Overflow Exceptions Caused by Recursion | 0  | 0 
+||190 | 76
+
+
+
 ### Null Reference Method/Field Invocation
 
 ``` csharp
@@ -147,26 +167,31 @@ it is unenforced): +0.
 
 ### Unexpected Variable Mutation 
 
-For example, I pass a reference to a class to a function, will the
-class come back the same as I passed it, or will it have mutated in
-some way? To prevent this, in C#, one would need to make the field
-readonly.
+For example, I pass data to a function, will the data come back the
+same as I passed it, or will it have mutated in some way? To prevent
+this, in C#, we would idiomatically make a new class and make the
+field readonly.
 
 ``` csharp
     //123456789012345678901234567890123456789012345678901234567890
-    //publicclassT{readonlystringn;publicArticle(stringi){n=i;}}
+    //publicclassT{readonlyn;publicT(i){n=i;}}
 
     public class T {
-        readonly string n;
+        readonly <type> n;
 
-        public Article(string i)    {
+        public T(<type> i) {
             n = i; 
         }
     }
 ```
 
-C# - +58
+C#: +40
 
+
+In F# we idiomatically would use whatever fit the need most: an
+existing class, a let bound primitive, a tuple, etc rather than make a
+whole class just for the immutability. F# class fields and values are
+immutable by default, so nothing extra for that. +0
 
 ### Deadlock prevention
 
@@ -189,10 +214,5 @@ penalty: +0.
 F# recursive functions calls are converted into loop constructs by the
 compiler automatically: +0
 
-## Totals
-
-| C#  | F# |
-|------------- |------------- | 
-| 150 | 76|
 
 
