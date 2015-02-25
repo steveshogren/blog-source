@@ -21,7 +21,7 @@ count newlines. Spaces or tabs do not count, but all other punctuation
 does. If a specific check is compiler enforced, like F#'s Option, that
 is only scored as half as many characters, to weight the fact that
 this is "safer" code. If something needs a library to function, we
-will not count the import either, as the importing the namespace will
+will not count the import either, as the importing the module will
 have a negligible effect on the code size and complexity.
 
 If there is a safety feature that is not possible to achieve
@@ -34,7 +34,8 @@ For example, lets score C# and F#:
 
 | Safety Check | C#  | F# | Javascript|
 |--|------------- |------------- |--|
-| Null Reference Method/Field Invocation| 19 | 2 | 20 
+| Null Reference Method Invocation      | 19 | 2 | 20 | 8
+| Null Reference Method/Field Invocation| 19 | 2 | 
 | Null List Iteration                   | 19 | 0 | 20
 | Putting wrong type into variable      | 0  | 0 | 30
 | Missing List Element                  | 23 | 21 | 22
@@ -48,9 +49,7 @@ For example, lets score C# and F#:
 | Stack Overflow Exceptions Caused by Recursion | 30  | 0 | 30
     ||220 | 76| 237
 
-
-
-### Null Reference Method/Field Invocation
+### Null Reference Method Invocation
 
 ``` csharp
     //1234567890123456789012345678901234567890
@@ -98,7 +97,29 @@ that by 2 for +2.
     }
 ```
 
-Javascript comes in at +20.
+Javascript a common pattern is to check if something is there comes in
+at +20.
+
+``` clojure
+    ;;1234567890123456789012345678901234567890
+    ;;((getl))
+    ((get l <fn-keyword> <consequent-fn>) <args>)
+```
+
+In Clojure, it is idiomatic to deal with primitive data structures
+like a hashmap and put functions in that. Retrieval and execution
+would likely use "get" which checks for nil by default: +8
+
+
+### Null Reference Field Invocation
+
+C#, F#, and Javascript would use the same checks as above: +19, +2,
+and +20.
+
+``` clojure
+```
+
+
 
 ### Null List Iteration
 
@@ -106,7 +127,7 @@ In C#, one would need to perform the same check as above: +19.
 
 In F#, the idiomatic list cannot be made null, so there is no check: +0.
 
-In Javascript, same if check as above: +20.
+In Javascript, same if check as for missing method: +20.
 
 ### Putting wrong type into variable
 
