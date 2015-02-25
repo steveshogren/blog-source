@@ -32,21 +32,21 @@ For example, lets score C# and F#:
 
 ## Totals
 
-| Safety Check | C#  | F# |
-|--|------------- |------------- | 
-| Null Reference Method/Field Invocation| 19 | 2 
-| Null List Iteration                   | 19 | 0 
-| Putting wrong type into variable      | 0  | 0 
-| Missing List Element                  | 23 | 21 
-| Incorrect Type Casting                | 29 | 23 
-| Passing Wrong Type to Method          | 0 | 0 
-| Calling Missing Method/Field/Function/Variable/Constant | 0 | 0 
-| Missing Enum Dispatch Implementation  | 30  | 0 
-| Unexpected Variable Mutation          | 40 | 0 
-| Deadlock prevention                   | 30 | 30 
-| Memory Deallocation                   | 0 | 0 
-| Stack Overflow Exceptions Caused by Recursion | 0  | 0 
-||190 | 76
+| Safety Check | C#  | F# | Javascript|
+|--|------------- |------------- |--|
+| Null Reference Method/Field Invocation| 19 | 2 | 20 
+| Null List Iteration                   | 19 | 0 | 20
+| Putting wrong type into variable      | 0  | 0 | 30
+| Missing List Element                  | 23 | 21 | 22
+| Incorrect Type Casting                | 29 | 23 | 30
+| Passing Wrong Type to Method          | 0 | 0 | 30
+| Calling Missing Method/Field/Function/Variable/Constant | 0 | 0 | 15
+| Missing Enum Dispatch Implementation  | 30  | 0 | 30
+| Unexpected Variable Mutation          | 40 | 0 | 30
+| Deadlock prevention                   | 30 | 30 | 0
+| Memory Deallocation                   | 0 | 0 | 0
+| Stack Overflow Exceptions Caused by Recursion | 30  | 0 | 30
+    ||220 | 76| 237
 
 
 
@@ -87,15 +87,32 @@ and performing some action with the inner value if it is there or
 returning the None if it isn't. Since it is compiler enforced, divide
 that by 2 for +2.
 
+``` javascript
+    //1234567890123456789012345678901234567890
+    //if(l!==null){}else{}
+
+    if (l !== null) {
+        <consequent>
+    } else {
+        <alternative>
+    }
+```
+
+Javascript comes in at +20.
+
 ### Null List Iteration
 
 In C#, one would need to perform the same check as above: +19.
 
 In F#, the idiomatic list cannot be made null, so there is no check: +0.
 
+In Javascript, same if check as above: +20.
+
 ### Putting wrong type into variable
 
 C# and F# - Compiler enforced. +0
+
+Javascript, no real idiomatic way to check, so: +30.
 
 ### Missing List Element
 
@@ -121,6 +138,19 @@ C# has +23.
 ```
 
 F# has +21.
+
+``` javascript
+    //12345678901234567890123456789012345678901234567890
+    //if(l.length>i){}else{}
+
+    if (l.length > i) {
+        <consequent>
+    } else {
+        <alternative>
+    }
+```
+
+Javascript: +22.
 
 ### Incorrect Type Casting
 
@@ -148,13 +178,30 @@ C# has +29.
 
 F# has +23.
 
+Javascript, no idiomatic way to check: +30.
+
 ### Passing Wrong Type to Method
 
 Both C# and F# compilers check for this: +0
 
+Javascript, no idiomatic way to check: +30.
+
 ### Calling Missing Method/Field/Function/Variable/Constant
 
 Both C# and F# compilers check for this: +0
+
+``` javascript
+    //1234567890123456789012345678901234567890
+    //if(t.f){}else{}
+
+    if (t.f) {
+        <consequent>
+    } else {
+        <alternative>
+    }
+```
+
+Javascript, just check if it is there: +15.
 
 ### Missing Enum Dispatch Implementation
 
@@ -164,6 +211,8 @@ safety. It isn't idiomatically possible to prevent this error, so +30.
 
 In F#, the compiler offers this as a warning with no extra code (but
 it is unenforced): +0.
+
+Javascript, no way to idiomatically check: +30.
 
 ### Unexpected Variable Mutation 
 
@@ -199,17 +248,23 @@ As far as I know, neither C# nor F# provide any way to prevent
 deadlocks at the compiler level, and it may not be possible, but it
 gets scored: +30.
 
+Javascript is single threaded, and uses a queue for asynchronous
+execution responses like from calls to Ajax methods. As such,
+deadlocks are not possible by design. It is possible to create an
+infinite loop, but that isn't the category: +0.
+
 ### Memory Deallocation
 
-Both C# and F# garbage collectors handle this automatically: +0
+C#, F#, and Javascript garbage collectors handle this automatically:
++0
 
 ### Stack Overflow Exceptions Caused by Recursion
 
-C# has nothing to prevent these, and therefore the alternative is to
-write algorithms in a loop construct. Since it is not idiomatic to use
-recursion, despite the missing feature, and any recursive algorithm
-can be expressed in a loop, it does not fit the criteria for a
-penalty: +0.
+C# and Javascript have nothing to prevent these, and therefore the
+alternative is to write algorithms in a loop construct. It is not
+idiomatic to use recursion because of this. While any recursive
+algorithm can be expressed in a loop, it can require more size and
+possibly a less intuitive algorithm: +30.
 
 F# recursive functions calls are converted into loop constructs by the
 compiler automatically: +0
