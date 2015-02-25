@@ -250,8 +250,9 @@ gets scored: +30.
 
 Javascript is single threaded, and uses a queue for asynchronous
 execution responses like from calls to Ajax methods. As such,
-deadlocks are not possible by design. It is possible to create an
-infinite loop, but that isn't the category: +0.
+deadlocks are not possible by design. Javascript therefore is
+restricted in its abilities, but this is about categorizing safety
+only: +0.
 
 ### Memory Deallocation
 
