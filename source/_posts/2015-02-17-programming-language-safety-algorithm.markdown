@@ -35,20 +35,35 @@ For example, lets score C# and F#:
 ## Totals
 
 | Safety Check | C#  | F# | Javascript| Clojure
+
 |--|------------- |------------- |--|
+
 | Null Reference Method/Field Invocation| 19 | -26 | 20 | 6
+
 | Null List Iteration                   | 19 | -30 | 20 | -30
+
 | Putting wrong type into variable      | -30 | -30 | 30 | 13
+
 | Missing List Element                  | 23 | 21 | 22 | 6
+
 | Incorrect Type Casting                | 29 | 23 | 30 | 26
+
 | Passing Wrong Type to Method          | -30 | -30 | 30 | 0
+
 | Calling Missing Method/Field/Function/Variable/Constant | -30 | -30 | 15 | -30
+
 | Missing Enum Dispatch Implementation  | 30  | 0 | 30 | 30
+
 | Unexpected Variable Mutation          | 40 | -30 | 30 | -30
+
 | Deadlock prevention                   | 30 | 30 | 0 | -30
+
 | Memory Deallocation                   | -30 | -30 | -30 | -30
+
 | Stack Overflow Exceptions Caused by Recursion | 30  | -30 | 30 | 14
+
 | Ensure Code Executes When Passed To a Function | -30 | -30 | -30 | +30
+
 || 70 | -132 | 197 | -25 
 
 
