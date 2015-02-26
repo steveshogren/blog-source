@@ -34,10 +34,10 @@ For example, lets score C# and F#:
 
 ## Totals
 
-| Safety Check | C#  | F# | Javascript|
+| Safety Check | C#  | F# | Javascript| Clojure
 |--|------------- |------------- |--|
 | Null Reference Method/Field Invocation| 19 | -26 | 20 | 6
-| Null List Iteration                   | 19 | -30 | 20 | 0
+| Null List Iteration                   | 19 | -30 | 20 | -30
 | Putting wrong type into variable      | -30 | -30 | 30 | 13
 | Missing List Element                  | 23 | 21 | 22 | 6
 | Incorrect Type Casting                | 29 | 23 | 30 | 26
@@ -46,9 +46,10 @@ For example, lets score C# and F#:
 | Missing Enum Dispatch Implementation  | 30  | 0 | 30 | 30
 | Unexpected Variable Mutation          | 40 | -30 | 30 | -30
 | Deadlock prevention                   | 30 | 30 | 0 | -30
-| Memory Deallocation                   | 0 | 0 | 0
-| Stack Overflow Exceptions Caused by Recursion | 30  | 0 | 30
-    ||220 | 76| 237
+| Memory Deallocation                   | -30 | -30 | -30 | -30
+| Stack Overflow Exceptions Caused by Recursion | 30  | -30 | 30 | 14
+|| 100 | -162 | 227 | -55 
+
 
 ### Null Reference Method/Field Invocation
 
@@ -128,7 +129,7 @@ there is no check: -30.
 In Javascript, same if check as for missing method: +20.
 
 In Clojure, the default iteration functions: map, reduce, filter all
-check and return an empty list if nil, so no need for a check: +0;
+check and return an empty list if nil, so no need for a check: -30;
 
 ### Putting wrong type into variable
 
@@ -220,8 +221,7 @@ C# has +29.
 
 F# has +23.
 
-Javascript, no idiomatic way to check: +30.
-
+Javascript has no idiomatic way to check: +30.
 
 ``` clojure
     ;;1234567890123456789012345678901234567890
@@ -307,10 +307,6 @@ immutable by default, so nothing extra for that: -30.
 In JavaScript, we would have to make the field inside an object, and
 use an accessor to expose it.
 
-``` javascript
-    
-```
-
 In Clojure, anything you would pass is immutable, so no check and
 enforced by the language before runtime: -30.
 
@@ -331,8 +327,8 @@ as there are no locks, data is immutable or changes are queued: -30.
 
 ### Memory Deallocation
 
-C#, F#, and Javascript garbage collectors handle this automatically:
-+0
+C#, F#, Javascript, and Clojure garbage collectors handle this
+automatically: -30.
 
 ### Stack Overflow Exceptions Caused by Recursion
 
@@ -343,7 +339,18 @@ algorithm can be expressed in a loop, it can require more size and
 possibly a less intuitive algorithm: +30.
 
 F# recursive functions calls are converted into loop constructs by the
-compiler automatically: +0
+compiler automatically: -30.
+
+``` clojure
+    ;;1234567890123456789012345678901234567890
+    ;;(loop[](recur))
+
+    (loop [<params>]
+      (recur <args>))
+```
+
+Clojure provides a syntax for tail-call opimization, called
+loop/recur: +14.
 
 
 
