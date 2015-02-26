@@ -48,12 +48,17 @@ For example, lets score C# and F#:
 | Deadlock prevention                   | 30 | 30 | 0 | -30
 | Memory Deallocation                   | -30 | -30 | -30 | -30
 | Stack Overflow Exceptions Caused by Recursion | 30  | -30 | 30 | 14
-|| 100 | -162 | 227 | -55 
+| Ensure Code Executes When Passed To a Function | -30 | -30 | -30 | +30
+|| 70 | -132 | 197 | -25 
 
 
 ### Null Reference Method/Field Invocation
 
-#### "C#" 
+For C# I count 19 characters, so +19. It is possible to use the
+ternary operator as well, but a quick StackOverflow search shows a lot
+of comments cautioning against using them "too much", so we will count
+the traditional "if-else" for the most idiomatic way of checking if
+the field is null before using it.
 
 ``` csharp
     //1234567890123456789012345678901234567890
@@ -66,19 +71,16 @@ For example, lets score C# and F#:
     }
 ```
 
-I count 19 characters, so +19. It is possible to use the ternary
-operator as well, but a quick StackOverflow search shows a lot of
-comments cautioning against using them "too much", so we will count
-the traditional "if-else" for the most idiomatic way of checking if
-the field is null before using it.
-
-#### "F#" 
-
 In F#, it is idiomatic to use Option instead of null (most classes
 cannot be made null without special effort). The FSharpx library
 function "sequential application" written: (<*>) automatically tests
 for Some or None, and applies the consequent only if the value is
 Some.
+
+This comes in at 4 characters, for the typical case of null checking
+and performing some action with the inner value if it is there or
+returning the None if it isn't. Since it is compiler enforced,
+subtract -30 for: -26.
 
 ``` fsharp
     //1234567890123456789012345678901234567890
@@ -87,12 +89,8 @@ Some.
     <consequent> <*> l
 ```
 
-This comes in at 4 characters, for the typical case of null checking
-and performing some action with the inner value if it is there or
-returning the None if it isn't. Since it is compiler enforced,
-subtract -30 for: -26.
-
-#### JavaScript
+Javascript the common pattern is to check if something is there comes in
+at +20.
 
 ``` javascript
     //1234567890123456789012345678901234567890
@@ -104,20 +102,16 @@ subtract -30 for: -26.
         <alternative>
     }
 ```
-Javascript the common pattern is to check if something is there comes in
-at +20.
 
-#### Clojure
+In Clojure, it is idiomatic to put data or functions inside primitive
+data structures like a hashmap. Retrieval and execution would likely
+use "get" which checks for nil by default: +6
 
 ``` clojure
     ;;1234567890123456789012345678901234567890
     ;;(getl)
     (get l <lookup-keyword> <default-if-missing>)
 ```
-
-In Clojure, it is idiomatic to deal with primitive data structures
-like a hashmap and put functions or data in that. Retrieval and
-execution would likely use "get" which checks for nil by default: +6
 
 ### Null List Iteration
 
@@ -137,6 +131,10 @@ C# and F# - Compiler enforced. -30.
 
 Javascript, no real idiomatic way to check, so: +30.
 
+In Clojure, the closest thing to a variable is a let bound function or
+an atom, and neither can be annotated by default. A wrapping call to
+"instance?" will give a runtime error: +13.
+
 ``` clojure
     ;;12345678901234567890123456789012345678901234567890
     ;;(instance?cx)
@@ -144,11 +142,9 @@ Javascript, no real idiomatic way to check, so: +30.
     (instance? c x)
 ```
 
-In Clojure, the closest thing to a variable is a let bound function or
-an atom, and neither can be annotated by default. A wrapping call to
-"instance?" will give a runtime error: +13.
-
 ### Missing List Element
+
+C# has +23.
 
 ``` csharp
     //12345678901234567890123456789012345678901234567890
@@ -161,7 +157,7 @@ an atom, and neither can be annotated by default. A wrapping call to
     }
 ```
 
-C# has +23.
+F# has +21.
 
 ``` fsharp
     //12345678901234567890123456789012345678901234567890
@@ -170,8 +166,7 @@ C# has +23.
         <consequent>
     else <alternative>
 ```
-
-F# has +21.
+Javascript: +22.
 
 ``` javascript
     //12345678901234567890123456789012345678901234567890
@@ -183,8 +178,7 @@ F# has +21.
         <alternative>
     }
 ```
-Javascript: +22.
-
+Clojure's "get" also gets values out of lists by index, so: +6.
 
 ``` clojure
     ;;1234567890123456789012345678901234567890
@@ -193,9 +187,9 @@ Javascript: +22.
     (get i <list> <default-value>)
 ```
 
-Clojure's "get" also gets values out of lists by index, so: +6.
-
 ### Incorrect Type Casting
+
+C# has +29.
 
 ```csharp
     //1234567890123456789012345678901234567890
@@ -207,8 +201,7 @@ Clojure's "get" also gets values out of lists by index, so: +6.
         <alternative>
     }
 ```
-
-C# has +29.
+F# has +23.
 
 ``` fsharp
     //1234567890123456789012345678901234567890
@@ -219,9 +212,10 @@ C# has +29.
         | _ -> <alternative>
 ```
 
-F# has +23.
-
 Javascript has no idiomatic way to check: +30.
+
+In Clojure, requires a try/catch block around the primitive cast
+function: +26.
 
 ``` clojure
     ;;1234567890123456789012345678901234567890
@@ -233,9 +227,6 @@ Javascript has no idiomatic way to check: +30.
       (<T> o)
       (catch Exception e <alternative>))
 ```
-
-In Clojure, requires a try/catch block around the primitive cast
-function: +26.
 
 ### Passing Wrong Type to Method
 
@@ -283,6 +274,8 @@ same as I passed it, or will it have mutated in some way? To prevent
 this, in C#, we would idiomatically make a new class and make the
 field readonly.
 
+C#: +40
+
 ``` csharp
     //123456789012345678901234567890123456789012345678901234567890
     //publicclassT{readonlyn;publicT(i){n=i;}}
@@ -295,9 +288,6 @@ field readonly.
         }
     }
 ```
-
-C#: +40
-
 
 In F# we idiomatically would use whatever fit the need most: an
 existing class, a let bound primitive, a tuple, etc rather than make a
@@ -341,6 +331,9 @@ possibly a less intuitive algorithm: +30.
 F# recursive functions calls are converted into loop constructs by the
 compiler automatically: -30.
 
+Clojure provides a syntax for tail-call opimization, called
+loop/recur: +14.
+
 ``` clojure
     ;;1234567890123456789012345678901234567890
     ;;(loop[](recur))
@@ -349,8 +342,14 @@ compiler automatically: -30.
       (recur <args>))
 ```
 
-Clojure provides a syntax for tail-call opimization, called
-loop/recur: +14.
+### Ensure Code Executes When Passed To a Function
+
+C#, F#, and Javascript all execute code that is passed to a function
+normally: -30.
+
+Clojure macros can prevent parameters from executing at all by
+rewriting the call, and it is impossible to prevent: +30.
+
 
 
 
