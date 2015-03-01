@@ -30,341 +30,379 @@ If there is a safety feature that is not possible to achieve
 programmatically, we will add +30 for a "every change run and debug to
 fix" cost.
 
-For example, lets score C# and F#:
+For example, lets score a variety of languages:
 
-## Totals
-
-| Safety Check | C#  | F# | Javascript| Clojure
-
-|--|------------- |------------- |--|
-
-| Null Reference Method/Field Invocation| 19 | -26 | 20 | 6
-
-| Null List Iteration                   | 19 | -30 | 20 | -30
-
-| Putting wrong type into variable      | -30 | -30 | 30 | 13
-
-| Missing List Element                  | 23 | 21 | 22 | 6
-
-| Incorrect Type Casting                | 29 | 23 | 30 | 26
-
-| Passing Wrong Type to Method          | -30 | -30 | 30 | 0
-
-| Calling Missing Method/Field/Function/Variable/Constant | -30 | -30 | 15 | -30
-
-| Missing Enum Dispatch Implementation  | 30  | 0 | 30 | 30
-
-| Unexpected Variable Mutation          | 40 | -30 | 30 | -30
-
-| Deadlock prevention                   | 30 | 30 | 0 | -30
-
-| Memory Deallocation                   | -30 | -30 | -30 | -30
-
-| Stack Overflow Exceptions Caused by Recursion | 30  | -30 | 30 | 14
-
-| Ensure Code Executes When Passed To a Function | -30 | -30 | -30 | +30
-
-|| 70 | -132 | 197 | -25 
-
-
-### Null Reference Method/Field Invocation
-
-For C# I count 19 characters, so +19. It is possible to use the
-ternary operator as well, but a quick StackOverflow search shows a lot
-of comments cautioning against using them "too much", so we will count
-the traditional "if-else" for the most idiomatic way of checking if
-the field is null before using it.
-
+<p class="lead"><table><tr><th>Safety Check</th>
+<th>C#</th>
+<th>F#</th>
+<th>Clojure</th>
+<th>JavaScript</th>
+</tr>
+<tr><td>Null Reference Method/Field Invocation</td>
+<td>19</td>
+<td>-26</td>
+<td>6</td>
+<td>20</td>
+</tr>
+<tr><td>Null List Iteration</td>
+<td>19</td>
+<td>-30</td>
+<td>-30</td>
+<td>20</td>
+</tr>
+<tr><td>Putting wrong type into variable</td>
+<td>-30</td>
+<td>-30</td>
+<td>13</td>
+<td>30</td>
+</tr>
+<tr><td>Missing List Element </td>
+<td>23</td>
+<td>21</td>
+<td>6</td>
+<td>22</td>
+</tr>
+<tr><td>Incorrect Type Casting</td>
+<td>29</td>
+<td>-7</td>
+<td>25</td>
+<td>30</td>
+</tr>
+<tr><td>Passing Wrong Type to Method</td>
+<td>-30</td>
+<td>-30</td>
+<td>0</td>
+<td>30</td>
+</tr>
+<tr><td>Calling Missing Method/Field/Function/Variable/Constant</td>
+<td>-30</td>
+<td>-30</td>
+<td>-30</td>
+<td>18</td>
+</tr>
+<tr><td>Missing Enum Dispatch Implementation</td>
+<td>30</td>
+<td>0</td>
+<td>30</td>
+<td>30</td>
+</tr>
+<tr><td>Unexpected Variable Mutation </td>
+<td>40</td>
+<td>0</td>
+<td>-30</td>
+<td>0</td>
+</tr>
+<tr><td>Deadlock prevention</td>
+<td>30</td>
+<td>30</td>
+<td>-30</td>
+<td>0</td>
+</tr>
+<tr><td>Memory Deallocation</td>
+<td>-30</td>
+<td>-30</td>
+<td>-30</td>
+<td>-30</td>
+</tr>
+<tr><td>Stack Overflow Exceptions Caused by Recursion</td>
+<td>30</td>
+<td>-30</td>
+<td>15</td>
+<td>30</td>
+</tr>
+<tr><td>Ensure Code Executes When Passed To a Function</td>
+<td>-30</td>
+<td>-30</td>
+<td>30</td>
+<td>-30</td>
+</tr>
+<tr><td>Totals</td>
+<td>70</td>
+<td>-192</td>
+<td>-25</td>
+<td>170</td>
+</tr>
+</table>
+<h2>C#</h2>
+<h3> Null Reference Method/Field Invocation</h3>
+<p>It is possible to use the ternary operator as well, but a quick StackOverflow search shows a lot of comments cautioning against using them &#39;too much&#39;, so we will count the traditional &#39;if-else&#39; for the most idiomatic way of checking if the field is null before using it. Score: 19 </p>
+ 
 ``` csharp
     //1234567890123456789012345678901234567890
     //if(l!=null){}else{}
 
-    if (l != null) {
-        <consequent>
-    } else {
-        <alternative>
-    }
+    if (l != null) {<!consequent!>} else {<!alternative!>}
 ```
+ 
+<h3> Null List Iteration</h3>
+<p>Same check as for a null field. Score: 19 </p>
+ 
+``` csharp
+    //1234567890123456789012345678901234567890
+    //if(l!=null){}else{}
 
-In F#, it is idiomatic to use Option instead of null (most classes
-cannot be made null without special effort). The FSharpx library
-function "sequential application" written: (<*>) automatically tests
-for Some or None, and applies the consequent only if the value is
-Some.
+    if (l != null) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Putting wrong type into variable</h3>
+<p>Compiler Enforced. -30 </p>
 
-This comes in at 4 characters, for the typical case of null checking
-and performing some action with the inner value if it is there or
-returning the None if it isn't. Since it is compiler enforced,
-subtract -30 for: -26.
+<h3> Missing List Element </h3>
+<p> Score: 23 </p>
+ 
+``` csharp
+    //1234567890123456789012345678901234567890
+    //if(l.Count()>i){}else{}
 
+    if (l.Count() > i) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Incorrect Type Casting</h3>
+<p> Score: 29 </p>
+ 
+``` csharp
+    //1234567890123456789012345678901234567890
+    //varm=oasT;if(m!=null){}else{}
+
+    var m = o as T; if (m != null) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Passing Wrong Type to Method</h3>
+<p>Compiler Enforced. -30 </p>
+
+<h3> Calling Missing Method/Field/Function/Variable/Constant</h3>
+<p>Compiler Enforced. -30 </p>
+
+<h3> Missing Enum Dispatch Implementation</h3>
+<p>For example, using a switch-case in C# to dispatch on an enum value. If you add a new value, the compiler does nothing, so no safety. It isn&#39;t idiomatically possible to prevent this error. 30 </p>
+
+<h3> Unexpected Variable Mutation </h3>
+<p>For example, I pass data to a function, will the data come back the same as I passed it, or will it have mutated in some way? To prevent this, in C#, we would idiomatically make a new class and make the field readonly. Score: 40 </p>
+ 
+``` csharp
+    //1234567890123456789012345678901234567890
+    //publicclassT{readonlyn;publicT(i){n=i;}}
+
+    public class T {readonly <!type!> n; public T(<!type!> i) {n = i;}}
+```
+ 
+<h3> Deadlock prevention</h3>
+<p>As far as I know, there is provide any way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored. 30 </p>
+
+<h3> Memory Deallocation</h3>
+<p>Handled by garbage collector. -30 </p>
+
+<h3> Stack Overflow Exceptions Caused by Recursion</h3>
+<p>No way to prevent these, and therefore the alternative is to write algorithms in a loop construct. It is not idiomatic to use recursion because of this. While any recursive algorithm can be expressed in a loop, it can require more size and possibly a less intuitive algorithm. 30 </p>
+
+<h3> Ensure Code Executes When Passed To a Function</h3>
+<p>Compiler Enforced. -30 </p>
+<h2>F#</h2>
+<h3> Null Reference Method/Field Invocation</h3>
+<p>In F#, it is idiomatic to use Option instead of null (most classes cannot be made null without special effort). The FSharpx library function &#39;sequential application&#39; written: (&lt;*&gt;) automatically tests for Some or None, and applies the consequent only if the value is Some. Score: -26 </p>
+ 
 ``` fsharp
     //1234567890123456789012345678901234567890
     //<*>l
 
-    <consequent> <*> l
+    <!consequent!> <*> l
 ```
+ 
+<h3> Null List Iteration</h3>
+<p>In F#, the idiomatic list cannot be made null by the compiler, so there is no check. -30 </p>
 
-Javascript the common pattern is to check if something is there comes in
-at +20.
+<h3> Putting wrong type into variable</h3>
+<p>Compiler Enforced. -30 </p>
 
-``` javascript
-    //1234567890123456789012345678901234567890
-    //if(l!==null){}else{}
-
-    if (l !== null) {
-        <consequent>
-    } else {
-        <alternative>
-    }
-```
-
-In Clojure, it is idiomatic to put data or functions inside primitive
-data structures like a hashmap. Retrieval and execution would likely
-use "get" which checks for nil by default: +6
-
-``` clojure
-    ;;1234567890123456789012345678901234567890
-    ;;(getl)
-    (get l <lookup-keyword> <default-if-missing>)
-```
-
-### Null List Iteration
-
-In C#, one would need to perform the same check as above: +19.
-
-In F#, the idiomatic list cannot be made null by the compiler, so
-there is no check: -30.
-
-In Javascript, same if check as for missing method: +20.
-
-In Clojure, the default iteration functions: map, reduce, filter all
-check and return an empty list if nil, so no need for a check: -30;
-
-### Putting wrong type into variable
-
-C# and F# - Compiler enforced. -30.
-
-Javascript, no real idiomatic way to check, so: +30.
-
-In Clojure, the closest thing to a variable is a let bound function or
-an atom, and neither can be annotated by default. A wrapping call to
-"instance?" will give a runtime error: +13.
-
-``` clojure
-    ;;12345678901234567890123456789012345678901234567890
-    ;;(instance?cx)
-
-    (instance? c x)
-```
-
-### Missing List Element
-
-C# has +23.
-
-``` csharp
-    //12345678901234567890123456789012345678901234567890
-    //if(l.Count()>i){}else{}
-
-    if (l.Count() > i) {
-        <consequent>
-    } else {
-        <alternative>
-    }
-```
-
-F# has +21.
-
+<h3> Missing List Element </h3>
+<p> Score: 21 </p>
+ 
 ``` fsharp
-    //12345678901234567890123456789012345678901234567890
-    //ifl.Count()>ithenelse 
-    if l.Count() > i then
-        <consequent>
-    else <alternative>
-```
-Javascript: +22.
-
-``` javascript
-    //12345678901234567890123456789012345678901234567890
-    //if(l.length>i){}else{}
-
-    if (l.length > i) {
-        <consequent>
-    } else {
-        <alternative>
-    }
-```
-Clojure's "get" also gets values out of lists by index, so: +6.
-
-``` clojure
-    ;;1234567890123456789012345678901234567890
-    ;;(geti)
-
-    (get i <list> <default-value>)
-```
-
-### Incorrect Type Casting
-
-C# has +29.
-
-```csharp
     //1234567890123456789012345678901234567890
-    //varm=oasT;if(m!=null){}else{}
-    var m = o as T;
-    if (m != null) {
-        <consequent>
-    } else {
-        <alternative>
-    }
-```
-F# has +23.
+    //ifl.Count()>ithenelse
 
+    if l.Count() > i then <!consequent!> else <!alternative!>
+```
+ 
+<h3> Incorrect Type Casting</h3>
+<p> Score: -7 </p>
+ 
 ``` fsharp
     //1234567890123456789012345678901234567890
     //matchowith|:?Tasm->|_->
 
-    match o with
-        | :? T as m -> <consequent>
-        | _ -> <alternative>
+    match o with | :? T as m -> <!consequent!> | _ -> <!alternative!>
 ```
+ 
+<h3> Passing Wrong Type to Method</h3>
+<p>Compiler Enforced. -30 </p>
 
-Javascript has no idiomatic way to check: +30.
+<h3> Calling Missing Method/Field/Function/Variable/Constant</h3>
+<p>Compiler Enforced. -30 </p>
 
-In Clojure, requires a try/catch block around the primitive cast
-function: +26.
+<h3> Missing Enum Dispatch Implementation</h3>
+<p>The compiler offers this as a warning with no extra code (but it is not enforced). 0 </p>
 
+<h3> Unexpected Variable Mutation </h3>
+<p>In F# we idiomatically would use whatever fit the need most: an existing class, a let bound primitive, a tuple, etc rather than make a whole class just for the immutability. F# class fields and values are immutable by default, so nothing extra. 0 </p>
+
+<h3> Deadlock prevention</h3>
+<p>As far as I know, there is provide any way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored. 30 </p>
+
+<h3> Memory Deallocation</h3>
+<p>Handled By Garbage Collector. -30 </p>
+
+<h3> Stack Overflow Exceptions Caused by Recursion</h3>
+<p>F# recursive functions calls are converted into loop constructs by the compiler automatically. -30 </p>
+
+<h3> Ensure Code Executes When Passed To a Function</h3>
+<p>Compiler Enforced. -30 </p>
+<h2>Clojure</h2>
+<h3> Null Reference Method/Field Invocation</h3>
+<p>In Clojure, it is idiomatic to put data or functions inside primitive data structures like a hashmap. Retrieval and execution would likely use &#39;get&#39; which checks for nil by default. Score: 6 </p>
+ 
 ``` clojure
     ;;1234567890123456789012345678901234567890
-    ;;(try(To)(catchExceptione))
+    ;;(getl)
 
-    ;; In this case, T doesn't exist in the core functions,
-    ;; but it stands in for double, float, etc.
-    (try
-      (<T> o)
-      (catch Exception e <alternative>))
+    (get l <!lookup-keyword!> <!default-if-missing!>)
 ```
+ 
+<h3> Null List Iteration</h3>
+<p>In Clojure, the default iteration functions: map, reduce, filter all check and return an empty list if nil, so no need for a check. -30 </p>
 
-### Passing Wrong Type to Method
+<h3> Putting wrong type into variable</h3>
+<p>In Clojure, the closest thing to a variable is a let bound function or an atom, and neither can be annotated by default. A wrapping call to &#39;instance?&#39; will give a runtime error. Score: 13 </p>
+ 
+``` clojure
+    ;;1234567890123456789012345678901234567890
+    ;;(instance?cx)
 
-Both C# and F# compilers check for this: -30.
-
-Javascript, no idiomatic way to check: +30.
-
-In Clojure, parameters can be annotated with a type, which is checked
-at runtime: +0.
-
-### Calling Missing Method/Field/Function/Variable/Constant
-
-Both C# and F# compilers check for this: -30.
-
-``` javascript
-    //1234567890123456789012345678901234567890
-    //if(t.f){}else{}
-
-    if (t.f) {
-        <consequent>
-    } else {
-        <alternative>
-    }
+    (instance? c x)
 ```
+ 
+<h3> Missing List Element </h3>
+<p>Clojure&#39;s &#39;get&#39; also gets values out of lists by index. Score: 6 </p>
+ 
+``` clojure
+    ;;1234567890123456789012345678901234567890
+    ;;(geti)
 
-Javascript, just check if it is there: +15.
-
-Clojure, the language checks for this before runtime: -30.
-
-### Missing Enum Dispatch Implementation
-
-For example, using a switch-case in C# to dispatch on an enum
-value. If you add a new value, the compiler does nothing, so no
-safety. It isn't idiomatically possible to prevent this error, so +30.
-
-In F#, the compiler offers this as a warning with no extra code (but
-it is unenforced): +0.
-
-Javascript and Clojure, no way to idiomatically check: +30.
-
-### Unexpected Variable Mutation 
-
-For example, I pass data to a function, will the data come back the
-same as I passed it, or will it have mutated in some way? To prevent
-this, in C#, we would idiomatically make a new class and make the
-field readonly.
-
-C#: +40
-
-``` csharp
-    //123456789012345678901234567890123456789012345678901234567890
-    //publicclassT{readonlyn;publicT(i){n=i;}}
-
-    public class T {
-        readonly <type> n;
-
-        public T(<type> i) {
-            n = i; 
-        }
-    }
+    (get i <!list!> <!default-value!>)
 ```
+ 
+<h3> Incorrect Type Casting</h3>
+<p>Requires a try/catch block around the primitive cast function. Score: 25 </p>
+ 
+``` clojure
+    ;;1234567890123456789012345678901234567890
+    ;;(try(o)(catchExceptione))
 
-In F# we idiomatically would use whatever fit the need most: an
-existing class, a let bound primitive, a tuple, etc rather than make a
-whole class just for the immutability. F# class fields and values are
-immutable by default, so nothing extra for that: -30.
+    (try (<!T!> o) (catch Exception e <!alternative!>))
+```
+ 
+<h3> Passing Wrong Type to Method</h3>
+<p>In Clojure, parameters can be annotated with a type, which is checked at runtime:  0 </p>
 
-In JavaScript, we would have to make the field inside an object, and
-use an accessor to expose it.
+<h3> Calling Missing Method/Field/Function/Variable/Constant</h3>
+<p>Clojure, the language checks for this before runtime. -30 </p>
 
-In Clojure, anything you would pass is immutable, so no check and
-enforced by the language before runtime: -30.
+<h3> Missing Enum Dispatch Implementation</h3>
+<p>No way to idiomatically check. 30 </p>
 
-### Deadlock prevention
+<h3> Unexpected Variable Mutation </h3>
+<p>In Clojure, anything you would pass is immutable, so no check and enforced by the language before runtime. -30 </p>
 
-As far as I know, neither C# nor F# provide any way to prevent
-deadlocks at the compiler level, and it may not be possible, but it
-gets scored: +30.
+<h3> Deadlock prevention</h3>
+<p>The STM and agent model built into the language cannot deadlock, and data is immutable or changes are queued. -30 </p>
 
-Javascript is single threaded, and uses a queue for asynchronous
-execution responses like from calls to Ajax methods. As such,
-deadlocks are not possible by design. Javascript therefore is
-restricted in its abilities, but this is about categorizing safety
-only: +0.
+<h3> Memory Deallocation</h3>
+<p>Handled by garbage collector. -30 </p>
 
-Clojure's STM and agent model built into the language cannot deadlock
-as there are no locks, data is immutable or changes are queued: -30.
-
-### Memory Deallocation
-
-C#, F#, Javascript, and Clojure garbage collectors handle this
-automatically: -30.
-
-### Stack Overflow Exceptions Caused by Recursion
-
-C# and Javascript have nothing to prevent these, and therefore the
-alternative is to write algorithms in a loop construct. It is not
-idiomatic to use recursion because of this. While any recursive
-algorithm can be expressed in a loop, it can require more size and
-possibly a less intuitive algorithm: +30.
-
-F# recursive functions calls are converted into loop constructs by the
-compiler automatically: -30.
-
-Clojure provides a syntax for tail-call opimization, called
-loop/recur: +14.
-
+<h3> Stack Overflow Exceptions Caused by Recursion</h3>
+<p>Clojure provides a syntax for tail-call opimization, called loop/recur. Score: 15 </p>
+ 
 ``` clojure
     ;;1234567890123456789012345678901234567890
     ;;(loop[](recur))
 
-    (loop [<params>]
-      (recur <args>))
+    (loop [<!params!>] (recur <!args!>))
 ```
+ 
+<h3> Ensure Code Executes When Passed To a Function</h3>
+<p>Clojure macros can prevent parameters from executing at all by rewriting the call, and it is impossible to prevent. 30 </p>
+<h2>JavaScript</h2>
+<h3> Null Reference Method/Field Invocation</h3>
+<p>Javascript the common pattern is to check if something is there with an OR statement. Score: 20 </p>
+ 
+``` javascript
+    //1234567890123456789012345678901234567890
+    //if(l!==null){}else{}
 
-### Ensure Code Executes When Passed To a Function
+    if (l !== null) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Null List Iteration</h3>
+<p>Same check as for a null field. Score: 20 </p>
+ 
+``` javascript
+    //1234567890123456789012345678901234567890
+    //if(l!==null){}else{}
 
-C#, F#, and Javascript all execute code that is passed to a function
-normally: -30.
+    if (l !== null) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Putting wrong type into variable</h3>
+<p>No real idiomatic way to check. 30 </p>
 
-Clojure macros can prevent parameters from executing at all by
-rewriting the call, and it is impossible to prevent: +30.
+<h3> Missing List Element </h3>
+<p> Score: 22 </p>
+ 
+``` javascript
+    //1234567890123456789012345678901234567890
+    //if(l.length>i){}else{}
 
+    if (l.length > i) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Incorrect Type Casting</h3>
+<p>No real idiomatic way to check. 30 </p>
 
+<h3> Passing Wrong Type to Method</h3>
+<p>No real idiomatic way to check. 30 </p>
 
+<h3> Calling Missing Method/Field/Function/Variable/Constant</h3>
+<p>It is common to use the OR statement to get a field OR something else if it isn&#39;t there or empty. Score: 18 </p>
+ 
+``` javascript
+    //1234567890123456789012345678901234567890
+    //t.f||<alternative>
 
+    t.f || <alternative>
+```
+ 
+<h3> Missing Enum Dispatch Implementation</h3>
+<p>No way to idiomatically check. 30 </p>
+
+<h3> Unexpected Variable Mutation </h3>
+<p>In JavaScript, we would have to make the field inside an object, and use an accessor to expose it. Score: 0 </p>
+ 
+``` javascript
+    //1234567890123456789012345678901234567890
+    //
+
+    
+```
+ 
+<h3> Deadlock prevention</h3>
+<p>Javascript is single threaded, and uses a queue for asynchronous execution responses like from calls to Ajax methods. As such, deadlocks are not possible by design. Javascript therefore is restricted in its abilities, but this is about categorizing safety only. 0 </p>
+
+<h3> Memory Deallocation</h3>
+<p>Handled By Garbage Collector. -30 </p>
+
+<h3> Stack Overflow Exceptions Caused by Recursion</h3>
+<p>No way to prevent these, and therefore the alternative is to write algorithms in a loop construct. It is not idiomatic to use recursion because of this. While any recursive algorithm can be expressed in a loop, it can require more size and possibly a less intuitive algorithm. 30 </p>
+
+<h3> Ensure Code Executes When Passed To a Function</h3>
+<p>Compiler Enforced. -30 </p>
+</p>
