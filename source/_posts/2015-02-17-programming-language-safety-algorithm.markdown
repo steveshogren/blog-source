@@ -123,7 +123,12 @@ For example, lets score a variety of languages:
 <td>170</td>
 </tr>
 </table>
-<h2>C#</h2>
+<select id="lang"><option value="csharp">C#  </option>
+<option value="fsharp">F#  </option>
+<option value="clojure">Clojure  </option>
+<option value="javascript">JavaScript  </option>
+</select>
+<div id="csharp"><h2>C#</h2>
 <h3> Null Reference Method/Field Invocation</h3>
 <p>It is possible to use the ternary operator as well, but a quick StackOverflow search shows a lot of comments cautioning against using them &#39;too much&#39;, so we will count the traditional &#39;if-else&#39; for the most idiomatic way of checking if the field is null before using it. Score: 19 </p>
  
@@ -197,7 +202,8 @@ For example, lets score a variety of languages:
 
 <h3> Ensure Code Executes When Passed To a Function</h3>
 <p>Compiler Enforced. -30 </p>
-<h2>F#</h2>
+</div>
+<div id="fsharp"><h2>F#</h2>
 <h3> Null Reference Method/Field Invocation</h3>
 <p>In F#, it is idiomatic to use Option instead of null (most classes cannot be made null without special effort). The FSharpx library function &#39;sequential application&#39; written: (&lt;*&gt;) automatically tests for Some or None, and applies the consequent only if the value is Some. Score: -26 </p>
  
@@ -257,7 +263,8 @@ For example, lets score a variety of languages:
 
 <h3> Ensure Code Executes When Passed To a Function</h3>
 <p>Compiler Enforced. -30 </p>
-<h2>Clojure</h2>
+</div>
+<div id="clojure"><h2>Clojure</h2>
 <h3> Null Reference Method/Field Invocation</h3>
 <p>In Clojure, it is idiomatic to put data or functions inside primitive data structures like a hashmap. Retrieval and execution would likely use &#39;get&#39; which checks for nil by default. Score: 6 </p>
  
@@ -331,7 +338,8 @@ For example, lets score a variety of languages:
  
 <h3> Ensure Code Executes When Passed To a Function</h3>
 <p>Clojure macros can prevent parameters from executing at all by rewriting the call, and it is impossible to prevent. 30 </p>
-<h2>JavaScript</h2>
+</div>
+<div id="javascript"><h2>JavaScript</h2>
 <h3> Null Reference Method/Field Invocation</h3>
 <p>Javascript the common pattern is to check if something is there with an OR statement. Score: 20 </p>
  
@@ -405,4 +413,16 @@ For example, lets score a variety of languages:
 
 <h3> Ensure Code Executes When Passed To a Function</h3>
 <p>Compiler Enforced. -30 </p>
+</div>
 </p>
+
+
+<script type="text/javascript">
+    $('#lang').on('change', function(){
+        $("#lang option").each(function() {
+            $('#' + $(this).val()).hide();
+        });
+        $('#' + $(this).val()).show();
+
+    });
+</script>
