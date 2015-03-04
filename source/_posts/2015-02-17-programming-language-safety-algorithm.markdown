@@ -15,163 +15,159 @@ instead suggest we focus on what is typically idiomatic. For example,
 if it is possible to achieve a level of safety in a language but by
 doing something uncommon, that should not be counted. 
 
+This is not about "whose language is better".
+
 To score a language, simply figure out how many characters it costs to
-"prevent" a certain type of error, and add that to the total. Do not
-count newlines. Spaces or tabs do not count, but all other punctuation
-does. If a specific check is compiler enforced, like F#'s Option or
-C#'s parameter type enforcement, that is given a -30 to make up for the
-lack of unit tests and code exercising needed to run that "path", to
-weight the fact that this is "safer" code.  If something needs a
-library to function, we will not count the import either, as the
-importing the module will have a negligible effect on the code size
-and complexity.
+"prevent" a certain type of error, and add that to the
+total. Newlines, spaces, and tabs do not count, but all other
+punctuation does. If a specific check is compiler enforced, like F#'s
+Option or C#'s parameter type enforcement, that is given a -30 to make
+up for the lack of unit tests and code exercising needed to run that
+"path". Do not count import lines either, as the importing the module
+will have a negligible effect on the code size and complexity.
 
 If there is a safety feature that is not possible to achieve
 programmatically, we will add +30 for a "every change run and debug to
 fix" cost.
 
-For example, lets score a variety of languages:
+For example:
 
-<p class="lead"><table><tr><th>Safety Check</th>
-<th>C#</th>
-<th>F#</th>
-<th>Clojure</th>
-<th>JavaScript</th>
+<input id="bu" type="range" min="0" max="10" />
+
+<div ng-app="TableApp">
+<div ng-controller="TableCtrl">
+{% raw %} {{ languages[0].name }} {% endraw %}
+
+<p class="lead">
+<table>
+<tr>
+<th>Safety Check (* indicates enforced)</th>
+<th ng-repeat="lang in languages">
+{% raw %} {{ lang.name }} {% endraw %}
+</th>
 </tr>
-<tr><td>Null Reference Method/Field Invocation</td>
-<td>19</td>
-<td>-26</td>
-<td>6</td>
-<td>20</td>
+<tr>
+<td>Null Reference Method/Field Invocation</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.nullField) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Null List Iteration</td>
-<td>19</td>
-<td>-30</td>
-<td>-30</td>
-<td>20</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.nullList) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Putting wrong type into variable</td>
-<td>-30</td>
-<td>-30</td>
-<td>13</td>
-<td>30</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.wrongVaribleType) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Missing List Element </td>
-<td>23</td>
-<td>21</td>
-<td>6</td>
-<td>22</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.missingListElem) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Incorrect Type Casting</td>
-<td>29</td>
-<td>-7</td>
-<td>25</td>
-<td>30</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.wrongCast) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Passing Wrong Type to Method</td>
-<td>-30</td>
-<td>-30</td>
-<td>0</td>
-<td>30</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.wrongTypeToMethod) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Calling Missing Method/Field/Function/Variable/Constant</td>
-<td>-30</td>
-<td>-30</td>
-<td>-30</td>
-<td>18</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.missingMethodOrField) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Missing Enum Dispatch Implementation</td>
-<td>30</td>
-<td>0</td>
-<td>30</td>
-<td>30</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.missingEnum) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Unexpected Variable Mutation </td>
-<td>40</td>
-<td>0</td>
-<td>-30</td>
-<td>0</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.variableMutation) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Deadlock prevention</td>
-<td>30</td>
-<td>30</td>
-<td>-30</td>
-<td>0</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.deadLocks) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Memory Deallocation</td>
-<td>-30</td>
-<td>-30</td>
-<td>-30</td>
-<td>-30</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.memoryDeallocation) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Stack Overflow Exceptions Caused by Recursion</td>
-<td>30</td>
-<td>-30</td>
-<td>15</td>
-<td>30</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.recursionStackOverflow) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Ensure Code Executes When Passed To a Function</td>
-<td>-30</td>
-<td>-30</td>
-<td>30</td>
-<td>-30</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ score(lang.consistentCodeExecution) }} {% endraw %}
+</td>
 </tr>
 <tr><td>Totals</td>
-<td>70</td>
-<td>-192</td>
-<td>-25</td>
-<td>170</td>
+<td ng-repeat="lang in languages">
+    {% raw %} {{ totalscore(lang) }} {% endraw %}
+</td>
 </tr>
 </table>
-<select id="lang"><option value="csharp">C#  </option>
+<h2>Select Language:<select id="lang"><option value="csharp">C#  </option>
 <option value="fsharp">F#  </option>
 <option value="clojure">Clojure  </option>
 <option value="javascript">JavaScript  </option>
 </select>
+</h2>
 <div id="csharp"><h2>C#</h2>
 <h3> Null Reference Method/Field Invocation</h3>
 <p>It is possible to use the ternary operator as well, but a quick StackOverflow search shows a lot of comments cautioning against using them &#39;too much&#39;, so we will count the traditional &#39;if-else&#39; for the most idiomatic way of checking if the field is null before using it. Score: 19 </p>
- 
-``` csharp
-    //1234567890123456789012345678901234567890
-    //if(l!=null){}else{}
 
-    if (l != null) {<!consequent!>} else {<!alternative!>}
+``` csharp
+//1234567890123456789012345678901234567890
+//if(l!=null){}else{}
+
+if (l != null) {<!consequent!>} else {<!alternative!>}
 ```
- 
+
 <h3> Null List Iteration</h3>
 <p>Same check as for a null field. Score: 19 </p>
- 
-``` csharp
-    //1234567890123456789012345678901234567890
-    //if(l!=null){}else{}
 
-    if (l != null) {<!consequent!>} else {<!alternative!>}
+``` csharp
+//1234567890123456789012345678901234567890
+//if(l!=null){}else{}
+
+if (l != null) {<!consequent!>} else {<!alternative!>}
 ```
- 
+
 <h3> Putting wrong type into variable</h3>
 <p>Compiler Enforced. -30 </p>
 
 <h3> Missing List Element </h3>
 <p> Score: 23 </p>
- 
-``` csharp
-    //1234567890123456789012345678901234567890
-    //if(l.Count()>i){}else{}
 
-    if (l.Count() > i) {<!consequent!>} else {<!alternative!>}
+``` csharp
+//1234567890123456789012345678901234567890
+//if(l.Count()>i){}else{}
+
+if (l.Count() > i) {<!consequent!>} else {<!alternative!>}
 ```
- 
+
 <h3> Incorrect Type Casting</h3>
 <p> Score: 29 </p>
- 
-``` csharp
-    //1234567890123456789012345678901234567890
-    //varm=oasT;if(m!=null){}else{}
 
-    var m = o as T; if (m != null) {<!consequent!>} else {<!alternative!>}
+``` csharp
+//1234567890123456789012345678901234567890
+//varm=oasT;if(m!=null){}else{}
+
+var m = o as T; if (m != null) {<!consequent!>} else {<!alternative!>}
 ```
- 
+
 <h3> Passing Wrong Type to Method</h3>
 <p>Compiler Enforced. -30 </p>
 
@@ -183,14 +179,14 @@ For example, lets score a variety of languages:
 
 <h3> Unexpected Variable Mutation </h3>
 <p>For example, I pass data to a function, will the data come back the same as I passed it, or will it have mutated in some way? To prevent this, in C#, we would idiomatically make a new class and make the field readonly. Score: 40 </p>
- 
-``` csharp
-    //1234567890123456789012345678901234567890
-    //publicclassT{readonlyn;publicT(i){n=i;}}
 
-    public class T {readonly <!type!> n; public T(<!type!> i) {n = i;}}
+``` csharp
+//1234567890123456789012345678901234567890
+//publicclassT{readonlyn;publicT(i){n=i;}}
+
+public class T {readonly <!type!> n; public T(<!type!> i) {n = i;}}
 ```
- 
+
 <h3> Deadlock prevention</h3>
 <p>As far as I know, there is provide any way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored. 30 </p>
 
@@ -205,15 +201,15 @@ For example, lets score a variety of languages:
 </div>
 <div id="fsharp"><h2>F#</h2>
 <h3> Null Reference Method/Field Invocation</h3>
-<p>In F#, it is idiomatic to use Option instead of null (most classes cannot be made null without special effort). The FSharpx library function &#39;sequential application&#39; written: (&lt;*&gt;) automatically tests for Some or None, and applies the consequent only if the value is Some. Score: -26 </p>
- 
-``` fsharp
-    //1234567890123456789012345678901234567890
-    //<*>l
+<p>In F#, it is idiomatic to use Option instead of null (most classes cannot be made null without special effort). The FSharpx library function &#39;sequential application&#39; written: (&lt;*&gt;) automatically tests for Some or None, and applies the consequent only if the value is Some, otherwise returning a default alternative of None. Score: -26 </p>
 
-    <!consequent!> <*> l
+``` fsharp
+//1234567890123456789012345678901234567890
+//<*>l
+
+<!consequent!> <*> l
 ```
- 
+
 <h3> Null List Iteration</h3>
 <p>In F#, the idiomatic list cannot be made null by the compiler, so there is no check. -30 </p>
 
@@ -222,24 +218,24 @@ For example, lets score a variety of languages:
 
 <h3> Missing List Element </h3>
 <p> Score: 21 </p>
- 
-``` fsharp
-    //1234567890123456789012345678901234567890
-    //ifl.Count()>ithenelse
 
-    if l.Count() > i then <!consequent!> else <!alternative!>
+``` fsharp
+//1234567890123456789012345678901234567890
+//ifl.Count()>ithenelse
+
+if l.Count() > i then <!consequent!> else <!alternative!>
 ```
- 
+
 <h3> Incorrect Type Casting</h3>
 <p> Score: -7 </p>
- 
-``` fsharp
-    //1234567890123456789012345678901234567890
-    //matchowith|:?Tasm->|_->
 
-    match o with | :? T as m -> <!consequent!> | _ -> <!alternative!>
+``` fsharp
+//1234567890123456789012345678901234567890
+//matchowith|:?Tasm->|_->
+
+match o with | :? T as m -> <!consequent!> | _ -> <!alternative!>
 ```
- 
+
 <h3> Passing Wrong Type to Method</h3>
 <p>Compiler Enforced. -30 </p>
 
@@ -267,47 +263,47 @@ For example, lets score a variety of languages:
 <div id="clojure"><h2>Clojure</h2>
 <h3> Null Reference Method/Field Invocation</h3>
 <p>In Clojure, it is idiomatic to put data or functions inside primitive data structures like a hashmap. Retrieval and execution would likely use &#39;get&#39; which checks for nil by default. Score: 6 </p>
- 
-``` clojure
-    ;;1234567890123456789012345678901234567890
-    ;;(getl)
 
-    (get l <!lookup-keyword!> <!default-if-missing!>)
+``` clojure
+;;1234567890123456789012345678901234567890
+;;(getl)
+
+(get l <!lookup-keyword!> <!default-if-missing!>)
 ```
- 
+
 <h3> Null List Iteration</h3>
 <p>In Clojure, the default iteration functions: map, reduce, filter all check and return an empty list if nil, so no need for a check. -30 </p>
 
 <h3> Putting wrong type into variable</h3>
 <p>In Clojure, the closest thing to a variable is a let bound function or an atom, and neither can be annotated by default. A wrapping call to &#39;instance?&#39; will give a runtime error. Score: 13 </p>
- 
-``` clojure
-    ;;1234567890123456789012345678901234567890
-    ;;(instance?cx)
 
-    (instance? c x)
+``` clojure
+;;1234567890123456789012345678901234567890
+;;(instance?cx)
+
+(instance? c x)
 ```
- 
+
 <h3> Missing List Element </h3>
 <p>Clojure&#39;s &#39;get&#39; also gets values out of lists by index. Score: 6 </p>
- 
-``` clojure
-    ;;1234567890123456789012345678901234567890
-    ;;(geti)
 
-    (get i <!list!> <!default-value!>)
+``` clojure
+;;1234567890123456789012345678901234567890
+;;(geti)
+
+(get i <!list!> <!default-value!>)
 ```
- 
+
 <h3> Incorrect Type Casting</h3>
 <p>Requires a try/catch block around the primitive cast function. Score: 25 </p>
- 
-``` clojure
-    ;;1234567890123456789012345678901234567890
-    ;;(try(o)(catchExceptione))
 
-    (try (<!T!> o) (catch Exception e <!alternative!>))
+``` clojure
+;;1234567890123456789012345678901234567890
+;;(try(o)(catchExceptione))
+
+(try (<!T!> o) (catch Exception e <!alternative!>))
 ```
- 
+
 <h3> Passing Wrong Type to Method</h3>
 <p>In Clojure, parameters can be annotated with a type, which is checked at runtime:  0 </p>
 
@@ -328,51 +324,51 @@ For example, lets score a variety of languages:
 
 <h3> Stack Overflow Exceptions Caused by Recursion</h3>
 <p>Clojure provides a syntax for tail-call opimization, called loop/recur. Score: 15 </p>
- 
-``` clojure
-    ;;1234567890123456789012345678901234567890
-    ;;(loop[](recur))
 
-    (loop [<!params!>] (recur <!args!>))
+``` clojure
+;;1234567890123456789012345678901234567890
+;;(loop[](recur))
+
+(loop [<!params!>] (recur <!args!>))
 ```
- 
+
 <h3> Ensure Code Executes When Passed To a Function</h3>
 <p>Clojure macros can prevent parameters from executing at all by rewriting the call, and it is impossible to prevent. 30 </p>
 </div>
 <div id="javascript"><h2>JavaScript</h2>
 <h3> Null Reference Method/Field Invocation</h3>
 <p>Javascript the common pattern is to check if something is there with an OR statement. Score: 20 </p>
- 
-``` javascript
-    //1234567890123456789012345678901234567890
-    //if(l!==null){}else{}
 
-    if (l !== null) {<!consequent!>} else {<!alternative!>}
+``` javascript
+//1234567890123456789012345678901234567890
+//if(l!==null){}else{}
+
+if (l !== null) {<!consequent!>} else {<!alternative!>}
 ```
- 
+
 <h3> Null List Iteration</h3>
 <p>Same check as for a null field. Score: 20 </p>
- 
-``` javascript
-    //1234567890123456789012345678901234567890
-    //if(l!==null){}else{}
 
-    if (l !== null) {<!consequent!>} else {<!alternative!>}
+``` javascript
+//1234567890123456789012345678901234567890
+//if(l!==null){}else{}
+
+if (l !== null) {<!consequent!>} else {<!alternative!>}
 ```
- 
+
 <h3> Putting wrong type into variable</h3>
 <p>No real idiomatic way to check. 30 </p>
 
 <h3> Missing List Element </h3>
 <p> Score: 22 </p>
- 
-``` javascript
-    //1234567890123456789012345678901234567890
-    //if(l.length>i){}else{}
 
-    if (l.length > i) {<!consequent!>} else {<!alternative!>}
+``` javascript
+//1234567890123456789012345678901234567890
+//if(l.length>i){}else{}
+
+if (l.length > i) {<!consequent!>} else {<!alternative!>}
 ```
- 
+
 <h3> Incorrect Type Casting</h3>
 <p>No real idiomatic way to check. 30 </p>
 
@@ -381,27 +377,27 @@ For example, lets score a variety of languages:
 
 <h3> Calling Missing Method/Field/Function/Variable/Constant</h3>
 <p>It is common to use the OR statement to get a field OR something else if it isn&#39;t there or empty. Score: 18 </p>
- 
-``` javascript
-    //1234567890123456789012345678901234567890
-    //t.f||<alternative>
 
-    t.f || <alternative>
+``` javascript
+//1234567890123456789012345678901234567890
+//t.f||<alternative>
+
+t.f || <alternative>
 ```
- 
+
 <h3> Missing Enum Dispatch Implementation</h3>
 <p>No way to idiomatically check. 30 </p>
 
 <h3> Unexpected Variable Mutation </h3>
-<p>In JavaScript, we would have to make the field inside an object, and use an accessor to expose it. Score: 0 </p>
- 
-``` javascript
-    //1234567890123456789012345678901234567890
-    //
+<p>The Immutabile.js library offers a simple set of tools for adding in immutability, under the Immutabile namespace. Score: 15 </p>
 
-    
+``` javascript
+//1234567890123456789012345678901234567890
+//Immutable.Map()
+
+Immutable.Map(<!object!>)
 ```
- 
+
 <h3> Deadlock prevention</h3>
 <p>Javascript is single threaded, and uses a queue for asynchronous execution responses like from calls to Ajax methods. As such, deadlocks are not possible by design. Javascript therefore is restricted in its abilities, but this is about categorizing safety only. 0 </p>
 
@@ -415,14 +411,6 @@ For example, lets score a variety of languages:
 <p>Compiler Enforced. -30 </p>
 </div>
 </p>
+</div>
+</div>
 
-
-<script type="text/javascript">
-    $('#lang').on('change', function(){
-        $("#lang option").each(function() {
-            $('#' + $(this).val()).hide();
-        });
-        $('#' + $(this).val()).show();
-
-    });
-</script>
