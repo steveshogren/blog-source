@@ -38,6 +38,7 @@ For example:
 
 
 Enforced Score:
+{% raw %} {{ enforcedScore }} {% endraw %}
 <input ng-model="enforcedScore" type="range" min="0" max="50" />
 
 <p class="lead">
@@ -48,72 +49,136 @@ Enforced Score:
 {% raw %} {{ lang.name }} {% endraw %}
 </th>
 </tr>
-<tr>
+<tr ng-click="showNullField = !!!showNullField">
 <td>Null Reference Method/Field Invocation</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.nullField) }} {% endraw %}
+    {% raw %} {{ score(lang.nullField, weightNullField) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Null List Iteration</td>
+<tr ng-show="showNullField"><td>
+Weight: {% raw %} {{ weightNullField }} {% endraw %}
+<input ng-model="weightNullField" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="shownullList = !!!shownullList">
+<td>Null List Iteration</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.nullList) }} {% endraw %}
+    {% raw %} {{ score(lang.nullList, weightnullList) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Putting wrong type into variable</td>
+<tr ng-show="shownullList"><td>
+Weight: {% raw %} {{ weightnullList}} {% endraw %}
+<input ng-model="weightnullList" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showwrongVaribleType = !!!showwrongVaribleType">
+<td>Putting wrong type into variable</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.wrongVaribleType) }} {% endraw %}
+    {% raw %} {{ score(lang.wrongVaribleType, weightwrongVaribleType) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Missing List Element </td>
+<tr ng-show="showwrongVaribleType"><td>
+Weight: {% raw %} {{ weightwrongVaribleType}} {% endraw %}
+<input ng-model="weightwrongVaribleType" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showmissingListElem = !!!showmissingListElem">
+<td>Missing List Element </td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.missingListElem) }} {% endraw %}
+    {% raw %} {{ score(lang.missingListElem, weightmissingListElem) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Incorrect Type Casting</td>
+<tr ng-show="showmissingListElem"><td>
+Weight: {% raw %} {{ weightmissingListElem}} {% endraw %}
+<input ng-model="weightmissingListElem" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showwrongCast = !!!showwrongCast">
+<td>Incorrect Type Casting</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.wrongCast) }} {% endraw %}
+    {% raw %} {{ score(lang.wrongCast, weightwrongCast) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Passing Wrong Type to Method</td>
+<tr ng-show="showwrongCast"><td>
+Weight: {% raw %} {{ weightwrongCast}} {% endraw %}
+<input ng-model="weightwrongCast" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showwrongTypeToMethod = !!!showwrongTypeToMethod">
+<td>Passing Wrong Type to Method</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.wrongTypeToMethod) }} {% endraw %}
+    {% raw %} {{ score(lang.wrongTypeToMethod, weightwrongTypeToMethod) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Calling Missing Method/Field/Function/Variable/Constant</td>
+<tr ng-show="showwrongTypeToMethod"><td>
+Weight: {% raw %} {{ weightwrongTypeToMethod}} {% endraw %}
+<input ng-model="weightwrongTypeToMethod" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showmissingMethodOrField = !!!showmissingMethodOrField">
+<td>Calling Missing Method/Field/Function/Variable/Constant</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.missingMethodOrField) }} {% endraw %}
+    {% raw %} {{ score(lang.missingMethodOrField, weightmissingMethodOrField) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Missing Enum Dispatch Implementation</td>
+<tr ng-show="showmissingMethodOrField"><td>
+Weight: {% raw %} {{ weightmissingMethodOrField}} {% endraw %}
+<input ng-model="weightmissingMethodOrField" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showmissingEnum = !!!showmissingEnum">
+<td>Missing Enum Dispatch Implementation</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.missingEnum) }} {% endraw %}
+    {% raw %} {{ score(lang.missingEnum, weightmissingEnum) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Unexpected Variable Mutation </td>
+<tr ng-show="showmissingEnum"><td>
+Weight: {% raw %} {{ weightmissingEnum}} {% endraw %}
+<input ng-model="weightmissingEnum" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showvariableMutation = !!!showvariableMutation">
+<td>Unexpected Variable Mutation </td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.variableMutation) }} {% endraw %}
+    {% raw %} {{ score(lang.variableMutation, weightvariableMutation) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Deadlock prevention</td>
+<tr ng-show="showvariableMutation"><td>
+Weight: {% raw %} {{ weightvariableMutation}} {% endraw %}
+<input ng-model="weightvariableMutation" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showdeadLocks = !!!showdeadLocks">
+<td>Deadlock prevention</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.deadLocks) }} {% endraw %}
+    {% raw %} {{ score(lang.deadLocks, weightdeadLocks) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Memory Deallocation</td>
+<tr ng-show="showdeadLocks"><td>
+Weight: {% raw %} {{ weightdeadLocks}} {% endraw %}
+<input ng-model="weightdeadLocks" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showmemoryDeallocation = !!!showmemoryDeallocation">
+<td>Memory Deallocation</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.memoryDeallocation) }} {% endraw %}
+    {% raw %} {{ score(lang.memoryDeallocation, weightmemoryDeallocation) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Stack Overflow Exceptions Caused by Recursion</td>
+<tr ng-show="showmemoryDeallocation"><td>
+Weight: {% raw %} {{ weightmemoryDeallocation}} {% endraw %}
+<input ng-model="weightmemoryDeallocation" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showrecursionStackOverflow = !!!showrecursionStackOverflow">
+<td>Stack Overflow Exceptions Caused by Recursion</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.recursionStackOverflow) }} {% endraw %}
+    {% raw %} {{ score(lang.recursionStackOverflow, weightrecursionStackOverflow) }} {% endraw %}
 </td>
 </tr>
-<tr><td>Ensure Code Executes When Passed To a Function</td>
+<tr ng-show="showrecursionStackOverflow"><td>
+Weight: {% raw %} {{ weightrecursionStackOverflow}} {% endraw %}
+<input ng-model="weightrecursionStackOverflow" type="range" min="0" max="10" />
+</td></tr>
+<tr ng-click="showconsistentCodeExecution = !!!showconsistentCodeExecution">
+<td>Ensure Code Executes When Passed To a Function</td>
 <td ng-repeat="lang in languages">
-    {% raw %} {{ score(lang.consistentCodeExecution) }} {% endraw %}
+    {% raw %} {{ score(lang.consistentCodeExecution, weightconsistentCodeExecution) }} {% endraw %}
 </td>
 </tr>
+<tr ng-show="showconsistentCodeExecution"><td>
+Weight: {% raw %} {{ weightconsistentCodeExecution}} {% endraw %}
+<input ng-model="weightconsistentCodeExecution" type="range" min="0" max="10" />
+</td></tr>
 <tr><td>Totals</td>
 <td ng-repeat="lang in languages">
     {% raw %} {{ totalscore(lang) }} {% endraw %}

@@ -10,18 +10,21 @@ var tableApp = angular.module('TableApp', []);
 tableApp.controller('TableCtrl', function ($scope) {
 
     $scope.enforcedScore = 30;
+    $scope.weightNullField = 10;
     $scope.cleanCode = function(c){
         var t = c.replace(/<![a-zA-Z-]+!>/g, "");
         return t.replace(/\s/g, "");
     };
-    $scope.score = function(t){
+    $scope.score = function(t, weight){
+        if (!weight) { weight = 10;}
         var delta = t.enforced ? $scope.enforcedScore : 0;
+        var count = 0;
         if (typeof t.humanScore !== "undefined") {
-            return t.humanScore - delta;
+            count =  t.humanScore;
         } else {
-
-            return $scope.cleanCode(t.rawCode).length - delta;
+            count = $scope.cleanCode(t.rawCode).length;
         }
+        return Math.ceil((weight / 10) * (count - delta));
     };
 
     $scope.totalscore = function(l){
