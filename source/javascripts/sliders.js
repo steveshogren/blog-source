@@ -10,12 +10,17 @@ var tableApp = angular.module('TableApp', []);
 tableApp.controller('TableCtrl', function ($scope) {
 
     $scope.enforcedScore = 30;
+    $scope.cleanCode = function(c){
+        var t = c.replace(/<![a-zA-Z-]+!>/g, "");
+        return t.replace(/\s/g, "");
+    };
     $scope.score = function(t){
+        var delta = t.enforced ? $scope.enforcedScore : 0;
         if (typeof t.humanScore !== "undefined") {
-            return t.humanScore;
+            return t.humanScore - delta;
         } else {
-            var delta = t.enforced ? $scope.enforcedScore : 0;
-            return (t.rawCode.length) - delta;
+
+            return $scope.cleanCode(t.rawCode).length - delta;
         }
     };
 
@@ -57,18 +62,18 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "As far as I know, there is provide any way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
             },
             missingMethodOrField: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Compiler Enforced."
             },
             wrongVaribleType: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Compiler Enforced."
             },
             name: "C#",
             consistentCodeExecution: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Compiler Enforced."
             },
@@ -78,7 +83,7 @@ tableApp.controller('TableCtrl', function ($scope) {
                 rawCode: "if (l.Count() > i) {<!consequent!>} else {<!alternative!>}"
             },
             wrongTypeToMethod: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Compiler Enforced."
             },
@@ -89,7 +94,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             markupName: "csharp",
             memoryDeallocation: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Handled by garbage collector."
             },
@@ -112,12 +117,12 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "The compiler offers this as a warning with no extra code (but it is not enforced)."
             },
             recursionStackOverflow: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "F# recursive functions calls are converted into loop constructs by the compiler automatically."
             },
             nullList: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "In F#, the idiomatic list cannot be made null by the compiler, so there is no check."
             },
@@ -127,18 +132,18 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "As far as I know, there is provide any way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
             },
             missingMethodOrField: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Compiler Enforced."
             },
             wrongVaribleType: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Compiler Enforced."
             },
             name: "F#",
             consistentCodeExecution: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Compiler Enforced."
             },
@@ -148,7 +153,7 @@ tableApp.controller('TableCtrl', function ($scope) {
                 rawCode: "if l.Count() > i then <!consequent!> else <!alternative!>"
             },
             wrongTypeToMethod: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Compiler Enforced."
             },
@@ -159,7 +164,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             markupName: "fsharp",
             memoryDeallocation: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Handled By Garbage Collector."
             },
@@ -187,17 +192,17 @@ tableApp.controller('TableCtrl', function ($scope) {
                 rawCode: "(loop [<!params!>] (recur <!args!>))"
             },
             nullList: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "In Clojure, the default iteration functions: map, reduce, filter all check and return an empty list if nil, so no need for a check."
             },
             deadLocks: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "The STM and agent model built into the language cannot deadlock, and data is immutable or changes are queued."
             },
             missingMethodOrField: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Clojure, the language checks for this before runtime."
             },
@@ -223,13 +228,13 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "In Clojure, parameters can be annotated with a type, which is checked at runtime: "
             },
             variableMutation: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "In Clojure, anything you would pass is immutable, so no check and enforced by the language before runtime."
             },
             markupName: "clojure",
             memoryDeallocation: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Handled by garbage collector."
             },
@@ -278,7 +283,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             name: "JavaScript",
             consistentCodeExecution: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Compiler Enforced."
             },
@@ -299,7 +304,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             markupName: "javascript",
             memoryDeallocation: {
-                humanScore: -30,
+                humanScore: 0,
                 enforced: true,
                 desc: "Handled By Garbage Collector."
             },
