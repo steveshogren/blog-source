@@ -7,16 +7,52 @@ $('#lang').on('change', function(){
 
 var tableApp = angular.module('TableApp', []);
 
+tableApp.directive('scoreRow', function(){
+    return {
+        restrict: 'A',
+        replace: true,
+        link: function(scope, element, attrs) {
+            scope.score = scope.$parent.score;
+            scope.languages = scope.$parent.languages;
+            scope.$watch('weight', function(n, old){
+                if(n !== old){
+                    scope.languages.map(function(l){
+                        scope.languageFn(l).weight = n;
+                    });
+
+                    scope.$parent.updateTotals();
+                }
+            });
+        },
+        scope: {
+            languageFn: '&',
+            name: '='
+        },
+        template: '<tr> <td>{{name}} Weight: {{ weight}}  <input ng-model="weight" type="range" min="0" max="10" /></td> <td ng-repeat="lang in languages">  {{ score(languageFn(lang), weight) }}  </td> </tr>'
+    };
+});
+
 tableApp.controller('TableCtrl', function ($scope) {
+    $scope.$watch('enforcedScore', function(n, old){
+        if(n !== old){
+            $scope.updateTotals();
+        }
+    });
 
     $scope.enforcedScore = 30;
     $scope.weightNullField = 10;
+    $scope.nullField = function(language){
+        return language.nullField; 
+    };
+    $scope.getNullFields = function(languages){
+        return languages.map(function(x){ return x.nullField; });
+    };
     $scope.cleanCode = function(c){
         var t = c.replace(/<![a-zA-Z-]+!>/g, "");
         return t.replace(/\s/g, "");
     };
-    $scope.score = function(t, weight){
-        if (!weight) { weight = 10;}
+    $scope.score = function(t){
+        if (!t.weight) { t.weight = 10;}
         var delta = t.enforced ? $scope.enforcedScore : 0;
         var count = 0;
         if (typeof t.humanScore !== "undefined") {
@@ -24,23 +60,26 @@ tableApp.controller('TableCtrl', function ($scope) {
         } else {
             count = $scope.cleanCode(t.rawCode).length;
         }
-        return Math.ceil((weight / 10) * (count - delta));
+        return Math.ceil((t.weight / 10) * (count - delta));
     };
-
-    $scope.totalscore = function(l){
-        return $scope.score(l.nullField) +
-            $scope.score(l.nullList) +
-            $scope.score(l.wrongVaribleType) +
-            $scope.score(l.missingListElem) +
-            $scope.score(l.wrongCast) +
-            $scope.score(l.wrongTypeToMethod) +
-            $scope.score(l.missingMethodOrField) +
-            $scope.score(l.missingEnum) +
-            $scope.score(l.variableMutation) +
-            $scope.score(l.deadLocks) +
-            $scope.score(l.memoryDeallocation) +
-            $scope.score(l.recursionStackOverflow) +
-            $scope.score(l.consistentCodeExecution); };
+    $scope.langtotals = [];
+    $scope.updateTotals = function(){
+        $scope.langTotals = [];
+        $scope.languages.map(function(l){
+            $scope.langTotals.push($scope.score(l.nullField) +
+                $scope.score(l.nullList) +
+                $scope.score(l.wrongVaribleType) +
+                $scope.score(l.missingListElem) +
+                $scope.score(l.wrongCast) +
+                $scope.score(l.wrongTypeToMethod) +
+                $scope.score(l.missingMethodOrField) +
+                $scope.score(l.missingEnum) +
+                $scope.score(l.variableMutation) +
+                $scope.score(l.deadLocks) +
+                $scope.score(l.memoryDeallocation) +
+                $scope.score(l.recursionStackOverflow) +
+                $scope.score(l.consistentCodeExecution));
+        });};
 
     $scope.languages = [
         {
@@ -324,4 +363,6 @@ tableApp.controller('TableCtrl', function ($scope) {
             }
         }
     ];
+
+    $scope.updateTotals();
 });
