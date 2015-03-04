@@ -32,11 +32,13 @@ fix" cost.
 
 For example:
 
-<input id="bu" type="range" min="0" max="10" />
 
 <div ng-app="TableApp">
 <div ng-controller="TableCtrl">
-{% raw %} {{ languages[0].name }} {% endraw %}
+
+
+Enforced Score:
+<input ng-model="enforcedScore" type="range" min="0" max="50" />
 
 <p class="lead">
 <table>

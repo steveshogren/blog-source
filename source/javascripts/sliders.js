@@ -8,11 +8,14 @@ $('#lang').on('change', function(){
 var tableApp = angular.module('TableApp', []);
 
 tableApp.controller('TableCtrl', function ($scope) {
+
+    $scope.enforcedScore = 30;
     $scope.score = function(t){
         if (typeof t.humanScore !== "undefined") {
             return t.humanScore;
         } else {
-            return t.rawCode.length;
+            var delta = t.enforced ? $scope.enforcedScore : 0;
+            return (t.rawCode.length) - delta;
         }
     };
 
