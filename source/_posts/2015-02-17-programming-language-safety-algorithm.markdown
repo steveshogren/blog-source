@@ -73,7 +73,7 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 <tr ng-repeat="check in langChecks" score-row name="check.name" language-fn="check.fn"></tr>
 <tr class="totals"><td>Totals</td>
 <td></td>
-<td ng-repeat="lang in langTotals">
+<td ng-repeat="lang in langTotals track by $index">
 {% raw %} {{ lang }} {% endraw %}
 </td>
 </tr>
@@ -102,7 +102,10 @@ are counted.
 {% raw %} {{ score(check.fn(selectedLang)) }} {% endraw %}
 
 <div>
-Code: <input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
+Code:
+<div class="tablecode">1234567890123456789012345678901234567890</div>
+<div class="tablecode" > {% raw %} {{ cleanCode(check.fn(selectedLang).rawCode) }} {% endraw %} </div>
+<input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
 </div>
 </p>
 </div>

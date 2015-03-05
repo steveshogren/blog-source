@@ -30,6 +30,11 @@ background: #f2f2f2;
     width: 100%;
 }
 
+.tablecode{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.8em;
+}
+
 .langtable td {
     border: 1px solid grey;
     text-align: left;
@@ -43,8 +48,5 @@ background: #f2f2f2;
     padding: 3px;
     background: grey;
     color: white;
-    font-size: 0.8em;
-}
-.evens tr {
-    background: grey;
+    font-size: 0.9em;
 }

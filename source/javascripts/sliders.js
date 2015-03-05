@@ -27,7 +27,17 @@ tableApp.directive('scoreRow', function(){
 });
 
 tableApp.controller('TableCtrl', function ($scope) {
+    $scope.$watch('inabilityPenalty', function(n, old){
+        if(n !== old){
+            $scope.updateTotals();
+        }
+    });
     $scope.$watch('enforcedScore', function(n, old){
+        if(n !== old){
+            $scope.updateTotals();
+        }
+    });
+    $scope.$watchCollection('languages', function(n, old){
         if(n !== old){
             $scope.updateTotals();
         }
@@ -39,6 +49,7 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.langtotals = [];
 
     $scope.cleanCode = function(c){
+        if (!c) { return "";}
         var t = c.replace(/<![a-zA-Z-]+!>/g, "");
         return t.replace(/\s/g, "");
     };
@@ -47,7 +58,7 @@ tableApp.controller('TableCtrl', function ($scope) {
         if (!t.weight) { t.weight = 100;}
         var count = 0;
         var delta = 0;
-        if (typeof t.rawCode === "undefined" && !t.rawCode) {
+        if ((typeof t.rawCode === "undefined" && !t.rawCode) || t.rawCode == "") {
             if (t.enforced === "yes") {
                 delta = -$scope.enforcedScore;
             } else if (t.enforced === "no"){
