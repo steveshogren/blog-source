@@ -31,7 +31,8 @@ will have a negligible effect on the code size and complexity.
 
 If there is a safety feature that is not possible to achieve
 programmatically, we will add +30 for a "every change run and debug to
-fix" cost.
+fix" cost, such as C# not having a way to prevent stack overflow
+exceptions caused by recursion.
 
     A lower score is "safer", needing less code to achieve the same
     level of safety.
@@ -52,16 +53,25 @@ Language Inability Penalty:
 Show Weights <input type="checkbox" ng-model="showWeights" />
 <p class="lead">
 <div style="overflow-x:scroll">
-<table>
+<table class="langtable">
 <tr>
 <th>Safety Check</th>
 <th></th>
-<th ng-repeat="lang in languages">
-{% raw %} {{ lang.name }} {% endraw %}
+<th>
+<select ng-options="lang.name for lang in allLanguages" ng-model="languages[0]"></select>
+</th>
+<th>
+<select ng-options="lang.name for lang in allLanguages" ng-model="languages[1]"></select>
+</th>
+<th>
+<select ng-options="lang.name for lang in allLanguages" ng-model="languages[2]"></select>
+</th>
+<th>
+<select ng-options="lang.name for lang in allLanguages" ng-model="languages[3]"></select>
 </th>
 </tr>
 <tr ng-repeat="check in langChecks" score-row name="check.name" language-fn="check.fn"></tr>
-<tr><td>Totals</td>
+<tr class="totals"><td>Totals</td>
 <td></td>
 <td ng-repeat="lang in langTotals">
 {% raw %} {{ lang }} {% endraw %}
@@ -76,10 +86,13 @@ here: [language data structure](https://github.com/steveshogren/blog-source/blob
 
 If you want to see what code was used to come up with those numbers,
 and want to put in your own examples, feel free to play with the
-samples below:
+samples below. Code surrounded with <! !> is ignored from the tally,
+since it would vary heavily based on the language and desired
+result. Variable and type names are kept at single characters, which
+are counted.
 
 <h2>Select Language:
-<select ng-options="lang.name for lang in languages" ng-model="selectedLang"></select>
+<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
 </h2>
 <h2>{% raw %} {{ selectedLang.name }} {% endraw %}</h2>
 <div ng-repeat="check in langChecks">

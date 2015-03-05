@@ -16,11 +16,35 @@ background: #f2f2f2;
           float: right;
 }
 
-.higher-score {
+.enforcedscore {
           //background-color: #F5A9A9;
-          color: red;
+          color: green;
 }
 .lower-score {
           //background-color: #81F781;
           color: green;
+}
+.langtable {
+    border-collapse: collapse;
+    max-width: 100%;
+    width: 100%;
+}
+
+.langtable td {
+    border: 1px solid grey;
+    text-align: left;
+    padding: 3px;
+    font-size: 0.8em;
+}
+
+.langtable th, .totals {
+    border: 1px solid grey;
+    text-align: left;
+    padding: 3px;
+    background: grey;
+    color: white;
+    font-size: 0.8em;
+}
+.evens tr {
+    background: grey;
 }
