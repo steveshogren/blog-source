@@ -51,9 +51,10 @@ Language Inability Penalty:
 
 Show Weights <input type="checkbox" ng-model="showWeights" />
 <p class="lead">
+<div style="overflow-x:scroll">
 <table>
 <tr>
-<th>Safety Check (* indicates enforced)</th>
+<th>Safety Check</th>
 <th></th>
 <th ng-repeat="lang in languages">
 {% raw %} {{ lang.name }} {% endraw %}
@@ -67,6 +68,7 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 </td>
 </tr>
 </table>
+</div>
 
 I want to see your language represented here! I'll happily take
 pull requests so long as they are in the same data structure found
