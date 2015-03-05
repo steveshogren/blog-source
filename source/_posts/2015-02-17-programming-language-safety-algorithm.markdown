@@ -4,6 +4,11 @@ title: "Programming Language Safety Algorithm"
 date: 2015-02-17 14:13
 comments: true
 categories: 
+- Technical Skills
+- Meta Game
+type: post
+status: publish
+published: true
 ---
 
 I think the time has come for a standard programming language scoring
