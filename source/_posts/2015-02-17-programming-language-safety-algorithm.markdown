@@ -90,3 +90,4 @@ samples below:
 </p>
 </div>
 
+Hope this is a helpful way to think about language safety!
