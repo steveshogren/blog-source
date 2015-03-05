@@ -7,8 +7,6 @@ categories:
 - Technical Skills
 - Meta Game
 type: post
-status: publish
-published: true
 ---
 
 I think the time has come for a standard programming language scoring
@@ -40,10 +38,8 @@ fix" cost.
 
 For example:
 
-
 <div ng-app="TableApp">
 <div ng-controller="TableCtrl">
-
 
 Language Enforced Bonus:
 {% raw %} {{ enforcedScore }} {% endraw %}
@@ -72,9 +68,13 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 </tr>
 </table>
 
+I want to see your language represented here! I'll happily take
+pull requests so long as they are in the same data structure found
+here: [language data structure](https://github.com/steveshogren/blog-source/blob/22f907bb2d43b1edf7ca8807c32bb4542c887d93/source/javascripts/sliders.js#L97-L158)
+
 If you want to see what code was used to come up with those numbers,
 and want to put in your own examples, feel free to play with the
-samples below.
+samples below:
 
 <h2>Select Language:
 <select ng-options="lang.name for lang in languages" ng-model="selectedLang"></select>
