@@ -86,7 +86,9 @@ samples below:
 {% raw %} {{ check.fn(selectedLang).desc }} {% endraw %}
 {% raw %} {{ score(check.fn(selectedLang)) }} {% endraw %}
 
-<div>Code: <input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" /><div>
+<div>
+Code: <input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
+</div>
 </p>
 </div>
 
