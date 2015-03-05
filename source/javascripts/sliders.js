@@ -12,12 +12,13 @@ tableApp.directive('scoreRow', function(){
         restrict: 'A',
         replace: true,
         link: function(scope, element, attrs) {
+            scope.weight = 100;
             scope.score = scope.$parent.score;
             scope.languages = scope.$parent.languages;
             scope.$watch('weight', function(n, old){
                 if(n !== old){
                     scope.languages.map(function(l){
-                        scope.languageFn(l).weight = n;
+                        scope.languageFn()(l).weight = n;
                     });
 
                     scope.$parent.updateTotals();
@@ -28,7 +29,7 @@ tableApp.directive('scoreRow', function(){
             languageFn: '&',
             name: '='
         },
-        template: '<tr> <td>{{name}} Weight: {{ weight}}  <input ng-model="weight" type="range" min="0" max="10" /></td> <td ng-repeat="lang in languages">  {{ score(languageFn(lang), weight) }}  </td> </tr>'
+        template: '<tr> <td>{{name}}</td><td><span ng-show="$parent.showWeights">{{weight}}%  <input ng-model="weight" type="range" min="0" step="10" max="100" /></span></td> <td ng-repeat="lang in languages">  {{ score(languageFn()(lang), weight) }}  </td> </tr>'
     };
 });
 
@@ -40,19 +41,14 @@ tableApp.controller('TableCtrl', function ($scope) {
     });
 
     $scope.enforcedScore = 30;
-    $scope.weightNullField = 10;
-    $scope.nullField = function(language){
-        return language.nullField; 
-    };
-    $scope.getNullFields = function(languages){
-        return languages.map(function(x){ return x.nullField; });
-    };
+    $scope.showWeights = false;
+    $scope.nullField = function(language){return language.nullField;};
     $scope.cleanCode = function(c){
         var t = c.replace(/<![a-zA-Z-]+!>/g, "");
         return t.replace(/\s/g, "");
     };
     $scope.score = function(t){
-        if (!t.weight) { t.weight = 10;}
+        if (!t.weight) { t.weight = 100;}
         var delta = t.enforced ? $scope.enforcedScore : 0;
         var count = 0;
         if (typeof t.humanScore !== "undefined") {
@@ -60,25 +56,31 @@ tableApp.controller('TableCtrl', function ($scope) {
         } else {
             count = $scope.cleanCode(t.rawCode).length;
         }
-        return Math.ceil((t.weight / 10) * (count - delta));
+        return Math.ceil((t.weight / 100) * (count - delta));
     };
     $scope.langtotals = [];
+
+    $scope.langChecks = [{name:"Null Reference Method/Field Invocation", fn:function(l){return l.nullField;}},
+                         {name:"Null List Iteration", fn:function(l){return l.nullList;}},
+                         {name:"Putting wrong type into variable", fn:function(l){return l.wrongVaribleType;}},
+                         {name:"Missing List Element ", fn:function(l){return l.missingListElem;}},
+                         {name:"Incorrect Type Casting", fn:function(l){return l.wrongCast;}},
+                         {name:"Passing Wrong Type to Method", fn:function(l){return l.wrongTypeToMethod;}},
+                         {name:"Calling Missing Method/Field/Function/Variable/Constant", fn:function(l){return l.missingMethodOrField;}},
+                         {name:"Missing Enum Dispatch Implementation", fn:function(l){return l.missingEnum;}},
+                         {name:"Unexpected Variable Mutation ", fn:function(l){return l.variableMutation;}},
+                         {name:"Deadlock prevention", fn:function(l){return l.deadLocks;}},
+                         {name:"Memory Deallocation", fn:function(l){return l.memoryDeallocation;}},
+                         {name:"Stack Overflow Exceptions Caused by Recursion", fn:function(l){return l.recursionStackOverflow;}},
+                         {name:"Ensure Code Executes When Passed To a Function", fn:function(l){return l.consistentCodeExecution;}}];
+
     $scope.updateTotals = function(){
         $scope.langTotals = [];
         $scope.languages.map(function(l){
-            $scope.langTotals.push($scope.score(l.nullField) +
-                $scope.score(l.nullList) +
-                $scope.score(l.wrongVaribleType) +
-                $scope.score(l.missingListElem) +
-                $scope.score(l.wrongCast) +
-                $scope.score(l.wrongTypeToMethod) +
-                $scope.score(l.missingMethodOrField) +
-                $scope.score(l.missingEnum) +
-                $scope.score(l.variableMutation) +
-                $scope.score(l.deadLocks) +
-                $scope.score(l.memoryDeallocation) +
-                $scope.score(l.recursionStackOverflow) +
-                $scope.score(l.consistentCodeExecution));
+            var t = $scope.langChecks.reduce(function(ret, next){
+                return ret + $scope.score(next.fn(l));
+            },0);
+            $scope.langTotals.push(t);
         });};
 
     $scope.languages = [

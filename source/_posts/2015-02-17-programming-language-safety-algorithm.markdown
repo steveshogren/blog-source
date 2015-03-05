@@ -41,19 +41,19 @@ Enforced Score:
 {% raw %} {{ enforcedScore }} {% endraw %}
 <input ng-model="enforcedScore" type="range" min="0" max="50" />
 
+Show Weights <input type="checkbox" ng-model="showWeights" />
 <p class="lead">
 <table>
 <tr>
 <th>Safety Check (* indicates enforced)</th>
+<th></th>
 <th ng-repeat="lang in languages">
 {% raw %} {{ lang.name }} {% endraw %}
 </th>
 </tr>
-<tr>
-<td>TESTS</td>
-</tr>
-<tr score-row name="'Get null field'" language-fn="nullField"></tr>
+<tr ng-repeat="check in langChecks" score-row name="check.name" language-fn="check.fn"></tr>
 <tr><td>Totals</td>
+<td></td>
 <td ng-repeat="lang in langTotals">
     {% raw %} {{ lang }} {% endraw %}
 </td>
