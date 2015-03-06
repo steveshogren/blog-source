@@ -46,7 +46,14 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.enforcedScore = 30;
     $scope.inabilityPenalty = 30;
     $scope.showWeights = false;
-    $scope.langtotals = [];
+    $scope.langTotals = [];
+    
+    $scope.percentageTotals = function(total){
+        var min = Math.min.apply(null, $scope.langTotals),
+            max = Math.max.apply(null, $scope.langTotals) - min,
+            shiftedTotal = total - min;
+        return Math.ceil(100-((100*(shiftedTotal))/max));
+    };
 
     $scope.cleanCode = function(c){
         if (!c) { return "";}
@@ -74,19 +81,19 @@ tableApp.controller('TableCtrl', function ($scope) {
     };
 
 
-    $scope.langChecks = [{name:"Null Reference Method/Field Invocation", fn:function(l){return l.nullField;}},
+    $scope.langChecks = [{name:"Test for Null Variable Reference", fn:function(l){return l.nullField;}},
                          {name:"Null List Iteration", fn:function(l){return l.nullList;}},
                          {name:"Putting wrong type into variable", fn:function(l){return l.wrongVaribleType;}},
                          {name:"Missing List Element ", fn:function(l){return l.missingListElem;}},
                          {name:"Incorrect Type Casting", fn:function(l){return l.wrongCast;}},
                          {name:"Passing Wrong Type to Method", fn:function(l){return l.wrongTypeToMethod;}},
-                         {name:"Calling Missing Method/Field/Function/Variable/Constant", fn:function(l){return l.missingMethodOrField;}},
-                         {name:"Missing Enum Dispatch Implementation", fn:function(l){return l.missingEnum;}},
-                         {name:"Unexpected Variable Mutation ", fn:function(l){return l.variableMutation;}},
+                         {name:"Calling Misspelled Method/Field/Function/Variable/Constant", fn:function(l){return l.missingMethodOrField;}},
+                         {name:"Missing Enum Value In Switch/Case or If/Else", fn:function(l){return l.missingEnum;}},
+                         {name:"Unexpected Variable Mutation", fn:function(l){return l.variableMutation;}},
                          {name:"Deadlock prevention", fn:function(l){return l.deadLocks;}},
                          {name:"Memory Deallocation", fn:function(l){return l.memoryDeallocation;}},
                          {name:"Stack Overflow Exceptions Caused by Recursion", fn:function(l){return l.recursionStackOverflow;}},
-                         {name:"Ensure Code Executes When Passed To a Function", fn:function(l){return l.consistentCodeExecution;}}];
+                         {name:"Guaranteed Code Evaluation When Passed To a Function", fn:function(l){return l.consistentCodeExecution;}}];
 
     $scope.updateTotals = function(){
         $scope.langTotals = [];
@@ -156,7 +163,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             nullField: {
                 enforced: "no",
-                desc: "It is possible to use the ternary operator as well, but a quick StackOverflow search shows a lot of comments cautioning against using them 'too much', so we will count the traditional 'if-else' for the most idiomatic way of checking if the field is null before using it.",
+                desc: "It is possible to use the ternary operator as well, but a quick StackOverflow search shows a lot of comments cautioning against using them 'too much', so we will count the traditional 'if-else' for the most idiomatic way of checking if the field is null before using it. Sourced from: http://stackoverflow.com/a/4660186/496112 and http://stackoverflow.com/a/3312825/496112 ",
                 rawCode: "if (l != null) {<!consequent!>} else {<!alternative!>}"
             }
         },
@@ -244,7 +251,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             wrongVaribleType: {
                 enforced: "no",
-                desc: "In Clojure, the closest thing to a variable is a let bound function or an atom, and neither can be annotated by default. A wrapping call to 'instance?' will give a runtime error.",
+                desc: "In Clojure, the closest thing to a variable is a let bound function or an atom, and neither can be annotated by default. A wrapping call to 'instance?' will give a runtime check.",
                 rawCode: "(instance? c x)"
             },
             name: "Clojure",
@@ -259,7 +266,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             wrongTypeToMethod: {
                 enforced: "warn",
-                desc: "In Clojure, parameters can be annotated with a type, which is checked at runtime: "
+                desc: "In Clojure, parameters can be annotated with a type or typeshape using a typeshaping library like Schema, which is checked at runtime."
             },
             variableMutation: {
                 enforced: "yes",
@@ -355,3 +362,21 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.updateTotals();
     $scope.selectedLang = $scope.languages[0];
 });
+
+/* chris...
+73  fn:function(l){return l.nullField;}},
+74  fn:function(l){return l.wrongVaribleType;}},
+75  fn:function(l){return l.wrongTypeToMethod;}},
+76  fn:function(l){return l.wrongCast;}},
+77  fn:function(l){return l.nullList;}},
+78  fn:function(l){return l.missingListElem;}},
+79  fn:function(l){return l.missingMethodOrField;}},
+80  fn:function(l){return l.missingEnum;}},
+81  fn:function(l){return l.variableMutation;}},
+82  fn:function(l){return l.deadLocks;}},
+83  fn:function(l){return l.memoryDeallocation;}},
+84  fn:function(l){return l.recursionStackOverflow;}},
+85  fn:function(l){return l.consistentCodeExecution;}}];
+
+
+*/

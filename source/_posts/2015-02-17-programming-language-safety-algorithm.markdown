@@ -9,9 +9,19 @@ categories:
 type: post
 ---
 
-I think the time has come for a standard programming language scoring
-algorithm that allows us to discuss the relative merits and, more
-importantly, associated costs of various languages and idioms.
+I want to think more clearly about programming language safety.
+
+When someone says "programming language safety", it typically invokes
+for me thoughts of unit tests, long build times, and red squiggles in
+an IDE. But, when developing, there are so many times when I am bitten
+by something that somehow the compiler just didn't catch. This got me
+thinking, clearly languages are not already perfectly safe, what would
+be a way to consider how safe they are in relation to a standard
+measure?
+
+I put together this scoring model to get a sense of how safe a
+language is at the primitive level, and if it isn't safe by default,
+how easy it is to make it safe manually.
 
 Rather than focus on what is _possible_ with a language, I will
 instead suggest we focus on what is typically idiomatic. For example,
@@ -23,7 +33,7 @@ doing something uncommon, that should not be counted.
 To score a language, simply figure out how many characters it costs to
 "prevent" a certain type of error, and add that to the
 total. Newlines, spaces, and tabs do not count, but all other
-punctuation does. If a specific check is compiler enforced, like F#'s
+punctuation does. If a specific check is language enforced, like F#'s
 Option or C#'s parameter type enforcement, that is given a -30 to make
 up for the lack of unit tests and code exercising needed to run that
 "path". Do not count import lines either, as the importing the module
@@ -75,6 +85,12 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 <td></td>
 <td ng-repeat="lang in langTotals track by $index">
 {% raw %} {{ lang }} {% endraw %}
+</td>
+</tr>
+<tr class="totals"><td>Magnitude</td>
+<td></td>
+<td ng-repeat="lang in langTotals track by $index">
+{% raw %} {{ percentageTotals(lang) }}% {% endraw %}
 </td>
 </tr>
 </table>
