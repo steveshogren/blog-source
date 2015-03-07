@@ -35,26 +35,30 @@ background: #f2f2f2;
     font-size: 0.8em;
 }
 
+td.tdname {
+  width:150px; 
+  max-width:150px;
+  min-width:150px; 
+  font-size: 0.7em !important;
+  line-height: 150%;
+}
+
 .langtable td {
     border: 1px solid grey;
     text-align: left;
-    padding: 3px;
-
+    padding-right: 3px;
+    padding-left: 3px;
     font-size: 0.8em;
 }
 .widetextarea {
     width: 100%;     
 }
-.tdname {
-  width:150px; 
-  max-width:150px;
-  min-width:150px; 
-}
 
 .langtable th, .totals {
     border: 1px solid grey;
     text-align: left;
-    padding: 3px;
+    padding-right: 3px;
+    padding-left: 3px;
     background: grey;
     color: white;
     font-size: 0.9em;
