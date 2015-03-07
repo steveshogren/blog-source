@@ -22,7 +22,7 @@ tableApp.directive('scoreRow', function(){
             languageFn: '&',
             name: '='
         },
-        template: '<tr ng-class-even="evens"> <td>{{name}}</td><td><span ng-show="$parent.showWeights">{{weight}}%  <input ng-model="weight" type="range" min="0" step="10" max="100" /></span></td> <td ng-repeat="lang in languages track by $index" ng-class="{enforcedscore:languageFn()(lang).enforced===\'yes\'}">  {{ score(languageFn()(lang), weight) }}  </td> </tr>'
+        template: '<tr ng-class-even="evens"> <td class="tdname">{{name}}</td><td><span ng-show="$parent.showWeights">{{weight}}%  <input ng-model="weight" type="range" min="0" step="10" max="100" /></span></td> <td ng-repeat="lang in languages track by $index" ng-class="{enforcedscore:languageFn()(lang).enforced===\'yes\'}">  {{ score(languageFn()(lang), weight) }}  </td> </tr>'
     };
 });
 
@@ -47,6 +47,12 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.inabilityPenalty = 30;
     $scope.showWeights = false;
     $scope.langTotals = [];
+
+    $scope.showRealName = false;
+    $scope.getName = function(lang){
+        if($scope.showRealName){return lang.name;}
+        return lang.softname;
+    };
     
     $scope.percentageTotals = function(total){
         var min = Math.min.apply(null, $scope.langTotals),
@@ -87,7 +93,7 @@ tableApp.controller('TableCtrl', function ($scope) {
                          {name:"Missing List Element ", fn:function(l){return l.missingListElem;}},
                          {name:"Incorrect Type Casting", fn:function(l){return l.wrongCast;}},
                          {name:"Passing Wrong Type to Method", fn:function(l){return l.wrongTypeToMethod;}},
-                         {name:"Calling Misspelled Method/Field/Function/Variable/Constant", fn:function(l){return l.missingMethodOrField;}},
+                         {name:"Calling Misspelled Method, Field, Function, Variable", fn:function(l){return l.missingMethodOrField;}},
                          {name:"Missing Enum Value In Switch/Case or If/Else", fn:function(l){return l.missingEnum;}},
                          {name:"Unexpected Variable Mutation", fn:function(l){return l.variableMutation;}},
                          {name:"Deadlock prevention", fn:function(l){return l.deadLocks;}},
@@ -112,7 +118,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             recursionStackOverflow: {
                 enforced: "no",
-                desc: "No way to prevent these, and therefore the alternative is to write algorithms in a loop construct. It is not idiomatic to use recursion because of this. While any recursive algorithm can be expressed in a loop, it can require more size and possibly a less intuitive algorithm."
+                desc: "No way to prevent these, and therefore the alternative is to write algorithms in a loop construct. It is not idiomatic to use recursion because of this. While any recursive algorithm can be expressed in a loop, it can require more size and possibly a less intuitive algorithm. Source: http://stackoverflow.com/a/18582585/496112"
             },
             nullList: {
                 enforced: "no",
@@ -132,14 +138,14 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "Compiler Enforced."
             },
             name: "C#",
-            softname: "Tradtional VM",
+            softname: "Popular VM Lang",
             consistentCodeExecution: {
                 enforced: "yes",
                 desc: "Compiler Enforced."
             },
             missingListElem: {
                 enforced: "no",
-                desc: "",
+                desc: "Source: http://www.dotnetperls.com/indexoutofrangeexception",
                 rawCode: "if (l.Count() > i) {<!consequent!>} else {<!alternative!>}"
             },
             wrongTypeToMethod: {
@@ -148,7 +154,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             variableMutation: {
                 enforced: "no",
-                desc: "For example, I pass data to a function, will the data come back the same as I passed it, or will it have mutated in some way? To prevent this, in C#, we would idiomatically make a new class and make the field readonly.",
+                desc: "For example, I pass data to a function, will the data come back the same as I passed it, or will it have mutated in some way? To prevent this, in C#, we would idiomatically make a new class and make the field readonly. Source: https://msdn.microsoft.com/en-us/library/acdd6hb7.aspx",
                 rawCode: "public class T {readonly <!type!> n; public T(<!type!> i) {n = i;}}"
             },
             markupName: "csharp",
@@ -159,7 +165,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             comment: "//",
             wrongCast: {
                 enforced: "no",
-                desc: "",
+                desc: "Source: http://stackoverflow.com/a/13405826/496112",
                 rawCode: "var m = o as T; if (m != null) {<!consequent!>} else {<!alternative!>}"
             },
             nullField: {
@@ -194,6 +200,7 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "Compiler Enforced."
             },
             name: "F#",
+            softname: "ML VM Lang",
             consistentCodeExecution: {
                 enforced: "yes",
                 desc: "Compiler Enforced."
@@ -256,6 +263,7 @@ tableApp.controller('TableCtrl', function ($scope) {
                 rawCode: "(instance? c x)"
             },
             name: "Clojure",
+            softname: "Lisp VM Lang",
             consistentCodeExecution: {
                 enforced: "no",
                 desc: "Clojure macros can prevent parameters from executing at all by rewriting the call, and it is impossible to prevent."
@@ -318,6 +326,7 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "No real idiomatic way to check."
             },
             name: "JavaScript",
+            softname: "JavaScript",
             consistentCodeExecution: {
                 enforced: "yes",
                 desc: "Compiler Enforced."

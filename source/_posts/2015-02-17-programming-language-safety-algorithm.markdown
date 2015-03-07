@@ -12,8 +12,7 @@ type: post
 I think the time has come for a standard programming language safety
 score. I want to use this model to help show that the concept of
 safety is much more nuanced than a binary bit of "has strong-static
-types". There are many languages now that could benefit from adding a
-richer set of safe-by-default functions.
+types".
 
 When someone says "programming language safety", it typically invokes
 for me thoughts of unit tests, long build times, and red squiggles in
@@ -44,15 +43,15 @@ is common to use user-defined classes to wrap around a set of
 primitives, those classes are still doing the same primitive work,
 just hidden behind a user-created abstraction. The more ways it is
 possible to make a "mistake" with a primitive, the more difficult it
-is to build good abstractions.
+is to build such good abstractions.
 
     This model is not about language "power".
 
 This model is not about ranking the "power", "expressiveness", or
 "abstract-ability" of a language. In any language that supports
 abstractions (functions, classes, modules, naming data), I am
-convinced it is possible to do almost anything, given enough
-code. This model is only about the costs to prevent unexpected
+convinced, given enough code, all Turing complete langauges can do the
+same work. This model is only about the costs to prevent unexpected
 "confusion" between the programmer and the machine at the primitive
 level.
 
@@ -60,8 +59,6 @@ Rather than focus on what is _possible_ with a language, I will
 instead focus on what is typically idiomatic to that community. For
 example, if it is possible to achieve a level of safety in a language
 but by doing something uncommon, that should not be counted.
-
-    This is not about "whose language is better".
 
 To score a language, simply figure out how many characters it costs to
 "prevent" a certain type of error, and add that to the
@@ -78,8 +75,13 @@ programmatically, we will add (a default) +30 for a "every change run
 and debug to fix" cost, such as Java not having a way to prevent stack
 overflow exceptions caused by recursion.
 
-    A lower score is "safer", needing less code to achieve the same
-    level of safety.
+    A lower score is "safer", needing less (or no) code to achieve the
+    same level of safety.
+
+Rather than tell you my (or survey for) hard-coded weightings, all
+checks are weighted the same by default. Feel free to apply your own
+weightings, to better match to your (or your team's) specific needs
+and preferences.
 
 <div ng-app="TableApp">
 <div ng-controller="TableCtrl">
@@ -100,16 +102,16 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 <th>Safety Check</th>
 <th></th>
 <th>
-<select ng-options="lang.name for lang in allLanguages" ng-model="languages[0]"></select>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
 </th>
 <th>
-<select ng-options="lang.name for lang in allLanguages" ng-model="languages[1]"></select>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
 </th>
 <th>
-<select ng-options="lang.name for lang in allLanguages" ng-model="languages[2]"></select>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
 </th>
 <th>
-<select ng-options="lang.name for lang in allLanguages" ng-model="languages[3]"></select>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
 </th>
 </tr>
 <tr ng-repeat="check in langChecks" score-row name="check.name" language-fn="check.fn"></tr>
@@ -128,27 +130,33 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 </table>
 </div>
 
-I want to see your language represented here! I'll happily take
-pull requests so long as they are in the same data structure found
-here: [language data structure](https://github.com/steveshogren/blog-source/blob/22f907bb2d43b1edf7ca8807c32bb4542c887d93/source/javascripts/sliders.js#L97-L158)
+I want to see your language represented here! I'll happily take pull
+requests for new languages so long as they are in the same data
+structure found here: [language data structure](https://github.com/steveshogren/blog-source/blob/22f907bb2d43b1edf7ca8807c32bb4542c887d93/source/javascripts/sliders.js#L97-L158)
 
-If you want to see what code was used to come up with those numbers,
-and want to put in your own examples, feel free to play with the
-samples below. Code surrounded with <! !> is ignored from the tally,
-since it would vary heavily based on the language and desired
-result. Variable and type names are kept at single characters, which
-are counted.
+I would love to see every major language represented, including major
+language "idiom communities". For example, Clojure and Typed Clojure
+are vastly different in abilities. Similarly "Scala - The Better Java"
+and "Scala - The JVM Haskell" have vastly different idioms with
+apparently very separate communities.
+
+<h3><input ng-model="showRealName" type="checkbox" /><span
+ng-click="showRealName = !!!showRealName"> See backing code and names unmasked</span></h3>
+
+<div ng-show="showRealName">
+Feel free to put in your own examples by playing with the samples
+below. Code surrounded with <! !> is ignored from the tally, since it
+would vary heavily based on the language and desired result. Variable
+and type names are kept at single characters, which are counted.
 
 <h2>Select Language:
 <select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
 </h2>
 <h2>{% raw %} {{ selectedLang.name }} {% endraw %}</h2>
 <div ng-repeat="check in langChecks">
-<h3>{% raw %} {{ check.name }} {% endraw %}</h3>
+<h3>{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{ score(check.fn(selectedLang)) }} {% endraw %} </h3>
 <p>
 {% raw %} {{ check.fn(selectedLang).desc }} {% endraw %}
-{% raw %} {{ score(check.fn(selectedLang)) }} {% endraw %}
-
 <div>
 Code:
 <div class="tablecode">1234567890123456789012345678901234567890</div>
@@ -156,6 +164,7 @@ Code:
 <input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
 </div>
 </p>
+</div>
 </div>
 
 Hope this is a helpful way to think about language safety!
