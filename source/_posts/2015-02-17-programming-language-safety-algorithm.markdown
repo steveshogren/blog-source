@@ -158,7 +158,7 @@ and type names are kept at single characters, which are counted.
 <p>
 {% raw %} {{ check.fn(selectedLang).desc }} {% endraw %}
 <div>
-Code:
+Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="check.fn(selectedLang).enforced"></select>
 <div class="tablecode">1234567890123456789012345678901234567890</div>
 <div class="tablecode" > {% raw %} {{ cleanCode(check.fn(selectedLang).rawCode) }} {% endraw %} </div>
 <input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
