@@ -109,7 +109,9 @@ tableApp.controller('TableCtrl', function ($scope) {
             },0);
             $scope.langTotals.push(t);
         });};
-    
+    $scope.copyToClipboard = function(text){
+        window.prompt("Copy to clipboard: Ctrl+C, Enter", JSON.stringify(text));
+    };
     $scope.enforcedTypes = ["yes", "no", "warn"];
     $scope.enforcedNice = function(e){
         if (e==="warn") {
@@ -137,7 +139,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             deadLocks: {
                 enforced: "no",
-                desc: "As far as I know, there is provide any way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
+                desc: "As far as I know, there is way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
             },
             missingMethodOrField: {
                 enforced: "yes",
@@ -191,7 +193,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             recursionStackOverflow: {
                 enforced: "yes",
-                desc: "F# recursive functions calls are converted into loop constructs by the compiler automatically. Source: http://blogs.msdn.com/b/fsharpteam/archive/2011/07/08/tail-calls-in-fsharp.aspx"
+                desc: "F# recursive function calls are converted into loop constructs by the compiler automatically. Source: http://blogs.msdn.com/b/fsharpteam/archive/2011/07/08/tail-calls-in-fsharp.aspx"
             },
             nullList: {
                 enforced: "yes",
@@ -199,7 +201,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             deadLocks: {
                 enforced: "no",
-                desc: "As far as I know, there is provide any way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
+                desc: "As far as I know, there is no way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
             },
             missingMethodOrField: {
                 enforced: "yes",
@@ -299,8 +301,8 @@ tableApp.controller('TableCtrl', function ($scope) {
             comment: ";;",
             wrongCast: {
                 enforced: "no",
-                desc: "Requires a try/catch block around the primitive cast function.",
-                rawCode: "(try (<!T!> o) (catch Exception e <!alternative!>))"
+                desc: "Requires a try/catch block around the primitive cast function, for example (double ...)",
+                rawCode: "(try (T o) (catch Exception e <!alternative!>))"
             },
             nullField: {
                 enforced: "no",
@@ -367,7 +369,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             nullField: {
                 enforced: "no",
-                desc: "Javascript the common pattern is to check if something is there with an if statement before accessing something that might not be there.",
+                desc: "In Javascript, the common pattern is to check if something is there with an if statement before accessing something that might not be there.",
                 rawCode: "if (l !== null) {<!consequent!>} else {<!alternative!>}"
             }
         }
