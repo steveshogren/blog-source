@@ -169,3 +169,9 @@ Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="chec
 </div>
 
 Hope this is a helpful way to think about language safety!
+
+Special thanks to (in alphabetical order):
+Kyle Burton [(blog)](http://asymmetrical-view.com/),
+Daniel Miladinov [(github)](https://github.com/danielmiladinov),
+Chris Salch [(github)](https://github.com/arlaneenalra), and
+Tim Visher [(github)](https://github.com/timvisher)
