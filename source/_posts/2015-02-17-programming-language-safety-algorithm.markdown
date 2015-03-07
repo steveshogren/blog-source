@@ -9,24 +9,57 @@ categories:
 type: post
 ---
 
-I want to think more clearly about programming language safety.
+I think the time has come for a standard programming language safety
+score. I want to use this model to help show that the concept of
+safety is much more nuanced than a binary bit of "has strong-static
+types". There are many languages now that could benefit from adding a
+richer set of safe-by-default functions.
 
 When someone says "programming language safety", it typically invokes
 for me thoughts of unit tests, long build times, and red squiggles in
-an IDE. But, when developing, there are so many times when I am bitten
-by something that somehow the compiler just didn't catch. This got me
-thinking, clearly languages are not already perfectly safe, what would
-be a way to consider how safe they are in relation to a standard
-measure?
+an IDE. But, in day-to-day development, there are so many times when I
+am bitten by something that somehow the compiler just didn't
+catch. This got me thinking how if languages are not already perfectly
+safe, what would be a way to consider how safe they are in relation to
+a standard measure?
 
 I put together this scoring model to get a sense of how safe a
 language is at the primitive level, and if it isn't safe by default,
-how easy it is to make it safe manually.
+how much it costs to manually make it safe. Since all abstractions
+eventually result in a series of primitive operations, I decided that
+focusing only on primitives would still be a valuable (if incomplete)
+data point. While any good library will handle these primitive checks
+and present the consumer with a well-designed abstraction, in the end,
+the consumer is still left wiring libraries together, building their
+own primitive abstractions for integration. Since it would be
+impossible to measure the quality of abstractions in all libraries for
+a language, that seemed entirely out of scope for what could ever be
+modeled.
+
+By focusing on only the primitive operations of making and calling
+functions, naming data, working with sequences, and dealing with
+language primitive data types, I slimmed down the large range of
+possible error vectors to a small handful. While in some languages it
+is common to use user-defined classes to wrap around a set of
+primitives, those classes are still doing the same primitive work,
+just hidden behind a user-created abstraction. The more ways it is
+possible to make a "mistake" with a primitive, the more difficult it
+is to build good abstractions.
+
+    This model is not about language "power".
+
+This model is not about ranking the "power", "expressiveness", or
+"abstract-ability" of a language. In any language that supports
+abstractions (functions, classes, modules, naming data), I am
+convinced it is possible to do almost anything, given enough
+code. This model is only about the costs to prevent unexpected
+"confusion" between the programmer and the machine at the primitive
+level.
 
 Rather than focus on what is _possible_ with a language, I will
-instead suggest we focus on what is typically idiomatic. For example,
-if it is possible to achieve a level of safety in a language but by
-doing something uncommon, that should not be counted. 
+instead focus on what is typically idiomatic to that community. For
+example, if it is possible to achieve a level of safety in a language
+but by doing something uncommon, that should not be counted.
 
     This is not about "whose language is better".
 
@@ -34,20 +67,19 @@ To score a language, simply figure out how many characters it costs to
 "prevent" a certain type of error, and add that to the
 total. Newlines, spaces, and tabs do not count, but all other
 punctuation does. If a specific check is language enforced, like F#'s
-Option or C#'s parameter type enforcement, that is given a -30 to make
-up for the lack of unit tests and code exercising needed to run that
-"path". Do not count import lines either, as the importing the module
-will have a negligible effect on the code size and complexity.
+Option or C#'s parameter type enforcement, that is given a (default)
+-30 to make up for the lack of unit tests and code exercising needed
+to run that "path". Do not count import lines for libraries, as the
+importing the module will have a negligible effect on the code size
+and complexity.
 
 If there is a safety feature that is not possible to achieve
-programmatically, we will add +30 for a "every change run and debug to
-fix" cost, such as C# not having a way to prevent stack overflow
-exceptions caused by recursion.
+programmatically, we will add (a default) +30 for a "every change run
+and debug to fix" cost, such as Java not having a way to prevent stack
+overflow exceptions caused by recursion.
 
     A lower score is "safer", needing less code to achieve the same
     level of safety.
-
-For example:
 
 <div ng-app="TableApp">
 <div ng-controller="TableCtrl">

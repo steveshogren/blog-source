@@ -132,6 +132,7 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "Compiler Enforced."
             },
             name: "C#",
+            softname: "Tradtional VM",
             consistentCodeExecution: {
                 enforced: "yes",
                 desc: "Compiler Enforced."
@@ -362,21 +363,3 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.updateTotals();
     $scope.selectedLang = $scope.languages[0];
 });
-
-/* chris...
-73  fn:function(l){return l.nullField;}},
-74  fn:function(l){return l.wrongVaribleType;}},
-75  fn:function(l){return l.wrongTypeToMethod;}},
-76  fn:function(l){return l.wrongCast;}},
-77  fn:function(l){return l.nullList;}},
-78  fn:function(l){return l.missingListElem;}},
-79  fn:function(l){return l.missingMethodOrField;}},
-80  fn:function(l){return l.missingEnum;}},
-81  fn:function(l){return l.variableMutation;}},
-82  fn:function(l){return l.deadLocks;}},
-83  fn:function(l){return l.memoryDeallocation;}},
-84  fn:function(l){return l.recursionStackOverflow;}},
-85  fn:function(l){return l.consistentCodeExecution;}}];
-
-
-*/
