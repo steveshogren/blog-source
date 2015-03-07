@@ -152,7 +152,9 @@ request.
 <h2>Select Language:
 <select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
 </h2>
+<button ng-click="showEdit = !showEdit">Edit Language</button>
 <button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
+<div ng-show="showEdit">
 <h2><input ng-model="selectedLang.name"></input></h2>
 <div ng-repeat="check in langChecks">
 <h3>{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{ score(check.fn(selectedLang)) }} {% endraw %} </h3>
@@ -165,6 +167,22 @@ Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="chec
 <input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
 </div>
 </p>
+</div>
+</div>
+
+<div ng-show="!showEdit">
+<h2>{% raw %} {{ selectedLang.name }} {% endraw %}</h2>
+<div ng-repeat="check in langChecks">
+<h3>{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{ score(check.fn(selectedLang)) }} {% endraw %} </h3>
+<p>
+{% raw %} {{ check.fn(selectedLang).desc }} {% endraw %}
+<div>
+Code: {% raw %} {{ enforcedNice(check.fn(selectedLang).enforced)  }} {% endraw %}
+<div class="tablecode">1234567890123456789012345678901234567890</div>
+<div class="tablecode" > {% raw %} {{ cleanCode(check.fn(selectedLang).rawCode) }} {% endraw %} </div>
+</div>
+</p>
+</div>
 </div>
 </div>
 
