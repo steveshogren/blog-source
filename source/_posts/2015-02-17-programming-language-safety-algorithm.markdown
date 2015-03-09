@@ -178,8 +178,9 @@ Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="sele
 {% raw %} {{ selectedLang[check.key].desc }} {% endraw %}
 <div>
 Code: {% raw %} {{ enforcedNice(selectedLang[check.key].enforced)  }} {% endraw %}
-<div class="tablecode">1234567890123456789012345678901234567890</div>
+<div class="tablecode" ng-if="selectedLang[check.key].rawCode">1234567890123456789012345678901234567890</div>
 <div class="tablecode" > {% raw %} {{ cleanCode(selectedLang[check.key].rawCode) }} {% endraw %} </div>
+<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
 </div>
 </p>
 </div>
