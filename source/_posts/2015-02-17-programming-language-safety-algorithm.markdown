@@ -129,8 +129,9 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 </div>
 
 I want to see your language represented here! I'll happily take pull
-requests for new languages so long as they are in the same data
-structure found here: [language data structure](https://github.com/steveshogren/blog-source/blob/22f907bb2d43b1edf7ca8807c32bb4542c887d93/source/javascripts/sliders.js#L97-L158)
+requests for new languages: [blog source](https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js). Just
+use the "edit language" and "copy to clipboard" to build your own
+language data structure.
 
 I would love to see every major language represented, including major
 language "idiom communities". For example, Clojure and Typed Clojure
@@ -190,6 +191,7 @@ Code: {% raw %} {{ enforcedNice(selectedLang[check.key].enforced)  }} {% endraw 
 Hope this is a helpful way to think about language safety!
 
 Special thanks to (in alphabetical order):
+Patrick Boe [(twitter)](https://twitter.com/traffichazard/),
 Kyle Burton [(blog)](http://asymmetrical-view.com/),
 Daniel Miladinov [(github)](https://github.com/danielmiladinov),
 Chris Salch [(github)](https://github.com/arlaneenalra), and

@@ -27,21 +27,18 @@ tableApp.directive('scoreRow', function(){
 });
 
 tableApp.controller('TableCtrl', function ($scope) {
-    $scope.$watch('inabilityPenalty', function(n, old){
+    $scope.watchTotalsFn = function(n, old){
         if(n !== old){
             $scope.updateTotals();
         }
-    });
-    $scope.$watch('enforcedScore', function(n, old){
-        if(n !== old){
-            $scope.updateTotals();
-        }
-    });
-    $scope.$watchCollection('languages', function(n, old){
-        if(n !== old){
-            $scope.updateTotals();
-        }
-    });
+    };
+    $scope.$watch('inabilityPenalty', $scope.watchTotalsFn);
+    $scope.$watchCollection('languages', $scope.watchTotalsFn);
+    $scope.$watch('enforcedScore', $scope.watchTotalsFn);
+    $scope.$watch('languages[0]', $scope.watchTotalsFn, true);
+    $scope.$watch('languages[1]', $scope.watchTotalsFn, true);
+    $scope.$watch('languages[2]', $scope.watchTotalsFn, true);
+    $scope.$watch('languages[3]', $scope.watchTotalsFn, true);
 
     $scope.enforcedScore = 30;
     $scope.inabilityPenalty = 30;
