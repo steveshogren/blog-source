@@ -157,14 +157,14 @@ request.
 <div ng-show="showEdit">
 <h2><input ng-model="selectedLang.name"></input></h2>
 <div ng-repeat="check in langChecks">
-<h3>{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{ score(check.fn(selectedLang)) }} {% endraw %} </h3>
+<h3>{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{ score(selectedLang[check.key]) }} {% endraw %} </h3>
 <p>
-<textarea class="widetextarea" rows="5" ng-model="check.fn(selectedLang).desc"></textarea> 
+<textarea class="widetextarea" rows="5" ng-model="selectedLang[check.key].desc"></textarea> 
 <div>
-Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="check.fn(selectedLang).enforced"></select>
+Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
 <div class="tablecode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" > {% raw %} {{ cleanCode(check.fn(selectedLang).rawCode) }} {% endraw %} </div>
-<input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
+<div class="tablecode" > {% raw %} {{ cleanCode(selectedLang[check.key].rawCode) }} {% endraw %} </div>
+<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
 </div>
 </p>
 </div>
@@ -173,13 +173,13 @@ Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="chec
 <div ng-show="!showEdit">
 <h2>{% raw %} {{ selectedLang.name }} {% endraw %}</h2>
 <div ng-repeat="check in langChecks">
-<h3>{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{ score(check.fn(selectedLang)) }} {% endraw %} </h3>
+<h3>{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{ score(selectedLang[check.key]) }} {% endraw %} </h3>
 <p>
-{% raw %} {{ check.fn(selectedLang).desc }} {% endraw %}
+{% raw %} {{ selectedLang[check.key].desc }} {% endraw %}
 <div>
-Code: {% raw %} {{ enforcedNice(check.fn(selectedLang).enforced)  }} {% endraw %}
+Code: {% raw %} {{ enforcedNice(selectedLang[check.key].enforced)  }} {% endraw %}
 <div class="tablecode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" > {% raw %} {{ cleanCode(check.fn(selectedLang).rawCode) }} {% endraw %} </div>
+<div class="tablecode" > {% raw %} {{ cleanCode(selectedLang[check.key].rawCode) }} {% endraw %} </div>
 </div>
 </p>
 </div>
