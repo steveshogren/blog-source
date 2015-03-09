@@ -11,7 +11,7 @@ tableApp.directive('scoreRow', function(){
             scope.$watch('weight', function(n, old){
                 if(n !== old){
                     scope.languages.map(function(l){
-                        scope.languageFn()(l).weight = n;
+                        l[scope.rowKey].weight = n;
                     });
 
                     scope.$parent.updateTotals();
@@ -19,10 +19,10 @@ tableApp.directive('scoreRow', function(){
             });
         },
         scope: {
-            languageFn: '&',
+            rowKey: '=',
             name: '='
         },
-        template: '<tr ng-class-even="evens"> <td class="tdname">{{name}}</td><td><span ng-show="$parent.showWeights">{{weight}}%  <input ng-model="weight" type="range" min="0" step="10" max="100" /></span></td> <td ng-repeat="lang in languages track by $index" ng-class="{enforcedscore:languageFn()(lang).enforced===\'yes\'}">  {{ score(languageFn()(lang), weight) }}  </td> </tr>'
+        template: '<tr ng-class-even="evens"> <td class="tdname">{{name}}</td><td><span ng-show="$parent.showWeights">{{weight}}%  <input ng-model="weight" type="range" min="0" step="10" max="100" /></span></td> <td ng-repeat="lang in languages track by $index" ng-class="{enforcedscore:lang[rowKey].enforced===\'yes\'}">  {{ score(lang[rowKey], weight) }}  </td> </tr>'
     };
 });
 
@@ -70,6 +70,8 @@ tableApp.controller('TableCtrl', function ($scope) {
     };
 
     $scope.score = function(t){
+        if (!t) { return 0; } // field not defined
+
         if (!t.weight) { t.weight = 100;}
         var count = 0;
         var delta = 0;
@@ -89,25 +91,30 @@ tableApp.controller('TableCtrl', function ($scope) {
     };
 
 
-    $scope.langChecks = [{name:"Test for Null Variable Reference", fn:function(l){return l.nullField;}},
-                         {name:"Null List Iteration", fn:function(l){return l.nullList;}},
-                         {name:"Putting wrong type into variable", fn:function(l){return l.wrongVaribleType;}},
-                         {name:"Missing List Element ", fn:function(l){return l.missingListElem;}},
-                         {name:"Incorrect Type Casting", fn:function(l){return l.wrongCast;}},
-                         {name:"Passing Wrong Type to Method", fn:function(l){return l.wrongTypeToMethod;}},
-                         {name:"Calling or Setting Misspelled Method, Field, Function, Variable", fn:function(l){return l.missingMethodOrField;}},
-                         {name:"Missing Enum Value In Switch/Case or If/Else", fn:function(l){return l.missingEnum;}},
-                         {name:"Unexpected Variable Mutation", fn:function(l){return l.variableMutation;}},
-                         {name:"Deadlock prevention", fn:function(l){return l.deadLocks;}},
-                         {name:"Memory Deallocation", fn:function(l){return l.memoryDeallocation;}},
-                         {name:"Stack Overflow Exceptions Caused by Recursion", fn:function(l){return l.recursionStackOverflow;}},
-                         {name:"Guaranteed Code Evaluation When Passed To a Function", fn:function(l){return l.consistentCodeExecution;}}];
+    $scope.langChecks = [
+        {name:"Test for Null Variable Reference", key:"nullField"},
+        {name:"Null List Iteration", key:"nullList"},
+        {name:"Putting wrong type into variable", key:"wrongVaribleType"},
+        {name:"Missing List Element ", key:"missingListElem"},
+        {name:"Incorrect Type Casting", key:"wrongCast"},
+        {name:"Passing Wrong Type to Method", key:"wrongTypeToMethod"},
+        {
+            name:"Calling or Setting Misspelled Method, Field, Function, Variable",
+            key:"missingMethodOrField"
+        },
+        {name:"Missing Enum Value In Switch/Case or If/Else", key:"missingEnum"},
+        {name:"Unexpected Variable Mutation", key:"variableMutation"},
+        {name:"Deadlock prevention", key:"deadLocks"},
+        {name:"Memory Deallocation", key:"memoryDeallocation"},
+        {name:"Stack Overflow Exceptions Caused by Recursion", key:"recursionStackOverflow"},
+        {name:"Guaranteed Code Evaluation When Passed To a Function", key:"consistentCodeExecution"}
+    ];
 
     $scope.updateTotals = function(){
         $scope.langTotals = [];
         $scope.languages.map(function(l){
             var t = $scope.langChecks.reduce(function(ret, next){
-                return ret + $scope.score(next.fn(l));
+                return ret + $scope.score(l[next.key]);
             },0);
             $scope.langTotals.push(t);
         });};

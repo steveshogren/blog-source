@@ -112,7 +112,7 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 <select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
 </th>
 </tr>
-<tr ng-repeat="check in langChecks" score-row name="check.name" language-fn="check.fn"></tr>
+<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
 <tr class="totals"><td>Totals</td>
 <td></td>
 <td ng-repeat="lang in langTotals track by $index">
