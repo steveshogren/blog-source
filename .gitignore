@@ -1,3 +1,5 @@
+*.sw?
+.preview-mode
 .bundle
 .DS_Store
 .sass-cache
