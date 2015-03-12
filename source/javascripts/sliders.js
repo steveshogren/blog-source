@@ -39,7 +39,6 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.$watch('languages[1]', $scope.watchTotalsFn, true);
     $scope.$watch('languages[2]', $scope.watchTotalsFn, true);
     $scope.$watch('languages[3]', $scope.watchTotalsFn, true);
-    $scope.$watch('languages[4]', $scope.watchTotalsFn, true);
 
     $scope.enforcedScore = 30;
     $scope.inabilityPenalty = 30;
@@ -443,7 +442,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             consistentCodeExecution: {
                 enforced: "yes",
                 desc: "Compiler Enforced."
-            },
+            }
         }
     ];
 
@@ -452,7 +451,6 @@ tableApp.controller('TableCtrl', function ($scope) {
         $scope.allLanguages[1],
         $scope.allLanguages[2],
         $scope.allLanguages[3],
-        $scope.allLanguages[4]
     ];
 
     $scope.updateTotals();

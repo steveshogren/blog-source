@@ -111,9 +111,6 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 <th>
 <select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
 </th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[4]"></select>
-</th>
 </tr>
 <tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
 <tr class="totals"><td>Totals</td>
@@ -131,6 +128,14 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 </table>
 </div>
 
+<h3><input ng-model="showRealName" type="checkbox" /><span
+ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3>
+
+Current Languages:
+<span ng-repeat="lang in allLanguages">
+{% raw %} {{ getName(lang) }}, {% endraw %}
+</select>
+
 I want to see your language represented here! I'll happily take pull
 requests for new languages: [blog source](https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js). Just
 use the "edit language" and "copy to clipboard" to build your own
@@ -142,8 +147,6 @@ are vastly different in abilities. Similarly "Scala - The Better Java"
 and "Scala - The JVM Haskell" have vastly different idioms with
 apparently very separate communities.
 
-<h3><input ng-model="showRealName" type="checkbox" /><span
-ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3>
 
 <div ng-show="showRealName"> Feel free to put in your own examples by
 playing with the samples below. Code surrounded with <! !> is ignored
