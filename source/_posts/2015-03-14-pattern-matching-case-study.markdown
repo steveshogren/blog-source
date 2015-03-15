@@ -4,6 +4,8 @@ title: "Case Study: Type-safe Domain Modeling in F#"
 date: 2015-03-14 09:42
 comments: true
 categories: 
+- Technical Skills
+type: post
 ---
 
 Domain modeling in F# is significantly easier and safer than with the
