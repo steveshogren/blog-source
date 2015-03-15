@@ -133,7 +133,7 @@ ng-click="showRealName = !!!showRealName">Click to see backing code and unmask n
 
 Current Languages:
 <span ng-repeat="lang in allLanguages">
-{% raw %} {{ getName(lang) }}, {% endraw %}
+{% raw %} {{ getName(lang) }}: {{ allLangTotals[$index] }}, {% endraw %}
 </select>
 
 I want to see your language represented here! I'll happily take pull
