@@ -96,7 +96,7 @@ let GetSendFn = function
 ```
 
 While it is possible to make an equivalent C# enum and combine these
-in a similar way, it is inherently unsafe (nothing to check you
+in a similar way, it is inherently unsafe (nothing to guarantee you
 covered every case) and therefore appropriately uncommon. The typical
 answer for safe polymorphic dispatch in C# is to use an interface and
 classes. Unfortunately, something still has to dispatch on that enum
