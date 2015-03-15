@@ -1,14 +1,16 @@
 ---
 layout: post
-title: "Pattern Matching Case Study"
+title: "Case Study: Type-safe Domain Modeling in F#"
 date: 2015-03-14 09:42
 comments: true
 categories: 
 ---
 
-Domain modeling is significantly easier and safer in F# than any other
-.NET language. This is because of the increased safety of pattern
-matching and the expressiveness of discriminated unions.
+Domain modeling in F# is significantly easier and safer than with the
+traditional .NET languages. This is because of the increased safety of
+pattern matching and the expressiveness of discriminated unions. These
+concepts are not in C# or VB.NET, and therefore bring a new tool to
+the table.
 
 To illustrate this, I found some old code I'd written to interact with
 a legacy system. The system uses many single enums on a record to keep
@@ -34,7 +36,7 @@ third.
 
 With some regularity, new records are added to these types of enums,
 causing a dangerous search and update across the system fixing all the
-if/else statements.
+if/else or switch/case statements.
 
 Right off the bat, pattern matching is a huge win here, taking a hard
 to comprehend function and making the domain concepts clear.
@@ -46,11 +48,10 @@ let GetPositionType = function
     | MovementType.Undefined, _ | _, ApplyToParty.Undefined -> PositionType.Undefined
 ```
 
-If we add a new status to either of these, we will get a compiler
-warning in every place letting us know. If that alone was the win,
-we'd be still be ahead by a lot. The domain is so clear here, I can
-print this code out and hand it to my BA to ensure the logic is
-correct.
+If we add a new status to any of these, we will get a compiler warning
+in every place letting us know. If that alone was the win, we'd be
+still be ahead by a lot. The domain is so clear here, I can print this
+code out and hand it to my BA to ensure the logic is correct.
 
 Next though, this got me thinking. Why does this set of three enums
 have to be calculated? Why are they even separate? Ah, of course,
@@ -81,25 +82,26 @@ let GetDirection = function
 
 Now I have a combined Direction that merges the three concepts into
 one. It is impossible with this new merged type to have an invalid
-state across the three. Getting any of the types back out to save to
-the database or do some work is as simple as another match:
+state across the three. Getting any of the types back out to convert
+into the ORM classes or do some work is as simple as another match:
 
 ``` fsharp
+let GetMovementTypeToSaveInORM = function
+   | Held_Deliver_Principal | Posted_Deliver_Counterparty -> Deliver
+   | Posted_Return_Principal | Held_Return_Counterparty -> Return
+
 let GetSendFn = function
    | Held_Deliver_Principal | Posted_Return_Principal -> SendMessageToPrincipal
    | Held_Return_Counterparty | Posted_Deliver_Counterparty -> SendMessageToCounterparty
 ```
 
 While it is possible to make an equivalent C# enum and combine these
-in a similar way, it is inherently unsafe and therefore appropriately
-uncommon. The fewer conversions done in C# the better, as converting
-sets of data from one shape to another creates more points where the
-application can fail in the future when enums change. Additionally,
-using enums to switch for business rules is dangerous, as it is so
-common to miss one. Traditional thought would be to use a class to
-dispatch, but something still has to switch case, either in the class
-or at the time of class instantiation, and that is a vector for
-errors.
+in a similar way, it is inherently unsafe (nothing to check you
+covered every case) and therefore appropriately uncommon. The typical
+answer for safe polymorphic dispatch in C# is to use an interface and
+classes. Unfortunately, something still has to dispatch on that enum
+id, either inside a class or at the time of class instantiation. That
+is a vector for errors.
 
 Because F# interops so well with C#, it is possible to build in a
 domain layer in F# immediately that calls down to your C# ORM
@@ -108,7 +110,4 @@ constrained and safe F# discriminated union is easy and will simplify
 your domain to its essence.
 
 For reasons like this, when I have to build something with a rich
-domain, I grab for F#. F# continues to be one of my favorite languages
-best suited to get done lots of high quality work.
-
-
+domain, I grab for F#. 
