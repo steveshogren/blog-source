@@ -223,9 +223,9 @@ task :deploy do
   Rake::Task["#{deploy_default}"].execute
 end
 
-desc "Generate website and deploy"
-task :gen_deploy => [:integrate, :generate, :deploy] do
-end
+# desc "Generate website and deploy"
+# task :gen_deploy => [:integrate, :generate, :deploy] do
+# end
 
 desc "copy dot files for deployment"
 task :copydot, :source, :dest do |t, args|
