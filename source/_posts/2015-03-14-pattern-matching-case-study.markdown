@@ -112,4 +112,4 @@ constrained and safe F# discriminated union is easy and will simplify
 your domain to its essence.
 
 For reasons like this, when I have to build something with a rich
-domain, I grab for F#. 
+domain, I reach for F#. 
