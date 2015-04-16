@@ -1,0 +1,3 @@
+* Safety Score
+** Exceptions (checked, unchecked)
+** variable shadowing 
