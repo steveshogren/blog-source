@@ -51,7 +51,7 @@ tableApp2.controller('TableCtrl', function ($scope) {
     $scope.langTotals = [];
     $scope.allLangTotals = [];
 
-    $scope.showEdit = false;
+    $scope.showEdit = true;
 
     $scope.showRealName = false;
     $scope.getName = function(lang){

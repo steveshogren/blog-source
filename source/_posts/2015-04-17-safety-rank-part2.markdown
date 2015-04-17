@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Programming Language Safety Score"
+title: "Language Safety Score Mark 2"
 date: 2015-02-17 14:13
 comments: true
 categories: 
@@ -77,28 +77,22 @@ language data structure.
 <h2>Select Language:
 <select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
 </h2>
-<button ng-click="showEdit = !showEdit">Edit Language</button>
 <button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
 <div ng-show="showEdit">
 <h2><input ng-model="selectedLang.name"></input></h2>
-<div ng-repeat="check in langChecks">
-<h3>{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{ score(selectedLang[check.key]) }} {% endraw %} </h3>
-<p>
-<textarea class="widetextarea" rows="5" ng-model="selectedLang[check.key].desc"></textarea> 
-<div>
-Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
-</div>
-</p>
-</div>
-</div>
 
-<div ng-show="!showEdit">
-<h2>{% raw %} {{ selectedLang.name }} {% endraw %}</h2>
-<div ng-repeat="check in langChecks">
-<h3>{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{ score(selectedLang[check.key]) }} {% endraw %} </h3>
-<p>
-{% raw %} {{ selectedLang[check.key].desc }} {% endraw %}
-</p>
+<table class="langtable">
+<tr><th>Check</th><th>Option</th></tr>
+<tr ng-repeat="check in langChecks">
+<td>
+{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{score(selectedLang[check.key]) }} {% endraw %}
+</td>
+<td>
+<select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
+</td>
+</tr>
+</table>
+
 </div>
 </div>
 </div>
