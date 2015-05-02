@@ -1,0 +1,44 @@
+---
+layout: post
+title: "On Defeat"
+date: 2015-05-02 19:01
+comments: true
+categories: 
+---
+
+One day, I went into an interview, and I was humiliated.
+
+(This is the third time I've tried to write this post.)
+
+To set the stage, you have to realize that I used to think very highly of
+myself. This was early on in the TDD craze, and I was one of the best I knew at
+it. I knew interfaces, classes, mocking frameworks, and best practices. I'd
+been taught all the tricks from some very smart people, and my confidence was
+high. Not only that, but I'd just finished the restoration of an abandoned
+legacy codebase to a bug-free state completely on my own.
+
+I'd shipped Java, PHP, Perl, and VB.NET, and I hadn't been programming more than
+a couple years. My first job, they'd made me a team lead over some very senior developers
+within a year my hire date. I was learning Clojure and Common Lisp, and had just
+shipped an Android game I made entirely alone (including the 2D physics engine).
+
+I thought I was incredible. Yet, due to an overwhelming sense of Imposter
+Syndrome, I keenly knew that there were things I didn't know, so I was waking up
+first thing in the morning, studying the Algorithm Design Manual before going to
+work.
+
+At the time, I did not enjoy my job. I felt like my vast talents were wasted,
+and I was determined to get what my talents deserved. My arrogance pushed me
+both to unhappiness where I was, but also to tirelessly struggle to be better
+than everyone else around me.
+
+Enter Company A.
+
+I flew through the phone screen "this is the best phone screen we've seen!" Of
+course it is. "Your resume is very impressive." Oh, I know!
+
+I get to the on-site interview.
+
+First, they tell me to get there the wrong time. Second, since I hadn't been
+thoughtful enough to ask, I wore a suit. Third, I was asked to present a project
+I'd worked on, and I picked my recently shipped game. I walk into a room 
