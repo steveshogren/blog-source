@@ -7,6 +7,7 @@ categories:
 - Technical Skills
 - Meta Game
 type: post
+published: false
 ---
 
 I previously wrote a table for scoring language safety which can be
