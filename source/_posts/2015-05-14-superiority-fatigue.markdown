@@ -6,11 +6,65 @@ comments: true
 categories: 
 ---
 
+<!-- This post started as a bitter screed against developers who actively and -->
+<!-- detrimentally resist new technology. Part way through writing it, I realized I -->
+<!-- was entirely trying to vindicate myself, to argue with the people who previously -->
+<!-- and currently actively work to entrench us in less productive tooling. -->
+
+Learning new tools, technologies, and methodologies is exhausting. Often times
+the most exhausting part is after you've gotten a good comprehension of the
+tool, and now, filled with excitement, you try to explain it to someone else.
+
+They react with hostility.
+
+What is going on? You just took time to learn this exciting tool that could save
+you a lot of time, and not only do they not care, but they resent you for it!
+Don't they see how this could be great for everyone?
+
+The issue, like humans, is complex and dynamic. Maybe they feel like you've now
+made them look lazy in comparison. Maybe they have tried new tools in the past
+only to discover they weren't as a good as promised. Maybe they are afraid they
+won't be able to learn the new tool as quickly as they need to, and will be left
+behind. Maybe they are afraid all the time they spent learning the existing
+tools will have been wasted. Maybe they are comfortable where they are, and
+don't care about increased productivity. Most times I have seen this, I think
+the root emotion is fear. Fear of failure, of being embarrassed, of looking
+inferior.
+
+Fear is a powerful emotion.
+
+When you react back with hostility, this only will compound their fear. Should
+they put their comfort and ego before the needs of the business? No, but you
+attacking them will only further prove to them that their fear was accurate.
+
+The hardest part of learning a new tool is when you are forced at work to use an
+inferior tool. Suddenly that liberating fresh air of power is replaced with a
+suffocating claustrophobia of weakness. Even if the tool isn't really that
+inferior, it now _feels_ terrible. It becomes worse when you and many others
+around you agree with the better value proposition of a new tool, and yet you
+are still required to use the inferior tool due to someone in power blocking you
+for political reasons.
+
+While there is always a place for the right tool, sometimes the weakness of
+others demands you use the inferior tool.
+
+I've definitely been guilty of suggesting a tool that was actually
+only a minor improvement. 
+
+
+
+
+
+
+
 I love programming languages. I love thinking about how and why they work the
 way they do. Nothing excites me like finding a new way to squeeze out a little
 more productivity or safety from a language. But from my very first interaction with
 other team-members, I encountered an opposite type of programmer that surprises
 me to this day: the Language Luddite.
+
+
+
 
 ### Language Luddites
 
