@@ -6,11 +6,6 @@ comments: true
 categories: 
 ---
 
-<!-- This post started as a bitter screed against developers who actively and -->
-<!-- detrimentally resist new technology. Part way through writing it, I realized I -->
-<!-- was entirely trying to vindicate myself, to argue with the people who previously -->
-<!-- and currently actively work to entrench us in less productive tooling. -->
-
 Learning new tools, technologies, and methodologies is exhausting. Often times
 the most exhausting part is after you've gotten a good comprehension of the
 tool, and now, filled with excitement, you try to explain it to someone else.
@@ -18,20 +13,20 @@ tool, and now, filled with excitement, you try to explain it to someone else.
 They react with hostility.
 
 What is going on? You just took time to learn this exciting tool that could save
-you a lot of time, and not only do they not care, but they resent you for it!
-Don't they see how this could be great for everyone?
+everyone a lot of time, and not only do they not care, but they resent you for
+it!  Don't they see how this could be great for everyone?
 
 The issue, like humans, is complex and dynamic. Maybe they feel like you've now
-made them look lazy in comparison. Maybe they have tried new tools in the past
+made them look lazy in comparison. Maybe they have tried other tools in the past
 only to discover they weren't as a good as promised. Maybe they are afraid they
 won't be able to learn the new tool as quickly as they need to, and will be left
 behind. Maybe they are afraid all the time they spent learning the existing
 tools will have been wasted. Maybe they are comfortable where they are, and
-don't care about increased productivity. Most times I have seen this, I think
-the root emotion is fear. Fear of failure, of being embarrassed, of looking
-inferior.
+don't care about increased productivity.
 
-Fear is a powerful emotion.
+Most times I have seen this, I think the root emotion is fear. Fear of failure,
+of change, of being embarrassed, of looking inferior. Fear is a powerful
+emotion.
 
 When you react back with hostility, this only will compound their fear. Should
 they put their comfort and ego before the needs of the business? No, but you
@@ -45,14 +40,39 @@ around you agree with the better value proposition of a new tool, and yet you
 are still required to use the inferior tool due to someone in power blocking you
 for political reasons.
 
-While there is always a place for the right tool, sometimes the weakness of
-others demands you use the inferior tool.
+For the developer who sets out to learn new things, you must learn to deal with
+inferior tools. Once you start learning, you will always find yourself in a
+situation where you are required to use an inferior tool. For me, this has been
+one of the hardest things to face in my career.
 
-I've definitely been guilty of suggesting a tool that was actually
-only a minor improvement. 
+## Tips
 
+### Let Go of Your Ego
 
+I write "let go of your ego" with a wry smile, because I am bad at it. I
+recently had a conversation with a team to recommended they look into a new
+technology. I was so nervious I was actually shaking. I was afraid they would
+reject it, and therefore dicredit me for suggesting it. In the end, they
+rejected it without any discussion or research, but I still felt terrible. I
+felt like it showed how little they thought of my opinion to even consider my
+suggestion.
 
+This story illustrates just how tied up my ego was with my recommendations. I
+could not even make a suggestion without a lot of deep-seated fear. No outcome
+but whole-hearted acceptance would have been positive for me. Even if they had
+accepted my suggestion, then later run into the inevitable issues with all
+technology, I would have been devastated. Technology is just a tool, and it is a
+tool that will inevitably fail in some regard. Tying my ego to a guaranteed
+failure is unhealthy and will ultimately result in unhappiness.
+
+### Work on Side Projects
+
+Using new tools in side projects lets you see where they are best used. Almost
+every technology will have a "sweet spot" where it shines. Rarely will the
+literature of a new technology highlight anything but this sweet spot. Much more
+rare and valuable is the knowledge of where the technology is weak. The
+developer who knows where a tool is both strong and weak is well equipped to
+use it.
 
 
 
