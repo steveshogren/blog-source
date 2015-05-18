@@ -72,7 +72,21 @@ every technology will have a "sweet spot" where it shines. Rarely will the
 literature of a new technology highlight anything but this sweet spot. Much more
 rare and valuable is the knowledge of where the technology is weak. The
 developer who knows where a tool is both strong and weak is well equipped to
-use it.
+use it most appropriately.
+
+I used to be totally anamored with a certain language, but if you'd asked me its
+weaknesses, I'd have had a hard time with anything concrete. If you'd asked me
+how to best work around its weaknesses, I wouldn't have had any answer at
+all. It wasn't until I built and deployed a system for a non-profit that the
+production-scale pain points became obvious! My previously academic
+understandings of weaknesses turned into real-life difficulties to overcome.
+
+### If You Can't Change Your Job...
+
+Change your job! If you know of a better tool and want more experience with it
+at work, sometimes the best option is just to find somewhere that does it
+already. It may just be socially impossible to make such a change at your
+current workplace.
 
 
 
@@ -82,9 +96,6 @@ way they do. Nothing excites me like finding a new way to squeeze out a little
 more productivity or safety from a language. But from my very first interaction with
 other team-members, I encountered an opposite type of programmer that surprises
 me to this day: the Language Luddite.
-
-
-
 
 ### Language Luddites
 
