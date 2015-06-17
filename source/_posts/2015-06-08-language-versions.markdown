@@ -14,11 +14,11 @@ probably include features that improve the situation, but do not fundamentally
 cause a large shift in thinking or process.
 
 I am not talking about social or financial aspects, like hiring. Hiring is a
-complex beast entirely in it's own category. The criteria for choosing a tool
+complex beast entirely in its own category. The criteria for choosing a tool
 when hiring a few hundred offshore developers is very different for hiring for a
-team of three senior developers.
+team of three senior developers. I'll leave that to the reader to determine.
 
-What are some examples of this?
+What are some examples of these semantic value changes?
 
 ## Minor Benefits
 
@@ -43,7 +43,7 @@ could quickly relearn any of the other three on demand.
 ### Java - VB.NET - C#
 
 Moving between Java, VB.NET, and C# feel similarly minor in tangible
-productivity. For the most part, all the tooling, expectations, and experience
+productivity. For the most part, all the expectations and experience
 carries between the three. Obviously the tools are different, and there are a
 number of gotchas, but nothing improved or hurt my productivity in any major
 way. I doubt any of those three have any one killer feature that cannot be had
