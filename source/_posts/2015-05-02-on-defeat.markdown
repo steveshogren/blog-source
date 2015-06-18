@@ -4,6 +4,7 @@ title: "On Defeat"
 date: 2015-05-02 19:01
 comments: true
 categories: 
+- Meta Game
 published: false
 ---
 
