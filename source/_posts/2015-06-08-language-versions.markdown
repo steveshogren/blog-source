@@ -3,7 +3,7 @@ layout: post
 title: "Language Versions"
 date: 2015-06-08 10:36
 comments: true
-categories: 
+categories:
 published: false
 ---
 
@@ -48,7 +48,7 @@ productivity. For the most part, all the expectations and experience
 carries between the three. Obviously the tools are different, and there are a
 number of gotchas, but nothing improved or hurt my productivity in any major
 way. I doubt any of those three have any one killer feature that cannot be had
-in the other. 
+in the other.
 
 ## Major Benefits
 
@@ -61,9 +61,10 @@ apply the techniques. Tools like dependency injection, mocking, TDD, and
 continuous integration enabled me to build and revive much larger
 systems. Automated testing is a skill that applies well to every language I've
 worked in, with benefits that grow increasingly valuable with more complex
-systems.
+systems. I don't always automated test, but it is an invaluable tool for certain
+classes of problems. 
 
-### REPL Development
+### REPL Development (moving from Ruby to Clojure)
 
 Repl based development with live hot patching was another major change. It
 required a new way of thinking about programming, and with it came an
@@ -71,12 +72,13 @@ instantaneous feedback loop. Much like unit testing, it was an entirely new
 skill, but opened up a very fast method of building up a system from small
 parts. Additionally, it allowed me to rapidly progress in my skills, because I
 could instantly see live feedback from my code, without needing to write a whole
-test just to see something execute.
+test just to execute the code.
 
-### Powerful Static Typing
+### Powerful Static Typing (moving from C# to F#)
 
 Moving from a typical static typed language to one with algebraic data types has
 been a major change, with major productivity benefits. I have noticed entire
-classes of defects disappearing. Additionally, the resulting codebases are much
-easier to refactor, which means a faster reaction to a changing domain.
+classes of defects disappearing. Additionally, because of the better compiler
+errors, the resulting codebases are much easier to refactor, which means a
+faster reaction to a changing domain. 
 
