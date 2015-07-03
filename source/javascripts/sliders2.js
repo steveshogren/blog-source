@@ -45,15 +45,15 @@ tableApp2.controller('TableCtrl', function ($scope) {
     $scope.$watch('languages[2]', $scope.watchTotalsFn, true);
     $scope.$watch('languages[3]', $scope.watchTotalsFn, true);
 
-    $scope.enforcedScore = 30;
-    $scope.inabilityPenalty = 30;
+    $scope.enforcedScore = 1;
+    $scope.inabilityPenalty = 1;
     $scope.showWeights = false;
     $scope.langTotals = [];
     $scope.allLangTotals = [];
 
     $scope.showEdit = true;
 
-    $scope.showRealName = false;
+    $scope.showRealName = true;
     $scope.getName = function(lang){
         if($scope.showRealName){return lang.name;}
         return lang.softname;
@@ -63,6 +63,7 @@ tableApp2.controller('TableCtrl', function ($scope) {
         var min = Math.min.apply(null, $scope.langTotals),
             max = Math.max.apply(null, $scope.langTotals) - min,
             shiftedTotal = total - min;
+        //return Math.ceil(100-((100*(shiftedTotal))/max));
         return Math.ceil(100-((100*(shiftedTotal))/max));
     };
 
@@ -73,10 +74,12 @@ tableApp2.controller('TableCtrl', function ($scope) {
     };
 
     $scope.scoreClass = function(score){
-        if (score > 0) {
-            return "red";
-        } else if (score < 0) {
-            return "green";
+        if (score < 0) {
+            //return "red";
+            return "#FF6600";
+        } else if (score > 0) {
+            //return "green";
+            return "#00CC99";
         } 
         return "white";
     };
@@ -87,9 +90,9 @@ tableApp2.controller('TableCtrl', function ($scope) {
         var count = 0;
         var delta = 0;
         if (t.enforced === "yes") {
-            delta = -$scope.enforcedScore;
+            delta = $scope.enforcedScore;
         } else if (t.enforced === "no"){
-            delta = $scope.inabilityPenalty;
+            delta = -$scope.inabilityPenalty;
         } else if (t.enforced === "warn"){
             delta = 0;
         }

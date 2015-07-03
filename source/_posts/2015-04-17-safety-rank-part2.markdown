@@ -13,18 +13,14 @@ published: false
 I previously wrote a table for scoring language safety which can be
 found here: 
 
+After being told I was "overfitting" the data, I've attempted to clean up by
+simply checking if each category is enforced, possible, or impossible. The shape
+of the curve pretty much stays the same, which I was told indicates that the
+character count weighting was a variable that didn't matter.
+
 <div ng-app="TableApp2">
 <div ng-controller="TableCtrl">
 
-Language Enforced Bonus:
-{% raw %} {{ enforcedScore }} {% endraw %}
-<input ng-model="enforcedScore" type="range" min="0" max="50" />
-
-Language Inability Penalty:
-{% raw %} {{ inabilityPenalty }} {% endraw %}
-<input ng-model="inabilityPenalty" type="range" min="0" max="50" />
-
-Show Weights <input type="checkbox" ng-model="showWeights" />
 <p class="lead">
 <div style="overflow-x:scroll">
 <table class="langtable">
@@ -60,8 +56,6 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 </table>
 </div>
 
-<h3><input ng-model="showRealName" type="checkbox" /><span
-ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3>
 
 Current Languages:
 <span ng-repeat="lang in allLanguages">
