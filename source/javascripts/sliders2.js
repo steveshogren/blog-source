@@ -63,8 +63,7 @@ tableApp2.controller('TableCtrl', function ($scope) {
         var min = Math.min.apply(null, $scope.langTotals),
             max = Math.max.apply(null, $scope.langTotals) - min,
             shiftedTotal = total - min;
-        //return Math.ceil(100-((100*(shiftedTotal))/max));
-        return Math.ceil(100-((100*(shiftedTotal))/max));
+        return Math.ceil(((100*(shiftedTotal))/max));
     };
 
     $scope.cleanCode = function(c){
