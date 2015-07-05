@@ -75,7 +75,8 @@ tableApp2.controller('TableCtrl', function ($scope) {
     $scope.scoreClass = function(score){
         if (score < 0) {
             //return "red";
-            return "#FF6600";
+            //return "#FF6600";
+            return "#FF6666";
         } else if (score > 0) {
             //return "green";
             return "#00CC99";
@@ -147,11 +148,12 @@ tableApp2.controller('TableCtrl', function ($scope) {
     $scope.enforcedTypes = ["yes", "no", "warn"];
     $scope.enforcedNice = function(e){
         if (e==="warn") {
-            return "Unenforced (No extra penalty)";
+            // return "Unenforced (No extra penalty)";
+            return "Unenforced: 0";
         } else if(e==="yes") {
-            return "Enforced (Add bonus)";
+            return "Enforced: 1";
         } 
-        return "Impossible (Add penalty)";
+        return "Impossible: -1";
     };
 
     $scope.allLanguages = [

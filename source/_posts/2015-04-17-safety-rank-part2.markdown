@@ -16,7 +16,8 @@ found here:
 After being told I was "overfitting" the data, I've attempted to clean up by
 simply checking if each category is enforced, possible, or impossible. The shape
 of the curve pretty much stays the same, which I was told indicates that the
-character count weighting was a variable that didn't matter.
+character count weighting was a variable that didn't matter. When the magnitudes
+are compared from the previous model, they come out very similar.
 
 <div ng-app="TableApp2">
 <div ng-controller="TableCtrl">
@@ -79,8 +80,8 @@ language data structure.
 <table class="langtable">
 <tr><th>Check</th><th>Option</th></tr>
 <tr ng-repeat="check in langChecks">
-<td>
-{% raw %} {{ check.name }} {% endraw %}: {% raw %} {{score(selectedLang[check.key]) }} {% endraw %}
+<td style="background-color:{% raw %} {{scoreClass(score(selectedLang[check.key]))}} {% endraw %}">
+{% raw %} {{ check.name }}{% endraw %}: {% raw %} {{score(selectedLang[check.key]) }} {% endraw %}
 </td>
 <td>
 <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
