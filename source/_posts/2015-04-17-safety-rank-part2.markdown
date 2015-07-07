@@ -11,13 +11,20 @@ published: false
 ---
 
 I previously wrote a table for scoring language safety which can be
-found here: 
+found here: [Programming Language Safety Score](http://deliberate-software.com/programming-language-safety-algorithm/)
 
-After being told I was "overfitting" the data, I've attempted to clean up by
-simply checking if each category is enforced, possible, or impossible. The shape
-of the curve pretty much stays the same, which I was told indicates that the
-character count weighting was a variable that didn't matter. When the magnitudes
-are compared from the previous model, they come out very similar.
+After being told I was [overfitting](https://en.wikipedia.org/wiki/Overfitting)
+the data, I've attempted to clean up by simply checking if each category is
+enforced, possible, or impossible. I score each as either 1, 0, or -1. When the
+magnitudes of the new model are compared with the previous model, they come out
+very similar. The shape of the curve pretty much stays the same, which I was
+told indicates that the character count weighting was a variable that didn't
+matter. 
+
+{% img center /images/rplot.jpg 'image' 'images' %}
+
+The code I used to generate the plot and normalize the scores can be found here:
+[scorePlot.R](https://github.com/steveshogren/datasciencecoursera/blob/master/scoreplot.R)
 
 <div ng-app="TableApp2">
 <div ng-controller="TableCtrl">
