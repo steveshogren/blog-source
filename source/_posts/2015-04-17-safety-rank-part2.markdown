@@ -10,8 +10,8 @@ type: post
 published: false
 ---
 
-I previously wrote a table for scoring language safety which can be
-found here: [Programming Language Safety Score](http://deliberate-software.com/programming-language-safety-algorithm/)
+I previously wrote a table for scoring language safety:
+[Programming Language Safety Score](http://deliberate-software.com/programming-language-safety-algorithm/)
 
 After being told I was [overfitting](https://en.wikipedia.org/wiki/Overfitting)
 the data, I've attempted to clean up by simply checking if each category is
@@ -25,6 +25,64 @@ matter.
 
 The code I used to generate the plot and normalize the scores can be found here:
 [scorePlot.R](https://github.com/steveshogren/datasciencecoursera/blob/master/scoreplot.R)
+
+A definition of the safety checks is as follows:
+
+<table class="langtable">
+<tr><th>Check</th> <th>Description</th></tr>
+<tr>
+<td>Test for Null Variable Reference</td><td>Ensuring that the symbol you are
+currently referring to is not a null reference before using it</td>
+</tr>
+<tr><td>Null List Iteration</td><td>Ensuring that a list or array is not null
+before iterating over it</td>
+</tr>
+<tr><td>Putting wrong type into variable</td><td>Preventing the replacement of a
+symbol in scope with a value or reference to a different type, primitive, or
+data structure than was originally used</td></tr>
+<tr>
+<td>Missing List Element </td><td>Preventing looking up an element from a list
+or array that does not exist</td>
+</tr>
+<tr>
+<td>Incorrect Type Casting</td><td>Preventing a coercion or cast that fails in a
+way that leaves you with invalid data or a bad reference</td>
+</tr>
+<tr>
+<td>Passing Wrong Type to Method</td><td>Preventing passing a
+primitive, type, or data structure to a method that cannot operate on it</td>
+</tr>
+<tr>
+<td>Calling or Setting Misspelled Method, Field, Function,
+Variable</td><td>Preventing referring to a symbol that does not exist in the
+current scope</td>
+</tr>
+<tr>
+<td>Missing Enum Value In Switch/Case or If/Else</td><td>Preventing dispatch
+errors caused by adding a new value to an enum without updating all existing
+usages of that enum to handle the new case</td>
+</tr>
+<tr>
+<td>Unexpected Variable Mutation</td><td>For example, I pass data to a function, will the data come back the same as I passed it, or will it have mutated in some way? </td>
+</tr>
+<tr>
+<td>Deadlock prevention</td><td>Preventing thread deadlocks at the language level</td>
+</tr>
+<tr>
+<td>Memory Deallocation</td><td>Is memory deallocated after all uses of it have
+completed</td>
+</tr>
+<tr>
+<td>Stack Overflow Exceptions Caused by Recursion</td><td>Does recursion cause exceptions</td>
+</tr>
+<tr>
+<td>Guaranteed Code Evaluation When Passed To a Function</td><td>Does calling a
+function cause it to evaluate immediately, or is it instead passed as an
+unevaluated thunk</td>
+</tr>
+</table>
+
+The new scores are calculated using the following table. 
 
 <div ng-app="TableApp2">
 <div ng-controller="TableCtrl">
@@ -79,11 +137,9 @@ language data structure.
 
 <h2>Select Language:
 <select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
-</h2>
 <button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
-<div ng-show="showEdit">
+</h2>
 <h2><input ng-model="selectedLang.name"></input></h2>
-
 <table class="langtable">
 <tr><th>Check</th><th>Option</th></tr>
 <tr ng-repeat="check in langChecks">
@@ -95,8 +151,6 @@ language data structure.
 </td>
 </tr>
 </table>
-
-</div>
 </div>
 </div>
 
