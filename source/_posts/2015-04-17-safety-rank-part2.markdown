@@ -129,9 +129,11 @@ Current Languages:
 </select>
 
 I want to see your language represented here! I'll happily take pull
-requests for new languages: [blog source](https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js). Just
-use the "edit language" and "copy to clipboard" to build your own
-language data structure.
+requests for new languages:
+[blog source](https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js). Just
+pick an existing language, edit the name and values, and "copy to clipboard" to
+build your own language data structure. Send it to me in a PR and I'll include
+it along with a thanks on the page.
 
 <div ng-show="showRealName">
 
