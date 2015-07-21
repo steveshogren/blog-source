@@ -1,36 +1,36 @@
 ---
 layout: post
 title: "Language Versions"
-date: 2015-06-08 10:36
+date: 2015-07-20 10:36
 comments: true
 categories:
-published: false
+published: true
 ---
 
-Changing programming tooling can be likened to major and minor versions in
-semantic versioning.
+Let's play a thought exercise. Imagine your development toolchain is like a
+semantic version number. Small features that incrementally improve your
+situation are like minor updates. They don't cause any large shifts in thinking
+or process. Major updates are big, new concepts, quantum jumps in theory or
+practice.
 
-Major updates are big, new concepts that have no parallel. Minor updates
-probably include features that improve the situation, but do not fundamentally
-cause a large shift in thinking or process.
+I am not talking about the political, social, or financial aspects of a
+toolchain. For example, hiring is a complex beast entirely in its own
+category. The criteria for choosing a tool when hiring a few hundred offshore
+developers is very different than the criteria for hiring for a team of three
+senior developers. I'll leave those aspects alone.
 
-I am not talking about social or financial aspects, like hiring. Hiring is a
-complex beast entirely in its own category. The criteria for choosing a tool
-when hiring a few hundred offshore developers is very different for hiring for a
-team of three senior developers. I'll leave that to the reader to determine.
-
-What are some examples of these semantic value changes?
+What are some examples of these value changes I've noticed in my development?
 
 ## Minor Benefits
 
 ### Perl - PHP - Python - Ruby
 
-Trigger warning! Switching from Perl to PHP for me was a minor change. I was
-able to carry over almost all my skills, and for the most part, the differences
-were mostly syntactic. Later, when I started using Python, most of my experience
-from Perl and PHP was still useful. The libraries had different names, and a few
-concepts were different, but on the whole, all three were in a same class of
-productivity for me.
+Switching from Perl to PHP for me was a minor change. I was able to carry over
+almost all my skills, and for the most part, the differences were mostly
+syntactic. Later, when I started using Python, most of my experience from Perl
+and PHP was still useful. The libraries had different names, and a few concepts
+were different, but on the whole, all three were in a same class of productivity
+for me.
 
 More recently, on taking over a small Ruby codebase (scripts, not Rails), I again
 found much of my previous experience was still valuable. I can almost guess what
@@ -41,14 +41,13 @@ with some minor differences here and there. These days I put effort only into
 maintaining familiarity with one of these languages, since I am confident I
 could quickly relearn any of the other three on demand.
 
-### Java - VB.NET - C#
+### Java - VB.NET - {% raw %}C#{% endraw %}
 
 Moving between Java, VB.NET, and C# feel similarly minor in tangible
-productivity. For the most part, all the expectations and experience
-carries between the three. Obviously the tools are different, and there are a
-number of gotchas, but nothing improved or hurt my productivity in any major
-way. I doubt any of those three have any one killer feature that cannot be had
-in the other.
+productivity. For the most part, all the expectations and experience carries
+between the three. Obviously the tools are different, and there are a number of
+gotchas, but nothing changed my productivity in any major way. I doubt any of
+those three have any one killer feature that cannot be had in the other.
 
 ## Major Benefits
 
@@ -64,7 +63,7 @@ worked in, with benefits that grow increasingly valuable with more complex
 systems. I don't always automated test, but it is an invaluable tool for certain
 classes of problems. 
 
-### REPL Development (moving from Ruby to Clojure)
+### REPL Development (moving from Python/Ruby to Clojure)
 
 Repl based development with live hot patching was another major change. It
 required a new way of thinking about programming, and with it came an
