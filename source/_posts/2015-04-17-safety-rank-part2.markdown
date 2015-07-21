@@ -153,6 +153,31 @@ it along with a thanks on the page.
 </td>
 </tr>
 </table>
+
+## Github Data
+
+I wanted to see how these scores matched up with actual projects in the real
+world. I used the GitHub API. I decided to observe the count of bugs per
+repository with the given language as the primary. My hypothesis is that scoring
+well in this model will result in fewer defects on projects with multiple
+commiters. Rather than check each repository for commiter counts, I counted
+repositories with more than 20 forks as a proxy. Since some languages are newer
+than others, I only included repositories created from 2012-01-01 to 2014-01-01,
+and only any bug created from 2013-01-01 to 2015-05-30. I wanted 150
+repositories for each langauge, but unfortunately, both F# and Clojure had fewer
+than 150 repositories with the given criteria.
+
+The counts were as follows:
+
+<table class="langtable">
+<tr><th>Language</th><th>Total Bug Count</th><th>Repositories</th><th>Av. Bug Count Per Repository</th></tr>
+<tr ng-repeat="l in languageRatios">
+<td>{% raw %} {{ l.lang }}{% endraw %}</td> 
+<td>{% raw %} {{ l.bugs }}{% endraw %}</td> 
+<td>{% raw %} {{ l.repos }}{% endraw %}</td> 
+<td>{% raw %} {{ l.ratio }}{% endraw %}</td> 
+</tr>
+</table>
 </div>
 </div>
 
