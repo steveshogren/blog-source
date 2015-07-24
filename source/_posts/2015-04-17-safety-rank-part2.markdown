@@ -10,7 +10,7 @@ type: post
 published: false
 ---
 
-I want to make a model that predicts bug counts based on language usage.
+I want to make a model that predicts bugs.
 
 I previously wrote a table for scoring language safety:
 [Programming Language Safety Score](http://deliberate-software.com/programming-language-safety-algorithm/),
@@ -88,23 +88,6 @@ Current Languages:
 {% raw %} {{ getName(lang) }}: {{ allLangTotals[$index] }}, {% endraw %}
 </select>
 
-<div ng-show="showRealName">
-<h2>Select Language:
-<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
-<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
-</h2>
-<h2><input ng-model="selectedLang.name"></input></h2>
-<table class="langtable">
-<tr><th>Check</th><th>Option</th></tr>
-<tr ng-repeat="check in langChecks">
-<td style="background-color:{% raw %} {{scoreClass(score(selectedLang[check.key]))}} {% endraw %}">
-{% raw %} {{ check.name }}{% endraw %}: {% raw %} {{score(selectedLang[check.key]) }} {% endraw %}
-</td>
-<td>
-<select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
-</td>
-</tr>
-</table>
 
 ## So, What's the Point?
 
@@ -123,7 +106,7 @@ grouping by primary language, removed the top and bottom 25% using the
 bug/commit ratio, which is a common practice in statistics to help find a more
 accurate average. I summed the bugs and commits of those remaining repositories
 grouped by language, finding a total average bug/commit ratio for each language
-grouping.
+grouping. Here is that data, sorted by safety score.
 
 <table class="langtable">
 <tr><th>Language</th>
@@ -199,9 +182,29 @@ Daniel Miladinov [(github)](https://github.com/danielmiladinov),
 Chris Salch [(github)](https://github.com/arlaneenalra),
 and Tim Visher [(github)](https://github.com/timvisher)
 
-I want to see your language represented here! I'll happily take pull
+## Complaints Department
+
+Did I mess up something about a language here, or are missing a safety check? I'll happily take pull
 requests for new languages:
-[blog source](https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js). Just
+[blog source](https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders2.js). Just
 pick an existing language, edit the name and values, and "copy to clipboard" to
 build your own language data structure. Send it to me in a PR and I'll include
 it along with a thanks on the page.
+
+<div ng-show="showRealName">
+<h2>Select Language:
+<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
+<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
+</h2>
+<h2><input ng-model="selectedLang.name"></input></h2>
+<table class="langtable">
+<tr><th>Check</th><th>Option</th></tr>
+<tr ng-repeat="check in langChecks">
+<td style="background-color:{% raw %} {{scoreClass(score(selectedLang[check.key]))}} {% endraw %}">
+{% raw %} {{ check.name }}{% endraw %}: {% raw %} {{score(selectedLang[check.key]) }} {% endraw %}
+</td>
+<td>
+<select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
+</td>
+</tr>
+</table>
