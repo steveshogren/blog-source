@@ -109,6 +109,42 @@ it along with a thanks on the page.
 </tr>
 </table>
 
+To see how this model corresponds with data in the real world, I used the GitHub
+API to query for the number of bugs created in repositories with more than 15
+forks created in a span from 2011 to 2015. Commits were counted by summing the
+commit counts of all contributors. I collected the ratio of bugs logged per
+commit for each repository, and after grouping by primary language, removed the
+top and bottem 25% based on the bug/commit number. I took those repositories,
+and again summed all bugs and all commits, this time across all repositories
+grouped by language, and found a total average bug/commit for each language
+grouping. The following table shows those numbers.
+
+<table class="langtable">
+<tr><th>Language</th><th>Bugs</th><th>Commits</th><th>Tests</th><th>Repositories</th><th>Bug/Commits</th></tr>
+<tr ng-repeat="lang in languageRatios">
+<td>{% raw %} {{ lang.name }}{% endraw %} </td>
+<td>{% raw %} {{ lang.bugs }}{% endraw %} </td>
+<td>{% raw %} {{ lang.commits }}{% endraw %} </td>
+<td>{% raw %} {{ lang.test }}{% endraw %} </td>
+<td>{% raw %} {{ lang.repos }}{% endraw %} </td>
+<td>{% raw %} {{ getBugsRatio(lang) }}{% endraw %} </td>
+</tr>
+</table>
+
+Here are the languages sorted by safety score with bug/commit ratios:
+
+{% img center /images/bugsAverage.jpg 'image' 'images' %}
+
+I took the magnitude of the safety scores and the bug/commit ratios. After
+inverting the safety scores, I overlaid them both onto a single graph.
+
+{% img center /images/bothMags.jpg 'image' 'images' %}
+
+Immediately it is obvious that Ruby, Python, and Clojure all seem to strongly
+buck the trend.
+The numbers correlate at an R^2 score of 0.55. 
+
+
 Hope this is a helpful way to think about language safety!
 
 Special thanks to (in alphabetical order):
