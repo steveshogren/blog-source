@@ -175,16 +175,25 @@ than expected bug count in Ruby and Clojure.
 ## Special Thanks
 
 Special thanks to (in alphabetical order):
-Patrick Boe [(twitter)](https://twitter.com/traffichazard/),
-Kyle Burton [(blog)](http://asymmetrical-view.com/),
-Max Haley,
-Daniel Miladinov [(github)](https://github.com/danielmiladinov),
-Chris Salch [(github)](https://github.com/arlaneenalra),
-and Tim Visher [(github)](https://github.com/timvisher)
+[Patrick Boe](https://twitter.com/traffichazard/) (Haskell, Sniff Test),
+[Kyle Burton](http://asymmetrical-view.com/) (General Advice),
+Nils Creque (Listening Board), 
+Max Haley (Python, Ruby, Teaching me how to math),
+[Daniel Miladinov](https://github.com/danielmiladinov) (Java, Scala, Morale Support),
+Keith O'Brien (Ruby and JS),
+[Chris Salch](https://github.com/arlaneenalra) (CoffeeScript and JS),
+and [Tim Visher](https://github.com/timvisher) (Clojure).
+
+Additional thanks to the posters on
+[/r/rust](https://www.reddit.com/r/rust/comments/3egx49/language_safety_score_mark_2/),
+including [/u/notriddle](https://www.reddit.com/user/notriddle),
+[/u/killercup](https://www.reddit.com/user/killercup), and
+[/u/diegobernardes](https://www.reddit.com/user/diegobernardes) who put together the Rust score.
+
 
 ## Complaints Department
 
-Did I mess up something about a language here, or are missing a safety check? I'll happily take pull
+Did I mess up something about a language here, or am I missing a safety check? I'll happily take pull
 requests for new languages:
 [blog source](https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders2.js). Just
 pick an existing language, edit the name and values, and "copy to clipboard" to
