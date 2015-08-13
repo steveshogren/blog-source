@@ -9,15 +9,18 @@ published: false
 
 # What Is It?
 
-Don't worry, SimpleMock isn't a library. Like many good things, SimpleMock is a
-pattern. The SimpleMock pattern breaks the need for a mocking library.
-
-My examples are in C# because that is what I got paid to write today: so it is
-freshest in memory. SimpleMock works in any language with closures that can be
-passed around by reference, so off the top of my head: C#, Java, F#, Scala, PHP,
-C++, Ruby, and Python. I'm sure you can think of others.
+Don't worry, SimpleMock isn't another library! Like many good things, SimpleMock
+is a pattern. 
 
 # Benefits
+
++ Reduced boilerplate
++ Saves interfaces for real polymorphism
++ Simplify test code
++ Reduces testing concerns in production code
++ Removes need for fragile IOC containers
++ Better abstraction design
++ Can convert one class at a time!
 
 The SimpleMock pattern promotes a better design of your abstractions and simpler
 tests. The pattern also reduces boilerplate and the pollution of your production
@@ -25,8 +28,14 @@ code with testing concerns. Bombastic? Read on!
 
 # The Normal Way
 
-If you are familiar with unit testing, this part is probably boring. Feel free
-to skip.
+My examples are in C# because that is what I got paid to write today - it is
+freshest in memory. SimpleMock works in any language with closures that can be
+passed around by reference, so off the top of my head: C#, Java, F#, Scala, PHP,
+C++, Ruby, and Python. I'm sure you can think of others.
+
+
+If you are familiar with unit test mocking with interfaces, this part is
+probably boring. Feel free to skip.
 
 The traditional way of performing C# unit test mocking involves dependency
 injection and interface mocking using a mocking library. For dependency
@@ -83,43 +92,43 @@ want to test. To test it, we mock the interface, creating a different concrete
 class at test runtime which implements that interface. We can setup that mock to
 respond with anything, which we use for assertions.
 
-The problem is we have created a whole interface just for testing. Interfaces
-are for polymorphism, but we don't really need polymorphism for this class. We
-simply want to mock it. The constructor injection is also test code polluting
-our business logic. If mocking was easier, we wouldn't even need that extra
-boilerplate.
+# What's Wrong with the Normal Way?
+
+The first problem is we have created a whole interface just for testing.
+Interfaces are for polymorphism, but we don't really need polymorphism for this
+class. We simply want to mock it. The constructor injection is also test code
+polluting our business logic. If mocking was easier, we wouldn't even need that
+extra boilerplate.
 
 What we have done is create a very small and very primitive dispatch table. The
-table has one row: something that has a function with the signature of
-```() -> DateTime``` or, as it is known in C#: ```Func<DateTime>```.
-Because the language requires fields put into a variable to have a matching
-type, we need to make an interface to replace the real all at test runtime.
-We will need to
-make this primitive dispatch table for every single mock in every single class
-we wish to test.
+table has one row: something that has a function with the signature of ```() -> DateTime``` or, as it is known in C#: ```Func<DateTime>```. Because the language
+requires fields put into a variable to have a matching type, we need to make an
+interface to replace the real function at test runtime. We will need to make
+this primitive dispatch table for every single mock in every single class we
+wish to test. That's a lot of boilerplate!
+
+Secondly, we have introduced a constructor just for mocking. It doesn't setup
+the class with any business data, just a lot of complicated indirection. More
+boilerplate!
+
+# Part One: Remove Test-Only Interfaces
 
 Because all we really care about is the ```Func<DateTime>``` signature, why not
 simplify everything? C# has an incredible ability to create and pass around
 lambdas and function pointers, what if we used those instead?
 
 ```
-public class CurrentTime {
-    public DateTime GetCurrentTime() {
-        return DateTime.Now();
-    }
-}
-
 public class Translator {
-    private Func<DateTime> GetCurrentTime;
+    private Func<DateTime> _getCurrentTime;
 
     public Translator() : this(new CurrentTime().GetCurrentTime) {}
 
     public Translator(Func<DateTime> getCurrentTime) {
-        this.GetCurrentTime = getCurrentTime;
+        this._getCurrentTime = getCurrentTime;
     }
 
     public string Translate(string input) {
-        return string.Format("{0}: {1}", GetCurrentTime().ToString(), input);
+        return string.Format("{0}: {1}", _getCurrentTime().ToString(), input);
     }
 }
 
@@ -142,25 +151,20 @@ or the relatively complicated setup logic. Instead we can simply inject the
 lambda at runtime, replacing that pointer. We didn't need the whole interface,
 really we just needed the simple signature of the function.
 
+# Step 2: Define Dependencies Inline
+
 We can take it even a step further. Why use constructor injection at all? Since
-all we really want is a single mutable dispatch table row, why make it harder to
-read? If I hit "go to definition" on either the GetCurrentTime lambda or the
-ICurrentTime interface from the first example, I'll not be taken to the actual
-executing code. In both cases I'll be taken to an abstraction level, in one the
-lambda, in the other the Interface. Let's make it easier to read and navigate.
+all we really want is a single mutable dispatch table row, why not just make it
+that way?
+
+# Final Pass
 
 ```
-public class CurrentTime {
-    public DateTime GetCurrentTime() {
-        return DateTime.Now();
-    }
-}
-
 public class Translator {
-    public Func<DateTime> GetCurrentTime = new CurrentTime().GetCurrentTime;
+    internal Func<DateTime> _getCurrentTime = new CurrentTime().GetCurrentTime;
 
     public string Translate(string input) {
-        return string.Format("{0}: {1}", GetCurrentTime().ToString(), input);
+        return string.Format("{0}: {1}", _getCurrentTime().ToString(), input);
     }
 }
 
@@ -169,7 +173,7 @@ public class Translator {
 public void TestCurrentTimeTranslator () {
     var now = DateTime.Now;
     var sut = new Translator();
-    sut.GetCurrentTime = () => now;
+    sut._getCurrentTime = () => now;
 
     var result = sut.Translate("test");
 
@@ -177,30 +181,22 @@ public void TestCurrentTimeTranslator () {
 }
 ```
 
-Now we've cleaned up to a single dispatch table line! "Go to definition" inside
-the class now takes me to the actual line with the actual called function! We've
-replaced a dependency on a class based interface with a function signature. The
-function signature _is_ the interface!
+Now we've cleaned up our nasty multi-line indirection into a single dispatch
+line! "Go to definition" now takes me to the actual line with the actual called
+function! We've replaced a dependency on a class based interface with a function
+signature. The function signature _is_ the interface!
 
-You probably noticed we have lost something with this final pattern. We have
-lost the ability to inject polymorphic behavior through the constructor. I have
-found this is needed very rarely, making the simpler pattern a better tool to
-grab for first. You can still inject polymorphic behavior by simply going back
-to injecting the function in the constructor.
+You probably noticed we have lost something with this final version. We have
+lost the ability to inject polymorphic behavior through the constructor. If you
+need it, simply go back to injecting the interface in the constructor or by
+passing it into the function itself. In practice, I have found this is needed
+very rarely, making the SimpleMock pattern a better tool to grab for first.
 
-With this pattern, we have greatly simplified the code. The dispatch row is
-clear and easy to read. We have removed a third party dependency. We have also
-removed a lot of "test only" boilerplate in our production code.
+# But How Does SimpleMock Promote Better Design?
 
-The pattern also works well in isolation. You can convert one class can use this
-pattern while the others continue to use whatever they did before. That will
-give you a chance to see how it all works.
-
-# SimpleMock Pattern
-
-Lastly, I believe this pattern actually promotes a better design. We were using
-the test pattern today and came into a more complicated situation. Take the
-following code:
+Lastly, SimpleMock actually promotes a better design. For example, we were
+writing some tests today and ran into a complicated situation. Take the
+following sanitized code:
 
 ```
 public class WorkDoer {
@@ -217,9 +213,9 @@ public class WorkDoer {
 
 ```
 
-How would you check that each section was called? A naive solution is
+How would you check that each section was called? Our naive solution was a
 complicated lambda with a "timesCalled" counter and an if statement to assert
-against each argument, but it turns nasty quickly: 
+against each argument, but it turns nasty quickly:
 
 ```
 /// Nasty test code
@@ -255,13 +251,18 @@ public void TestWorkDoer () {
 }
 ```
 
-Nasty. Hard to get right. More complicated than the real code. With a situation
-like this, we have two easy options. Option one is to just use a third party
-mocking library, replacing the functions from inside the test code. This gives
-us access to all the sophisticated mocking tools available. Another option is to
-look to reduce complexity of the production code.
+Huuuuurrrrkk! The test is an absolute catastrophe. I see a mess of mixed
+concerns, and even conditionals! In a test?! Unconscionable.
 
-In my experience using this pattern, heavy reliance on mocking libraries just
+# Step 3: Write Better Abstractions
+
+With a situation like this, we have two easy options. Option one is to just use
+a third party mocking library, replacing the functions from inside the test
+code. This gives us access to all the sophisticated mocking tools available.
+Another option is to look to reduce complexity of the production code with a
+better abstraction.
+
+In my experience using SimpleMock, a heavy reliance on mocking libraries just
 allows a worse design. Consider the code, what makes it so hard to test? Not
 knowing which element is called when. Doing the same work on two parameters. I
 would consider this a bad abstraction. Why not simplify?
@@ -276,7 +277,7 @@ public class WorkDoer {
     }
 }
 
-/// Simple
+/// Simpler test
 [TestCase]
 public void TestWorkDoer () {
     var sut = new WorkDoer();
@@ -297,5 +298,13 @@ public void TestWorkDoer () {
 ```
 
 Much better! Yes, we had to change a few signatures. We get the same work done,
-but now the code is actually a lot more useful. We can easily change any calling
-functions, but now 
+but now the code is actually a lot more useful. Our test code is absolutely
+comparable with anything you'd find using a mocking library, without having to
+learn a whole complicated tool.
+
+# Conclusion
+
+With the SimpleMock pattern, we have greatly simplified the code. The dispatch
+row is clear and easy to read. We have removed some third party dependencies. We
+have also removed a lot of "test only" boilerplate in our production code. The
+test code is greatly simplified, and injection a breeze.
