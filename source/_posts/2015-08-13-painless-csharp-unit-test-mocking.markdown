@@ -43,7 +43,7 @@ injection, it is common to use a tool like Ninject or hand-rolled constructor
 injection. For mocking, a library like Moq or Rhino Mocks is standard. Here is
 an example of a class and its testing code without any business logic.
 
-```
+``` csharp
 public interface ICurrentTime {
     DateTime GetCurrentTime();
 }
@@ -117,7 +117,7 @@ Because all we really care about is the ```Func<DateTime>``` signature, why not
 simplify everything? C# has an incredible ability to create and pass around
 lambdas and function pointers, what if we used those instead?
 
-```
+``` csharp
 public class Translator {
     private Func<DateTime> _getCurrentTime;
 
@@ -159,7 +159,7 @@ that way?
 
 # Final Pass
 
-```
+``` csharp
 public class Translator {
     internal Func<DateTime> _getCurrentTime = new CurrentTime().GetCurrentTime;
 
@@ -198,7 +198,7 @@ Lastly, SimpleMock actually promotes a better design. For example, we were
 writing some tests today and ran into a complicated situation. Take the
 following sanitized code:
 
-```
+``` csharp
 public class WorkDoer {
     internal Action<Thing> ignoreElements = new ThingIgnorer().IgnoreElements;
     internal Action<Thing> removeIgnoredElements = new ThingRemover().RemoveElements;
@@ -217,7 +217,7 @@ How would you check that each section was called? Our naive solution was a
 complicated lambda with a "timesCalled" counter and an if statement to assert
 against each argument, but it turns nasty quickly:
 
-```
+``` csharp
 /// Nasty test code
 [TestCase]
 public void TestWorkDoer () {
@@ -267,7 +267,7 @@ allows a worse design. Consider the code, what makes it so hard to test? Not
 knowing which element is called when. Doing the same work on two parameters. I
 would consider this a bad abstraction. Why not simplify?
 
-```
+``` csharp
 public class WorkDoer {
     internal Func<Thing, Thing> ignoreElements = new ThingIgnorer().IgnoreElements;
     internal Func<Thing, Thing> removeIgnoredElements = new ThingRemover().RemoveElements;
