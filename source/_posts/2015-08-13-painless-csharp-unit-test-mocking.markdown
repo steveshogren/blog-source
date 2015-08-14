@@ -16,15 +16,15 @@ is a pattern.
 
 + Reduced boilerplate
 + Saves interfaces for real polymorphism
-+ Simplify test code
++ Simplifies test code
 + Reduces testing concerns in production code
 + Removes need for fragile IOC containers
-+ Better abstraction design
++ Encourages better abstraction design
 + Can convert one class at a time!
 
 The SimpleMock pattern promotes a better design of your abstractions and simpler
 tests. The pattern also reduces boilerplate and the pollution of your production
-code with testing concerns. Bombastic? Read on!
+code with testing concerns. 
 
 # The Normal Way
 
@@ -97,21 +97,22 @@ respond with anything, which we use for assertions.
 The first problem is we have created a whole interface just for testing.
 Interfaces are for polymorphism, but we don't really need polymorphism for this
 class. We simply want to mock it. The constructor injection is also test code
-polluting our business logic. If mocking was easier, we wouldn't even need that
-extra boilerplate.
+polluting our business logic. 
 
 What we have done is create a very small and very primitive dispatch table. The
-table has one row: something that has a function with the signature of ```() -> DateTime``` or, as it is known in C#: ```Func<DateTime>```. Because the language
-requires fields put into a variable to have a matching type, we need to make an
-interface to replace the real function at test runtime. We will need to make
+table has one row: something that has a function with the signature of ```() -> DateTime``` or, as it is known in C#: ```Func<DateTime>```.  We will need to make
 this primitive dispatch table for every single mock in every single class we
 wish to test. That's a lot of boilerplate!
 
-Secondly, we have introduced a constructor just for mocking. It doesn't setup
-the class with any business data, just a lot of complicated indirection. More
-boilerplate!
+# SimpleMock Pattern
 
-# Part One: Remove Test-Only Interfaces
+The SimpleMock pattern is aptly named. 
+
+1. Replace Test-Only Interfaces With Functions
+2. Define Dependencies Inline
+3. Write Better Abstractions
+
+# Step One: Replace Test-Only Interfaces With Functions
 
 Because all we really care about is the ```Func<DateTime>``` signature, why not
 simplify everything? C# has an incredible ability to create and pass around
@@ -156,8 +157,6 @@ really we just needed the simple signature of the function.
 We can take it even a step further. Why use constructor injection at all? Since
 all we really want is a single mutable dispatch table row, why not just make it
 that way?
-
-# Final Pass
 
 ``` csharp
 public class Translator {
@@ -308,3 +307,5 @@ With the SimpleMock pattern, we have greatly simplified the code. The dispatch
 row is clear and easy to read. We have removed some third party dependencies. We
 have also removed a lot of "test only" boilerplate in our production code. The
 test code is greatly simplified, and injection a breeze.
+
+Thanks to Shuwei Chen for helping me put this together!
