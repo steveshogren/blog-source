@@ -147,10 +147,10 @@ public class Translator {
 
 ```
 
-The test code becomes much simpler! No longer do we need the dependency on Moq,
-or the relatively complicated setup logic. Instead we can simply inject the
-lambda at runtime, replacing that pointer. We didn't need the whole interface,
-really we just needed the simple signature of the function.
+The test code becomes much simpler! No longer do we need the dependency on third
+party mocking libraries, or the relatively complicated setup logic. Instead we
+can simply inject the lambda at runtime, replacing that pointer. We didn't need
+the whole interface, really we just needed the simple signature of the function.
 
 # Step 2: Define Dependencies Inline
 
@@ -191,10 +191,10 @@ need it, simply go back to injecting the interface in the constructor or by
 passing it into the function itself. In practice, I have found this is needed
 very rarely, making the SimpleMock pattern a better tool to grab for first.
 
-# But How Does SimpleMock Promote Better Design?
+# Step 3: Write Better Abstractions
 
-Lastly, SimpleMock actually promotes a better design. For example, we were
-writing some tests today and ran into a complicated situation. Take the
+Lastly, SimpleMock actually promotes a better design. For example, a cooworker
+was writing some tests today and ran into a complicated situation. Take the
 following sanitized code:
 
 ``` csharp
@@ -253,18 +253,18 @@ public void TestWorkDoer () {
 Huuuuurrrrkk! The test is an absolute catastrophe. I see a mess of mixed
 concerns, and even conditionals! In a test?! Unconscionable.
 
-# Step 3: Write Better Abstractions
-
 With a situation like this, we have two easy options. Option one is to just use
 a third party mocking library, replacing the functions from inside the test
 code. This gives us access to all the sophisticated mocking tools available.
-Another option is to look to reduce complexity of the production code with a
-better abstraction.
+
+My preferred option is to look to reduce complexity of the production code with
+a better abstraction.
 
 In my experience using SimpleMock, a heavy reliance on mocking libraries just
-allows a worse design. Consider the code, what makes it so hard to test? Not
-knowing which element is called when. Doing the same work on two parameters. I
-would consider this a bad abstraction. Why not simplify?
+allows a worse design to exist. Consider the code, what makes it so hard to
+test? Not knowing which element is called when, doing the same work on two
+parameters, and reference mutation all make this a poor abstraction. Why not
+simplify?
 
 ``` csharp
 public class WorkDoer {
@@ -286,7 +286,7 @@ public void TestWorkDoer () {
     sut.ignoreElements = (t) => new Thing();
 
     sut.removeIgnoredElements = (t) => {
-        Assert.AreEqual(t, sut.ignoreElements(null));
+        Assert.AreEqual(t, sut.ignoreElements(t));
         return expected;
     };
 
@@ -298,8 +298,15 @@ public void TestWorkDoer () {
 
 Much better! Yes, we had to change a few signatures. We get the same work done,
 but now the code is actually a lot more useful. Our test code is absolutely
-comparable with anything you'd find using a mocking library, without having to
-learn a whole complicated tool.
+comparable with anything you'd find using a mocking library, without having a
+whole complicated tool to help prop up a bad design. I am absolutely okay with
+using a mocking library when absolutely needed, but I always carefully consider
+my abstractions and design first.
+
+If mocking libraries and IOC containers are the chainsaws of the testing world,
+the SimpleMock pattern are the garden shears. Sometimes the chainsaw is
+absolutely the only tool for the job, and that is fine. But for most work around
+the yard, you can leave the chainsaw in the shed.
 
 # Conclusion
 
