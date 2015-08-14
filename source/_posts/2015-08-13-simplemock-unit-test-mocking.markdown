@@ -4,7 +4,9 @@ title: "SimpleMock: Language Agnostic Unit Test Mocking"
 date: 2015-08-13 06:53
 comments: true
 categories: 
-published: false
+- Technical Skills
+- Meta Game
+published: true
 ---
 
 # What Is It?
