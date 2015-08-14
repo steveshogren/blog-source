@@ -9,10 +9,13 @@ categories:
 published: true
 ---
 
-# What Is It?
-
 Don't worry, SimpleMock isn't another library! Like many good things, SimpleMock
-is a pattern. 
+is a pattern. You can use the pattern to organize your testing code without
+mocking or complicated dependency injection.
+
+SimpleMock works in any language with closures that can be passed around by
+reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
+Python. I'm sure you can think of others.
 
 # Benefits
 
@@ -26,85 +29,11 @@ is a pattern.
 
 The SimpleMock pattern promotes a better design of your abstractions and simpler
 tests. The pattern also reduces boilerplate and the pollution of your production
-code with testing concerns. 
+code with testing concerns.
 
-# The Normal Way
-
-My examples are in C# because that is what I got paid to write today - it is
-freshest in memory. SimpleMock works in any language with closures that can be
-passed around by reference, so off the top of my head: C#, Java, F#, Scala, PHP,
-C++, Ruby, and Python. I'm sure you can think of others.
-
-
-If you are familiar with unit test mocking with interfaces, this part is
-probably boring. Feel free to skip.
-
-The traditional way of performing C# unit test mocking involves dependency
-injection and interface mocking using a mocking library. For dependency
-injection, it is common to use a tool like Ninject or hand-rolled constructor
-injection. For mocking, a library like Moq or Rhino Mocks is standard. Here is
-an example of a class and its testing code without any business logic.
-
-``` csharp
-public interface ICurrentTime {
-    DateTime GetCurrentTime();
-}
-
-public class CurrentTime : ICurrentTime {
-    public DateTime GetCurrentTime() {
-        return DateTime.Now();
-    }
-}
-
-public class Translator {
-    private readonly ICurrentTime ct;
-
-    public Translator() : this(new CurrentTime()) {}
-
-    public Translator(ICurrentTime currentTime) {
-        this.ct = currentTime;
-    }
-
-    public string Translate(string input) {
-        return string.Format("{0}: {1}", ct.GetCurrentTime().ToString(), input);
-    }
-}
-
-/// Test Code with Moq
-[TestCase]
-public void TestCurrentTimeTranslator () {
-    var rightNow = DateTime.Now;
-    var mock = new Mock<ICurrentTime>();
-
-    mock.Setup(a=>a.GetCurrentTime()).Returns(rightNow);
-
-    var sut = new Translator(mock.Object);
-
-    var result = sut.Translate("test");
-
-    Assert.AreEqual(rightNow.ToString() + ": test", result);
-}
-
-```
-
-If you've done much C# unit testing, this should look familiar. We want to
-inject some code that is potentially long-running or dynamic. We put that code
-into a class, add an interface, then inject that interface into the class we
-want to test. To test it, we mock the interface, creating a different concrete
-class at test runtime which implements that interface. We can setup that mock to
-respond with anything, which we use for assertions.
-
-# What's Wrong with the Normal Way?
-
-The first problem is we have created a whole interface just for testing.
-Interfaces are for polymorphism, but we don't really need polymorphism for this
-class. We simply want to mock it. The constructor injection is also test code
-polluting our business logic. 
-
-What we have done is create a very small and primitive dispatch table. The
-table has one row: something that has a function with the signature of ```() -> DateTime``` or, as it is known in C#: ```Func<DateTime>```.  We will need to make
-this primitive dispatch table for every single mock in every single class we
-wish to test. That's a lot of boilerplate!
+If you aren't familiar with the normal pattern of unit test mocking using
+interfaces, dependency injection, and mock libraries, scroll down to "The
+Non-SimpleMock Way" at the end of the post.
 
 # SimpleMock Pattern
 
@@ -116,11 +45,17 @@ The SimpleMock pattern is aptly named.
 
 # Step One: Replace Test-Only Interfaces With Functions
 
-Because all we really care about is the ```Func<DateTime>``` signature, why not
-simplify everything? C# has an incredible ability to create and pass around
-lambdas and function references. What if we used those instead?
+My examples are in C# because that is what I got paid to write today - it is
+freshest in memory. C# has an incredible ability to create and pass around
+lambdas and function references. Here is an example of using functions instead
+of interfaces.
 
 ``` csharp
+public class CurrentTime : ICurrentTime {
+    public DateTime GetCurrentTime() {
+        return DateTime.Now();
+    }
+}
 public class Translator {
     private Func<DateTime> _getCurrentTime;
 
@@ -137,7 +72,7 @@ public class Translator {
 
 /// Test Code with just lambdas
 [TestCase]
-    public void TestCurrentTimeTranslator () {
+public void TestCurrentTimeTranslator () {
     var now = DateTime.Now;
 
     var sut = new Translator(() => now);
@@ -149,7 +84,7 @@ public class Translator {
 
 ```
 
-The test code becomes much simpler! No longer do we need the dependency on third
+The test code is quite simple! No longer do we need the dependency on third
 party mocking libraries, or the relatively complicated setup logic. Instead we
 can simply inject the lambda at runtime, replacing that pointer. We didn't need
 the whole interface, really we just needed the simple signature of the function.
@@ -213,7 +148,7 @@ public class WorkDoer {
 }
 
 ```
-
+ 
 How would you check that each section was called? Our naive solution was a
 complicated lambda with a "timesCalled" counter and an if statement to assert
 against each argument, but it turns nasty quickly:
@@ -317,3 +252,75 @@ testable" from your code. The test code is greatly simplified, and injection a
 breeze. The result: much simpler code, just as easy to test.
 
 Thanks to Shuwei Chen for helping me put this together!
+
+# The Non-SimpleMock Way
+
+If you are familiar with unit test mocking with interfaces, this part is
+probably boring. Feel free to skip.
+
+The traditional way of performing C# unit test mocking involves dependency
+injection and interface mocking using a mocking library. For dependency
+injection, it is common to use a tool like Ninject or hand-rolled constructor
+injection. For mocking, a library like Moq or Rhino Mocks is standard. Here is
+an example of a class and its testing code without any business logic.
+
+``` csharp
+public interface ICurrentTime {
+    DateTime GetCurrentTime();
+}
+
+public class CurrentTime : ICurrentTime {
+    public DateTime GetCurrentTime() {
+        return DateTime.Now();
+    }
+}
+
+public class Translator {
+    private readonly ICurrentTime ct;
+
+    public Translator() : this(new CurrentTime()) {}
+
+    public Translator(ICurrentTime currentTime) {
+        this.ct = currentTime;
+    }
+
+    public string Translate(string input) {
+        return string.Format("{0}: {1}", ct.GetCurrentTime().ToString(), input);
+    }
+}
+
+/// Test Code with Moq
+[TestCase]
+public void TestCurrentTimeTranslator () {
+    var rightNow = DateTime.Now;
+    var mock = new Mock<ICurrentTime>();
+
+    mock.Setup(a=>a.GetCurrentTime()).Returns(rightNow);
+
+    var sut = new Translator(mock.Object);
+
+    var result = sut.Translate("test");
+
+    Assert.AreEqual(rightNow.ToString() + ": test", result);
+}
+
+```
+
+If you've done much C# unit testing, this should look familiar. We want to
+inject some code that is potentially long-running or dynamic. We put that code
+into a class, add an interface, then inject that interface into the class we
+want to test. To test it, we mock the interface, creating a different concrete
+class at test runtime which implements that interface. We can setup that mock to
+respond with anything, which we use for assertions.
+
+# What's Wrong with the Non-SimpleMock Way?
+
+The first problem is we have created a whole interface just for testing.
+Interfaces are for polymorphism, but we don't really need polymorphism for this
+class. We simply want to mock it. The constructor injection is also test code
+polluting our business logic. 
+
+What we have done is create a very small and primitive dispatch table. The
+table has one row: something that has a function with the signature of ```() -> DateTime``` or, as it is known in C#: ```Func<DateTime>```.  We will need to make
+this primitive dispatch table for every single mock in every single class we
+wish to test. That's a lot of boilerplate!
