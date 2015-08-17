@@ -9,9 +9,8 @@ categories:
 published: true
 ---
 
-Don't worry, SimpleMock isn't another library! Like many good things, SimpleMock
-is a pattern. You can use the pattern to organize your testing code without
-mocking or complicated dependency injection.
+SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
+organize your testing code without mocking or complicated dependency injection.
 
 SimpleMock works in any language with closures that can be passed around by
 reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
