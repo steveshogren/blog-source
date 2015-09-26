@@ -34,6 +34,31 @@ If you aren't familiar with the normal pattern of unit test mocking using
 interfaces, dependency injection, and mock libraries, scroll down to "The
 Non-SimpleMock Way" at the end of the post.
 
+# Example: 
+
+Here is a brief (if a bit silly) example of the final pattern:
+
+``` csharp
+public class LineCounter {
+    internal Func<string, IEnumerable<string>> _readLines = File.ReadLines;
+
+    public string CountLines(string filename) {
+        return _readLines(filename).Count();
+    }
+}
+
+/// Test Code with just inline lambdas
+[TestCase]
+public void TestLineCounter () {
+    var sut = new LineCounter();
+    sut._readLines = (string x) => new List<string>{"test", "that"};
+
+    var result = sut.CountLines("test");
+
+    Assert.AreEqual(2, result);
+}
+```
+
 # SimpleMock Pattern
 
 The SimpleMock pattern is aptly named. 
@@ -41,6 +66,7 @@ The SimpleMock pattern is aptly named.
 1. Replace Test-Only Interfaces With Functions
 2. Define Dependencies Inline
 3. Write Better Abstractions
+
 
 # Step One: Replace Test-Only Interfaces With Functions
 
