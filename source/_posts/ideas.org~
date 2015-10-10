@@ -5,15 +5,12 @@ If you are writing much F#, you possibly are curious how you might handle unit t
 
 I previously posted an example that shows a much simpler way to inject dependencies that allows much less code with equivalent safety. The "SimpleMock" pattern can also be used in F#, but it isn't always necessary if you are not using classes. F# has a much simpler way to allow for dependency injection via currying.
 
-Here is a sample program that does some work and persists the results.
-
 ``` fsharp
 let addAndSave x y =
   let sum = x + y
   DB.saveSum sum
   sum
 ``` 
-
 
 
 * Safety Score
