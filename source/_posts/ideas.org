@@ -10,10 +10,26 @@ Here is a sample program that does some work and persists the results.
 ``` fsharp
 let addAndSave x y =
   let sum = x + y
-  DB.saveSum sum
+  DBModule.saveSum sum
   sum
 ``` 
 
+To test this, we can use currying to simply replace the DBModule.saveSum function with a test-only version. We start by renaming the addAndSave function with a trailing ```'```. Then a new ```addAndSave``` is created that calls ```addAndSave'``` with the correct dependency.
+
+``` fsharp
+let addAndSave = addAndSave' DBModule.saveSum
+let addAndSave' saveSum x y = 
+  let sum = x + y
+  saveSum sum
+  sum
+
+// Test code
+let addAndSave_Test =
+  let mutable ref calledVar = 0
+  let result = addAndSave' (fun sum -> calledVar <- sum) 1 2
+  Assert.AreEqual(3, result)
+  Assert.AreEqual(3, calledVar)
+``` 
 
 
 * Safety Score
