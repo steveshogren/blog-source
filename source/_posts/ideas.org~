@@ -14,7 +14,8 @@ let addAndSave x y =
   sum
 ``` 
 
-To test this, we can use currying to simply replace the DBModule.saveSum function with a test-only version.
+To test this, we can use currying to simply replace the DBModule.saveSum function with a test-only version. 
+
 
 ``` fsharp
 let addAndSave = addAndSave' DBModule.saveSum
@@ -29,6 +30,24 @@ let addAndSave_Test =
   let result = addAndSave' (fun sum -> calledVar <- sum) 1 2
   Assert.AreEqual(3, result)
   Assert.AreEqual(3, calledVar)
+``` 
+We start by renaming the addAndSave function with a trailing ```'```. Then a new ```addAndSave``` is created that calls ```addAndSave'``` with the correct dependency.
+
+The replacement for DBModule.saveSum is fairly complex, but it should be easy to make a simple helper that takes parameters and returns them when called.
+
+``` fsharp
+let makeTestFakeOne one = (fun () -> one)
+```
+
+With this we can re-write the previous test:
+
+``` fsharp
+// Test code
+let addAndSave_Test =
+  let fakeSaver = makeTestFakeOne
+  let result = addAndSave' fakeSaver 1 2
+  Assert.AreEqual(3, result)
+  Assert.AreEqual(3, fakeSaver())
 ``` 
 
 
