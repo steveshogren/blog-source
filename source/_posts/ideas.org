@@ -36,12 +36,15 @@ We start by renaming the addAndSave function with a trailing ```'```. Then a new
 The replacement for DBModule.saveSum is fairly complex, but it should be easy to make a simple helper that takes parameters and returns them when called.
 
 ``` fsharp
-let makeTestFakeOne = 
-  let mutable ref one = ()
+type FakeStuff = {timesCalled:Integer; args: object list}
+let makeTestFake = 
+  let mutable ref args : object list = []
+  let mutable ref timesCalled = 0
   let result = (fun p1 -> 
-                  one <- p1
+                  args = p1 :: args
+                  timesCalled <- timesCalled + 1
                   p1)
-  (fake, (fun () -> one)) 
+  (fake, (fun () -> {timesCalled = timesCalled; args = args)) 
 ```
 
 With this we can re-write the previous test:
@@ -52,7 +55,8 @@ let addAndSave_Test =
   let (fake, fakeCalled) = makeTestFakeOne
   let result = addAndSave' fake 1 2
   Assert.AreEqual(3, result)
-  Assert.AreEqual(3, fakeCalled())
+  Assert.AreEqual(3, fakeCalled().arg)
+  Assert.AreEqual(1, fakeCalled().timesCalled)
 ``` 
 
 
