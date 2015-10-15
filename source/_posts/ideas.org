@@ -1,11 +1,13 @@
 
 Simple F# Unit Test Mocking
 
-If you are writing much F#, you possibly are curious how you might handle unit test mocking. In a language like C# or Java, the common method is to a DI container or handmade constructor injection. These "entry points" allow for a unit test to replace a real dependency with a test-only replacement. 
+If you are considering using F#, you might be curious how to handle unit test mocking, especially if you want to use both modules and classes. In a language like C# or Java, the common method is to a DI container or handmade constructor injection on a class. These "entry points" allow for a unit test to replace a real dependency with a test-only replacement. 
 
-I previously posted an example that shows a much simpler way to inject dependencies that allows much less code with equivalent safety. The "SimpleMock" pattern can also be used in F#, but it isn't always necessary if you are not using classes. F# has a much simpler way to allow for dependency injection via currying.
+I previously posted an example that shows a much simpler way to inject dependencies called the SimpleMock pattern. The SimpleMock pattern can also be used in F#, even if you are only using modules.
 
-Here is a sample program that does some work and persists the results.
+## SimpleMock in F# Modules
+
+Here is a sample program that does some work and persists the results. We will assume you are mocking inside a module and not a class. Mocking inside an F# class would look much the same as it does in C#, which we showed earlier.
 
 ``` fsharp
 let addAndSave x y =
@@ -14,11 +16,12 @@ let addAndSave x y =
   sum
 ``` 
 
-To test this, we can use currying to simply replace the DBModule.saveSum function with a test-only version. 
-
+To apply the SimpleMock pattern, we can use argument currying. 
 
 ``` fsharp
+// Integer -> Integer -> Integer
 let addAndSave = addAndSave' DBModule.saveSum
+// (Integer -> unit) -> Integer -> Integer -> Integer
 let addAndSave' saveSum x y = 
   let sum = x + y
   saveSum sum
@@ -26,38 +29,43 @@ let addAndSave' saveSum x y =
 
 // Test code
 let addAndSave_Test =
-  let mutable ref calledVar = 0
-  let result = addAndSave' (fun sum -> calledVar <- sum) 1 2
+  let mutable ref calledVar : object = 0
+  let result = addAndSave' (fun sum:Integer -> calledVar <- sum) 1 2
   Assert.AreEqual(3, result)
   Assert.AreEqual(3, calledVar)
 ``` 
-We start by renaming the addAndSave function with a trailing ```'```. Then a new ```addAndSave``` is created that calls ```addAndSave'``` with the correct dependency.
 
-The replacement for DBModule.saveSum is fairly complex, but it should be easy to make a simple helper that takes parameters and returns them when called.
+We started by renaming the ```addAndSave``` function with a trailing ```'```. We created a new ```addAndSave``` that calls ```addAndSave'``` with the correct dependency for the first argument, leaving the rest of the arguments to be called later, which is possible because of currying. The new ```addAndSave``` function only needs the ```x``` and ```y``` parameters. At test time, we call ```addAndSave'``` passing in any needed dependencies. This leaves the injection as close to the dependency use as possible!
+
+## Bonus: SimpleMock Fake Helper
+
+The earlier replacement for DBModule.saveSum is a bit complex, and it doesn't show us how many times the fake was called. We can easily make a helper that takes parameters and returns them when called, along withe count of times it was called.
 
 ``` fsharp
-type FakeStuff = {timesCalled:Integer; args: object list}
-let makeTestFake = 
+type TestFake = {timesCalled:Integer; args: object list}
+let makeTestFakeOneArg () = 
   let mutable ref args : object list = []
   let mutable ref timesCalled = 0
-  let result = (fun p1 -> 
+  let fake = (fun p1 -> 
                   args = p1 :: args
                   timesCalled <- timesCalled + 1
                   p1)
   (fake, (fun () -> {timesCalled = timesCalled; args = args)) 
 ```
 
-With this we can re-write the previous test:
+We can now re-write the previous test using ```makeTestFakeOneArg```:
 
 ``` fsharp
 // Test code
 let addAndSave_Test =
-  let (fake, fakeCalled) = makeTestFakeOne
+  let (fake, fakeResult) = makeTestFakeOneArg()
   let result = addAndSave' fake 1 2
   Assert.AreEqual(3, result)
-  Assert.AreEqual(3, fakeCalled().arg)
-  Assert.AreEqual(1, fakeCalled().timesCalled)
+  Assert.AreEqual(3, fakeResult().args[0])
+  Assert.AreEqual(1, fakeResult().timesCalled)
 ``` 
+
+The TestFake can return information about the way it was called, including the list of all arguments. If we felt we needed the extra expressiveness, we could also use a mocking library like RhinoMocks or Moq. The TestFake and its constructor are not essential to the pattern. The most important part is learning to unit test in F# with confidance.
 
 
 * Safety Score
