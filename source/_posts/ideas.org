@@ -71,6 +71,36 @@ let addAndSave_Test =
 The TestFakeResults can return information about the way it was called, including the list of all arguments. If we felt we needed the extra expressiveness, we could also use a mocking library like RhinoMocks or Moq. The TestFakeResults and its constructor are not essential to the pattern. The most important part is learning to unit test in F# with confidance.
 
 
+# Double Bonus: When to Use a Class Instead of a Record?
+
+When I first wrote this post, I used a record instead of a class for the ```TestFakeResults``` type. If you are bit by the functional programming bug, you might have recoiled at my usage of a mutable class instead of an immutable data structure like a record. Here are two alternates of ```makeFake_OneArg``` which use records, you can probably see why I switched:
+
+``` fsharp
+type TestFakeResults = {timesCalled:Integer;args: object list}
+
+// Using Record Alternate 1
+let makeFake_OneArg_RecordAlternate1 () = 
+  let mutable ref timesCalled = 0
+  let mutable ref args : object list = []
+  let fake = (fun p1 -> 
+                  args <- p1 :: args
+                  timesCalled <- timesCalled + 1
+                  p1)
+  (fake, (fun () -> {timesCalled=timesCalled; args = args})) 
+
+// Using Record Alternate 2
+let makeFake_OneArg_RecordAlternate2 () = 
+  let mutable ref result = {timesCalled=0; args = []}
+  let fake = (fun p1 -> 
+                  result <- {result with args = p1 :: result.args}
+                  timesCalled <- {result with timesCalled = result.timesCalled + 1}
+                  p1)
+  (fake, result) 
+```
+
+The only way to use a record is to either delay its construction via a lambda, or mutate it on each call. Both are obviously complex: what we need is a mutable data structure, and a record is not that. We can approximate it using tricks, but ultimately, I find both alternatives to be too complex to justify their use. Sometimes a mutable data structure( here provided in F# as a class) is the best choice to solve your problem efficiently. The power of F# is that it gives us the ability to choose the best tool for the job: records for immutablity, classes for mutablity.
+
+
 * Safety Score
 ** Exceptions (checked, unchecked)
 ** variable shadowing 
