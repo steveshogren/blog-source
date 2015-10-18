@@ -6,7 +6,7 @@ I previously posted an example that shows a much simpler way to inject dependenc
 
 ## SimpleMock in F# Modules
 
-Here is a sample program that does some work and persists the results. We will assume you are mocking inside a module and not a class. Mocking inside an F# class would look much the same as it does in C#, which we showed earlier.
+We will assume you are mocking inside a module and not a class. Mocking inside an F# class would look much the same as it does in C#, which we showed in the SimpleMock post. Here is a sample program that does some work and persists the results.
 
 ``` fsharp
 let addAndSave x y =
@@ -15,7 +15,7 @@ let addAndSave x y =
   sum
 ``` 
 
-To apply the SimpleMock pattern, we can use argument currying. 
+To apply the SimpleMock pattern, we can use argument currying by adding a simple function "wrapper".
 
 ``` fsharp
 // Integer -> Integer -> Integer
@@ -38,7 +38,7 @@ We started by renaming the ```addAndSave``` function with a trailing ```'```. We
 
 ## Bonus: SimpleMock Fake Helper
 
-The earlier replacement for DBModule.saveSum is a bit complex, and it doesn't show us how many times the fake was called. We can easily make a helper that takes parameters and returns them when called, along withe count of times it was called.
+The earlier replacement for DBModule.saveSum is a bit complex, and it does not show us how many times the fake was called. We can easily make a helper that takes parameters and returns them when called, along withe count of times it was called.
 
 ``` fsharp
 type TestFakeResults() = 
@@ -71,9 +71,9 @@ let addAndSave_Test =
 The TestFakeResults can return information about the way it was called, including the list of all arguments. If we felt we needed the extra expressiveness, we could also use a mocking library like RhinoMocks or Moq. The TestFakeResults and its constructor are not essential to the pattern. The most important part is learning to unit test in F# with confidance.
 
 
-# Double Bonus: When to Use a Class Instead of a Record?
+# Double Bonus: When to Use a Class Instead of a Record
 
-When I first wrote this post, I used a record instead of a class for the ```TestFakeResults``` type. If you are bit by the functional programming bug, you might have recoiled at my usage of a mutable class instead of an immutable data structure like a record. Here are two alternates of ```makeFake_OneArg``` which use records, you can probably see why I switched:
+When I first wrote this post, I used a record instead of a class for the ```TestFakeResults``` type. If you are bit by the functional programming bug, you might have wondered at my usage of a mutable class. Here are two alternates of ```makeFake_OneArg``` which use records, you can probably see why I switched:
 
 ``` fsharp
 type TestFakeResults = {timesCalled:Integer;args: object list}
@@ -98,7 +98,7 @@ let makeFake_OneArg_RecordAlternate2 () =
   (fake, result) 
 ```
 
-The only way to use a record is to either delay its construction via a lambda, or mutate it on each call. Both are obviously complex: what we need is a mutable data structure, and a record is not that. We can approximate it using tricks, but ultimately, I find both alternatives to be too complex to justify their use. Sometimes a mutable data structure( here provided in F# as a class) is the best choice to solve your problem efficiently. The power of F# is that it gives us the ability to choose the best tool for the job: records for immutablity, classes for mutablity.
+The only way to use a record is to either delay its construction via a lambda which must be executed by the test code, or mutate the record on each fake call. Both are complex: what we need is a mutable data structure which we can access via a reference. A record is not that. We can approximate it using tricks, but ultimately I find both alternatives to be too complex to justify their use. Sometimes a mutable data structure is the best choice to solve your problem efficiently. The power of F# is that it gives us the ability to choose the best tool for the job: records for immutablity, classes for mutablity.
 
 
 * Safety Score
