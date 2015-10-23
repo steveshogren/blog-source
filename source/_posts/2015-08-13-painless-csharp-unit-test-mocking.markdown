@@ -180,9 +180,9 @@ public void TestCurrentTimeTranslator () {
 }
 ```
 
-Now we've cleaned up our nasty multi-line indirection into a single dispatch
-line! "Go to definition" now takes me to the actual line with the actual called
-function! We've replaced a dependency on a class based interface with a function
+We've cleaned up our nasty multi-line indirection into a single dispatch line.
+"Go to definition" now takes me to the actual line with the actual called
+function. We've replaced a dependency on a class based interface with a function
 signature. The function signature _is_ the interface!
 
 You probably noticed we have lost something with this final version. We have
@@ -297,6 +297,7 @@ public void TestWorkDoer () {
 ```
 
 Much better! Yes, we had to change a few signatures. We get the same work done,
+<<<<<<< Updated upstream:source/_posts/2015-08-13-painless-csharp-unit-test-mocking.markdown
 but now the code is actually a lot more useful. Our test code is absolutely
 comparable with anything you'd find using a mocking library, without having a
 whole complicated tool to help prop up a bad design. I am absolutely okay with
@@ -307,6 +308,17 @@ If mocking libraries and IOC containers are the chainsaws of the testing world,
 the SimpleMock pattern are the garden shears. Sometimes the chainsaw is
 absolutely the only tool for the job, and that is fine. But for most work around
 the yard, you can leave the chainsaw in the shed.
+=======
+but now the code is actually a lot more useful. Our test code is comparable with
+anything you'd find using a mocking library. I am absolutely okay with using a
+mocking library when needed, but I always carefully consider my abstractions and
+design first.
+
+If mocking libraries and IoC containers are the chainsaws of the testing world,
+then SimpleMock is the garden shears. Sometimes the chainsaw is the only tool
+for the job, and that is fine. But for most work around the yard, you can leave
+the chainsaw in the shed.
+>>>>>>> Stashed changes:source/_posts/2015-08-13-simplemock-unit-test-mocking.markdown
 
 # Conclusion
 
