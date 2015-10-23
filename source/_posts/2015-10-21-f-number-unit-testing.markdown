@@ -36,20 +36,20 @@ To apply the SimpleMock pattern, we can use argument currying by adding a simple
 function "wrapper".
 
 ``` fsharp
-// Integer -> Integer -> Integer
-let addAndSave = addAndSave' DBModule.saveSum
 // (Integer -> unit) -> Integer -> Integer -> Integer
 let addAndSave' saveSum x y = 
   let sum = x + y
   saveSum sum
   sum
+// Integer -> Integer -> Integer
+let addAndSave = addAndSave' DBModule.saveSum
 
 // Test code
 let addAndSave_Test =
-  let mutable ref calledVar : object = 0
-  let result = addAndSave' (fun sum:Integer -> calledVar <- sum) 1 2
+  let calledVar = ref 0
+  let result = addAndSave' (fun sum -> calledVar := sum) 1 2
   Assert.AreEqual(3, result)
-  Assert.AreEqual(3, calledVar)
+  Assert.AreEqual(3, !calledVar)
 ``` 
 
 We started by renaming the ```addAndSave``` function with a trailing ```'```. We
@@ -67,17 +67,17 @@ takes parameters and returns them when called, along withe count of times it was
 called.
 
 ``` fsharp
-type TestFakeResults() = 
-  member val timesCalled:Integer = 0
-  member val args: object list = []
+type TestFakeResults() =
+  member val timesCalled = 0 with get,set
+  member val args: obj list = [] with get,set
 
-let makeFake_OneArg () = 
-  let ref results = new TestFakeResults()
-  let fake = (fun p1 -> 
-                  results.args <- p1 :: args
-                  results.timesCalled <- timesCalled + 1
-                  p1)
-  (fake, results) 
+let makeFake_OneArg () =
+  let results = new TestFakeResults()
+  let fake = (fun p1 ->
+                  results.args <- p1 :: results.args
+                  results.timesCalled <- results.timesCalled + 1
+                  ())
+  (fake, results)
 ```
 
 The above code might be hard to comprehend at first! We have made a generic
@@ -94,7 +94,7 @@ let addAndSave_Test =
   let (fakeSave, fakeSaveCalling) = makeFake_OneArg()
   let result = addAndSave' fakeSave 1 2
   Assert.AreEqual(3, result)
-  Assert.AreEqual(3, fakeSaveCalling.args[0])
+  Assert.AreEqual(3, fakeSaveCalling.args.[0])
   Assert.AreEqual(1, fakeSaveCalling.timesCalled)
 ``` 
 
@@ -112,7 +112,7 @@ you might have wondered at my usage of a mutable class. Here are two alternates
 of ```makeFake_OneArg``` which use records, you can probably see why I switched:
 
 ``` fsharp
-type TestFakeResults = {timesCalled:Integer;args: object list}
+type TestFakeResults = {timesCalled:int, args obj list}
 
 // Using Record Alternate 1
 let makeFake_OneArg_RecordAlternate1 () = 
