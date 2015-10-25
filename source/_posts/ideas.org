@@ -1,6 +1,6 @@
-# Programming Languages Are All Relative
+* Programming Languages Are All Relative
 
->>> You either die the hero, or live long enough to see yourself become the villian
+>>> You either die the hero, or live long enough to see yourself become the villain
 
 Can we agree that some programming languages are better suited to a task than
 others? A language that is the world's slowest at calculating equations is
@@ -12,20 +12,29 @@ currently working on my third revision to the safety ranking, it is a complex
 topic!)
 
 But calculation speed and code verbosity isn't the whole story. What about
-readabilty, library maturity, learning resources and effort to learn, speed to
+readability, library maturity, learning resources and effort to learn, speed to
 write, and cost to maintain? What about "business value per development hour"?
 Truly the "best language" would be the one that produces the most dollars per
 dollar spent across the entire lifetime of the project.
 
 Unfortunately, it is impossible to calculate the business value per dollar
-spent. Software is trivial to copy and easy to deliver. I posit that most
+spent. Software is trivial to copy and easy to deliver. I hypothesize that most
 successful projects succeed to due to luck, fashion, branding, or marketing
 rather than raw development speed. While some products are ruined from software
-that is too buggy or not as feature rich, plenty of inferior products thrive for
-reasons unrelated to the technical merits of the product itself.
+that is too buggy or are lacking features, plenty of inferior products thrive
+for reasons unrelated to the technical merits of the product itself.
 
 For most projects, does it matter if you can deliver a better product a month
-before your competitor? A year?
+before your competitor? A year? Or is it more likely that branding, sales,
+customer support, price, and fashion will dictate the market leader?
+
+Even the ability to innovate and develop new features quickly might not matter
+that much in industries where the cost to switch products is high. A slow,
+buggy, low feature system might still be better than the cost to switch to the
+new hotness.
+
+Programming languages, libraries, frameworks, and tools attempt to sell in this
+environment.
 
 * Safety Score
 ** Exceptions (checked, unchecked)
