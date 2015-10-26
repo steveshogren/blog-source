@@ -1,20 +1,20 @@
-module Tests
+module T.Tests
 
 let asserter (x:obj) (y:obj) = if x = y then printf "." else printf "F (%A != %A)" x y
 
 let saveSum x = printfn "called save: %A" x
 
 
-type TestFakeRecord = {timesCalled:int, args obj list}
+type TestFakeRecord = {timesCalled:int;
+                       args: obj list}
 
 let makeFake_OneArg () =
-  let timesCalled = ref 0
-  let args : obj list = ref []
+  let result = ref {TestFakeRecord.timesCalled = 0; args = []}
   let fake = (fun p1 ->
-                  args := p1 :: !args
-                  timesCalled := !timesCalled + 1
-                  ())
-  (fake, (fun () -> {timesCalled=!timesCalled; args = !args}))
+              result := {timesCalled = (!result).timesCalled + 1;
+                         args = p1 :: (!result).args}
+              ())
+  (fake, (fun () -> !result))
 
 let addAndSave' saveSum x y =
   let sum = x + y
@@ -27,7 +27,7 @@ let addAndSave_Test() =
   let (fakeSave, fakeSaveCalling) = makeFake_OneArg()
   let result = addAndSave' fakeSave 1 2
   asserter 3 result
-  asserter 3 fakeSaveCalling.args.[0]
-  asserter 1 fakeSaveCalling.timesCalled
+  asserter 3 (fakeSaveCalling().args.[0])
+  asserter 1 (fakeSaveCalling().timesCalled)
 
 addAndSave_Test()

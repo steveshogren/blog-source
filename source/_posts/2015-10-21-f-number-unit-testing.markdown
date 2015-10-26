@@ -1,12 +1,10 @@
 ---
 layout: post
-title: "F# Unit Testing"
+title: "SimpleMock in F#"
 date: 2015-10-21 16:41
 comments: true
 categories: 
 ---
-
-# Simple F# Unit Test Mocking
 
 If you are considering using F#, you might be curious how to handle unit test
 mocking, especially if you want to use both modules and classes. In a language
@@ -15,7 +13,7 @@ injection on a class. These "entry points" allow for a unit test to replace a
 real dependency with a test-only replacement.
 
 I previously posted an example that shows a much simpler way to inject
-dependencies called the SimpleMock pattern. The SimpleMock pattern can also be
+dependencies called the [SimpleMock pattern](http://deliberate-software.com/simplemock-unit-test-mocking/). The SimpleMock pattern can also be
 used in F#, even if you are only using modules.
 
 ## SimpleMock in F# Modules
@@ -33,15 +31,13 @@ let addAndSave x y =
 ``` 
 
 To apply the SimpleMock pattern, we can use argument currying by adding a simple
-function "wrapper".
+function wrapper.
 
 ``` fsharp
-// (Integer -> unit) -> Integer -> Integer -> Integer
 let addAndSave' saveSum x y = 
   let sum = x + y
   saveSum sum
   sum
-// Integer -> Integer -> Integer
 let addAndSave = addAndSave' DBModule.saveSum
 
 // Test code
@@ -102,43 +98,45 @@ The TestFakeResults can return information about the way it was called,
 including the list of all arguments. If we felt we needed the extra
 expressiveness, we could also use a mocking library like RhinoMocks or Moq. The
 TestFakeResults and its constructor are not essential to the pattern. The most
-important part is learning to unit test in F# with confidance.
+important part is learning to unit test in F# with confidence.
 
 
 # Double Bonus: When to Use a Class Instead of a Record
 
-When I first wrote this post, I used a record instead of a class for the ```TestFakeResults``` type. If you are bit by the functional programming bug,
+When I first wrote this post, I used a record instead of a class for the ```TestFakeResults``` type. If you have been bitten by the functional programming bug,
 you might have wondered at my usage of a mutable class. Here are two alternates
-of ```makeFake_OneArg``` which use records, you can probably see why I switched:
+of ```makeFake_OneArg``` which use records. You can probably see why I switched to a class:
 
 ``` fsharp
 type TestFakeResults = {timesCalled:int, args obj list}
 
 // Using Record Alternate 1
 let makeFake_OneArg_RecordAlternate1 () = 
-  let mutable ref timesCalled = 0
-  let mutable ref args : object list = []
-  let fake = (fun p1 -> 
-                  args <- p1 :: args
-                  timesCalled <- timesCalled + 1
-                  p1)
-  (fake, (fun () -> {timesCalled=timesCalled; args = args})) 
+  let t = ref 0
+  let a : obj list ref = ref []
+  let fake = (fun p1 ->
+                  a := p1 :: !a
+                  t := !t + 1
+                  ())
+  (fake, (fun () ->
+                {TestFakeRecord.timesCalled = !t;
+                 args = !a}))
 
 // Using Record Alternate 2
 let makeFake_OneArg_RecordAlternate2 () = 
-  let mutable ref result = {timesCalled=0; args = []}
-  let fake = (fun p1 -> 
-                  result <- {result with args = p1 :: result.args}
-                  timesCalled <- {result with timesCalled = result.timesCalled + 1}
-                  p1)
-  (fake, result) 
+  let result = ref {TestFakeRecord.timesCalled = 0; args = []}
+  let fake = (fun p1 ->
+              result := {timesCalled = (!result).timesCalled + 1;
+                         args = p1 :: (!result).args}
+              ())
+  (fake, (fun () -> !result))
 ```
 
-The only way to use a record is to either delay its construction via a lambda
-which must be executed by the test code, or mutate the record on each fake call.
-Both are complex: what we need is a mutable data structure which we can access
-via a reference. A record is not that. We can approximate it using tricks, but
-ultimately I find both alternatives to be too complex to justify their use.
-Sometimes a mutable data structure is the best choice to solve your problem
-efficiently. The power of F# is that it gives us the ability to choose the best
-tool for the job: records for immutablity, classes for mutablity.
+The only way to use a record is to delay its construction via a lambda which
+must be executed by the test code. Both are complex: what we need is a mutable
+data structure which we can access via a reference. A record is not that. We can
+approximate it using tricks, but ultimately I find both alternatives to be too
+complex to justify their use. Sometimes a mutable data structure is the best
+choice to solve your problem efficiently. The power of F# is that it gives us
+the ability to choose the best tool for the job: records for immutability,
+classes for mutability.
