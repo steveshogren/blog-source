@@ -100,7 +100,6 @@ expressiveness, we could also use a mocking library like RhinoMocks or Moq. The
 TestFakeResults and its constructor are not essential to the pattern. The most
 important part is learning to unit test in F# with confidence.
 
-
 # Double Bonus: When to Use a Class Instead of a Record
 
 When I first wrote this post, I used a record instead of a class for the ```TestFakeResults``` type. If you have been bitten by the functional programming bug,

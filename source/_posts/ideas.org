@@ -1,3 +1,32 @@
+# Programming Languages Are All Relative
+
+>>> You either die the hero, or live long enough to see yourself become the villian
+
+Can we agree that some programming languages are better suited to a task than
+others? A language that is the world's slowest at calculating equations is
+objectively the slowest at its task. A language that requires 100x more lines of
+code to accomplish its task is objectively 100x more wordy. It is possible to
+measure and quantify speed and verbosity. If you design a good enough rubric,
+you can even measure something more complex, like language safety. (I am
+currently working on my third revision to the safety ranking, it is a complex
+topic!)
+
+But calculation speed and code verbosity isn't the whole story. What about
+readabilty, library maturity, learning resources and effort to learn, speed to
+write, and cost to maintain? What about "business value per development hour"?
+Truly the "best language" would be the one that produces the most dollars per
+dollar spent across the entire lifetime of the project.
+
+Unfortunately, it is impossible to calculate the business value per dollar
+spent. Software is trivial to copy and easy to deliver. I posit that most
+successful projects succeed to due to luck, fashion, branding, or marketing
+rather than raw development speed. While some products are ruined from software
+that is too buggy or not as feature rich, plenty of inferior products thrive for
+reasons unrelated to the technical merits of the product itself.
+
+For most projects, does it matter if you can deliver a better product a month
+before your competitor? A year?
+
 * Safety Score
 ** Exceptions (checked, unchecked)
 ** variable shadowing 

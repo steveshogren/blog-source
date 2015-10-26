@@ -31,9 +31,9 @@ namespace with a new definition.
   (+ 1 (get-current-id connection)))
 
 (testing "next-id"
-  ;; bind get-current-id to a function that always returns 4 
+  ;; bind get-current-id to a lambda that always returns 4 
   (with-redefs [get-current-id (fn [_] 4)]
-    (is (= (next-id "fake connection")
+    (is (= 5 (next-id nil)))))
            
 ```
 
