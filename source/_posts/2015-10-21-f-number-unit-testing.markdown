@@ -1,9 +1,10 @@
 ---
 layout: post
-title: "SimpleMock in F#"
+title: "F# Unit Testing with SimpleMock"
 date: 2015-10-21 16:41
 comments: true
 categories: 
+- Technical Skills
 ---
 
 If you are considering using F#, you might be curious how to handle unit test

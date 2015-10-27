@@ -1,0 +1,28 @@
+<section>
+  <h1>Top Posts</h1>
+  <ul id="recent_posts">
+    <li class="post">
+      <a href="{{ root_url }}/ego-driven-development/">Ego Driven Development</a>
+    </li>
+    <li class="post">
+      <a href="{{ root_url }}/programming-language-safety-algorithm/">Language Safety Score</a>
+    </li>
+
+    <li class="post">
+      <a href="{{ root_url }}/intro-to-macros/">Intro To Macros</a>
+    </li>
+    <li class="post">
+      <a href="{{ root_url }}/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    {% for post in site.posts limit: site.recent_posts %}
+      <li class="post">
+        <a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>

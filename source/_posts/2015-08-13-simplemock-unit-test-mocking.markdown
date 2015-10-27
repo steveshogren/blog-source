@@ -16,7 +16,33 @@ SimpleMock works in any language with closures that can be passed around by
 reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
 Python. I'm sure you can think of others.
 
-# Benefits
+## Example: 
+
+Here is a brief (if a bit silly) example of the final pattern:
+
+``` csharp
+public class LineCounter {
+    internal Func<string, IEnumerable<string>> _readLines = File.ReadLines;
+
+    public string CountLines(string filename) {
+        return _readLines(filename).Count();
+    }
+}
+
+/// Test Code
+[TestCase]
+public void TestLineCounter () {
+    var sut = new LineCounter();
+    // "SimpleMock" of File.ReadLines
+    sut._readLines = (string x) => new List<string>{"test", "that"};
+
+    var result = sut.CountLines("test");
+
+    Assert.AreEqual(2, result);
+}
+```
+
+## Benefits
 
 + Reduced boilerplate
 + Saves interfaces for real polymorphism
@@ -34,32 +60,7 @@ If you aren't familiar with the normal pattern of unit test mocking using
 interfaces, dependency injection, and mock libraries, scroll down to "The
 Non-SimpleMock Way" at the end of the post.
 
-# Example: 
-
-Here is a brief (if a bit silly) example of the final pattern:
-
-``` csharp
-public class LineCounter {
-    internal Func<string, IEnumerable<string>> _readLines = File.ReadLines;
-
-    public string CountLines(string filename) {
-        return _readLines(filename).Count();
-    }
-}
-
-/// Test Code with just inline lambdas
-[TestCase]
-public void TestLineCounter () {
-    var sut = new LineCounter();
-    sut._readLines = (string x) => new List<string>{"test", "that"};
-
-    var result = sut.CountLines("test");
-
-    Assert.AreEqual(2, result);
-}
-```
-
-# SimpleMock Pattern
+## SimpleMock Pattern
 
 The SimpleMock pattern is aptly named. 
 
@@ -68,7 +69,7 @@ The SimpleMock pattern is aptly named.
 3. Write Better Abstractions
 
 
-# Step One: Replace Test-Only Interfaces With Functions
+## Step One: Replace Test-Only Interfaces With Functions
 
 My examples are in C# because that is what I got paid to write today - it is
 freshest in memory. C# has an incredible ability to create and pass around
@@ -95,7 +96,7 @@ public class Translator {
     }
 }
 
-/// Test Code with just lambdas
+/// Test Code
 [TestCase]
 public void TestCurrentTimeTranslator () {
     var now = DateTime.Now;
@@ -114,7 +115,7 @@ party mocking libraries, or the relatively complicated setup logic. Instead we
 can simply inject the lambda at runtime, replacing that pointer. We didn't need
 the whole interface, really we just needed the simple signature of the function.
 
-# Step 2: Define Dependencies Inline
+## Step 2: Define Dependencies Inline
 
 We can take it even a step further. Why use constructor injection at all? Since
 all we really want is a single mutable dispatch table row, why not just make it
@@ -129,7 +130,7 @@ public class Translator {
     }
 }
 
-/// Test Code with just inline lambdas
+/// Test Code
 [TestCase]
 public void TestCurrentTimeTranslator () {
     var now = DateTime.Now;
@@ -153,7 +154,7 @@ need it, simply go back to injecting the interface in the constructor or by
 passing it into the function itself. In practice, I have found this is needed
 very rarely, making the SimpleMock pattern a better tool to reach for first.
 
-# Step 3: Write Better Abstractions
+## Step 3: Write Better Abstractions
 
 Lastly, SimpleMock actually promotes better designs. For example, a coworker was
 writing some tests today and ran into a complicated situation. Take the
@@ -268,7 +269,7 @@ then SimpleMock is the garden shears. Sometimes the chainsaw is the only tool
 for the job, and that is fine. But for most work around the yard, you can leave
 the chainsaw in the shed.
 
-# Conclusion
+## Conclusion
 
 I’ve shown how you can really simplify your code with SimpleMock. The dispatch
 row is clear and easy to read. We have removed some third party mocking
@@ -278,7 +279,7 @@ breeze. The result: much simpler code, just as easy to test.
 
 Thanks to Shuwei Chen for helping me put this together!
 
-# The Non-SimpleMock Way
+## The Non-SimpleMock Way
 
 If you are familiar with unit test mocking with interfaces, this part is
 probably boring. Feel free to skip.
@@ -338,7 +339,7 @@ want to test. To test it, we mock the interface, creating a different concrete
 class at test runtime which implements that interface. We can setup that mock to
 respond with anything, which we use for assertions.
 
-# What's Wrong with the Non-SimpleMock Way?
+## What's Wrong with the Non-SimpleMock Way?
 
 The first problem is we have created a whole interface just for testing.
 Interfaces are for polymorphism, but we don't really need polymorphism for this
