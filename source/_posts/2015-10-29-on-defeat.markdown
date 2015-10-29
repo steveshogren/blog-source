@@ -87,10 +87,11 @@ this wasn't a test, I was determined to be at my most professional and finish
 with my head held high.
 
 Five developers walk out before I can finish my first sentence. One of the
-remaining interviewers asks if I could live code them a web scraper in any
-language instead of the presentation. I turn my laptop around (still no
-projector) and ask if PHP is acceptable. They are a Python shop, and PHP is the
-closest to what they use that I am comfortable using when this nervous.
+remaining six interviewers looks embarrassed and asks if I could live code them
+a web scraper in any language instead of the presentation. I turn my laptop
+around (still no projector) and ask if PHP is acceptable. They are a Python
+shop, and PHP is the closest to what they use that I am comfortable using when
+this nervous.
 
     "PHP? Gross. I suppose if it is all you know..."
 
