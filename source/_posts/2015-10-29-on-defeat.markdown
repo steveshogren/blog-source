@@ -8,6 +8,8 @@ categories:
 published: true
 ---
 
+(Check out my in-progress book: [Convincing Coworkers](https://leanpub.com/convincingcooworkers))
+
 One day, I went into an interview, and I was humiliated.
 
 ### The Setup
@@ -30,11 +32,6 @@ Syndrome, I keenly knew that there were things I didn't know. I'm mostly self
 taught, so a lot of common CS concepts felt alien. I was waking up before work
 and teaching myself algorithms, lisps, and math.
 
-At the time, I did not enjoy my job. I felt like my vast talents were wasted,
-and I was determined to get what I deserved. My arrogance pushed me to
-unhappiness at my job and to tirelessly struggle to be better than everyone else
-around me.
-
 Enter Company A.
 
 I flew through the phone screen "this is the best phone screen we've seen!" Of
@@ -51,13 +48,13 @@ minutes early.
 
     "You are 25 minutes late."
 
-What?! I have the email saying 9:30! No matter, I can salvage this. I walk into
-a conference room with a dozen people sitting around a table looking bored and
-pissed.
+What?! I explain that I have the email saying 9:30! No matter, "hurry, they are
+waiting!" Maybe I can salvage this. I walk into a conference room with a dozen
+people sitting around a table looking bored and pissed.
 
     "Let's see your presentation."
 
-I start to open up my laptop.
+I start to open up my laptop. Meanwhile they start to joke around to each other:
 
     "Oh, wow, Linux, what is this, 2003? I'd hoped I'd never have to see the
     grub boot screen again! Can't you afford a real machine?"
@@ -69,11 +66,11 @@ clothes.
 
     "A suit, classic, where are you interviewing after this, a sales job?"
 
-I start presenting about the 2D physics engine I'd written for my game. One of
-the most interesting parts to me was how I'd first written it without any unit
-testing, following just Clean Code practices. I then re-wrote it using heavy
-TDD. The design turned out very different both times, which I thought was
-interesting to see how TDD had influenced the design.
+I start presenting about the 2D physics engine I'd written as a learning project
+for my game. One of the most interesting parts to me was how I'd first written
+it without any unit testing, following just Clean Code practices. I then
+re-wrote it using heavy TDD. The design turned out very different both times,
+which I thought was interesting to see how TDD had influenced the design.
 
 About five minutes in, I am cut off:
 
@@ -172,3 +169,5 @@ coworkers and friends at meetups about your company? Will they talk about
 feeling respected, and how they hope to get the chance to work with you one day?
 Or will they talk of a group of self-righteous jerks who abuse their power to
 make others feel small? You can break the cycle.
+
+(Check out my in-progress book: [Convincing Coworkers](https://leanpub.com/convincingcooworkers))
