@@ -67,7 +67,7 @@ joking and laughing to each other at my choice of clothes.
 
     "A suit, classic, where are you interviewing after this, a sales job?"
 
-I roll with it, some joke about "styling". I start presenting about the 2D
+I roll with it, make some joke about "styling". I start presenting about the 2D
 physics engine I'd written as a learning project for my game. One of the most
 interesting parts to me was how I'd first written it without any unit testing,
 following just Clean Code practices. I then re-wrote it using heavy TDD. The
