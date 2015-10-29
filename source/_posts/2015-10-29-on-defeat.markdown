@@ -8,7 +8,8 @@ categories:
 published: true
 ---
 
-(Check out my in-progress book: [Convincing Coworkers](https://leanpub.com/convincingcooworkers))
+(If you feel like you have all these great ideas but no one will listen, check
+out my in-progress book: [Convincing Coworkers](https://leanpub.com/convincingcooworkers))
 
 One day, I went into an interview, and I was humiliated.
 
@@ -170,4 +171,5 @@ feeling respected, and how they hope to get the chance to work with you one day?
 Or will they talk of a group of self-righteous jerks who abuse their power to
 make others feel small? You can break the cycle.
 
-(Check out my in-progress book: [Convincing Coworkers](https://leanpub.com/convincingcooworkers))
+(If you feel like you have all these great ideas but no one will listen, check
+out my in-progress book: [Convincing Coworkers](https://leanpub.com/convincingcooworkers))
