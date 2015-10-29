@@ -21,9 +21,9 @@ tested state completely on my own.
 
 I'd shipped Java, PHP, Perl, C#, and VB.NET, and I hadn't been programming more
 than a couple years. My first job, they'd made me a team lead over some very
-senior developers within a year my hire date. I was learning Clojure and Common
-Lisp, and had just shipped an Android game I made entirely alone (including the
-2D physics engine).
+senior developers within a year of my hire date. I was learning Clojure and
+Common Lisp, and had just shipped an Android game I made entirely alone
+(including the 2D physics engine).
 
 I thought I was incredible. Yet, due to an overwhelming sense of Imposter
 Syndrome, I keenly knew that there were things I didn't know. I'm mostly self
