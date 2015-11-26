@@ -91,14 +91,11 @@ requirements of the business with high quality code.
 
 The development manager holds no technical authority over the development staff,
 nor handles prioritization and assignment of work. The work priorities are to be
-handled by the business experts. Work is assigned to the team that forms around
-it, not an individual.
+handled by the business experts. Work is assigned to the development team, which
+uses rotation to ensure a number of developers see the project.
 
 Additionally development managers interact with recruiters and coordinate HR
 related functions and documentation.
-
-
-
 
 (All these great ideas, but no one is listening? Check out my
 book: [Convincing Coworkers](https://leanpub.com/convincingcoworkers))
