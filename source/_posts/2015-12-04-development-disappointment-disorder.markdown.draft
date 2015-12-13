@@ -5,14 +5,13 @@ date: 2015-12-04 06:57:55 -0500
 comments: true
 categories: 
 - Meta Game
-published: true
+published: false
 ---
 
-
 You just finished this really hard feature. It's taken you a lot longer than
-expected, because when it was a lot harder than anyone realized. Not only that,
-but the feature wasn't clearly explained, so you spent a lot of time churning on
-the actual requirements. Despite all the confusion, iteration, and technical
+expected. The whole thing was a lot harder than anyone realized. Not only that,
+but the feature wasn't clearly explained, so you lost time churning on the
+actual requirements. Despite all the confusion, iteration, and technical
 challenges, you managed to get it working! You look back, and realize how much
 you have learned and grown.
 
