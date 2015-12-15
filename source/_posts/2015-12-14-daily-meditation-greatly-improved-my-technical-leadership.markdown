@@ -36,26 +36,26 @@ self-worth were so tied into "my" campaigns that I wasn't able to clearly hear
 criticism. When people pointed out legitimate concerns or weaknesses, I would
 get embarrassed and take it as a personal failure.
 
-From the very beginning, my current idea had been poorly executed. After
-researching the new technology for a long time, I felt like I saw a place where
-it could solve some of our needs. Instead of carefully writing out a proposal, I
-"half-jokingly" brought it up whenever I could. When the listeners didn't
-immediately react positively, I quickly retracted the idea, "just kidding". Over
-weeks I dropped not-so-subtle hints, "this would be better with...", or, "we
-wouldn't have this problem if...". Instead of convincing anyone of anything, I
-just broadcasted to everyone how insecure I felt about the issue. Everyone could
-clearly see that I cared, but I was too afraid to put myself out there and make
-a serious suggestion. For months nothing changed, and I felt more and more
-bitter that "my idea" wasn't being listened to. In reality, I hadn't even made a
-serious suggestion yet!
+I could see, from the very beginning, my current "campaign" had been poorly
+executed. After researching the new technology for a long time, I felt like I
+saw a place where it could solve some of our needs. Instead of carefully writing
+out a proposal, I "half-jokingly" brought it up whenever I could. When the
+listeners didn't immediately react positively, I quickly retracted the idea,
+"just kidding". Over weeks I dropped not-so-subtle hints, "this would be better
+with...", or, "we wouldn't have this problem if...". Instead of convincing
+anyone of anything, I just broadcasted to everyone how insecure I felt about the
+issue. Everyone could clearly see that I cared, but I was too afraid to put
+myself out there and make a serious suggestion. For months nothing changed, and
+I felt more and more bitter that "my idea" wasn't being listened to. In reality,
+I hadn't even made a serious suggestion yet!
 
 Eventually, the people around me started to listen and research the new
 language. They agreed it really did solve a need we had. After a while, enough
 people got on board that we started using it more. Even then, I held tightly to
 "my idea", afraid that it would prove to be a failure. When someone ran into
-issues, I would get defensive. While never outright rude, I clearly took any
-criticism personally, no matter how legitimate. I'd tightly coupled my ego to my
-ideas, and I always had.
+issues, I would get defensive. Even though I tried to keep my emotions in check,
+I clearly took any criticism of the language as if it was a personal failing, no
+matter how legitimate. I'd tightly coupled my ego to my ideas, and I always had.
 
 After a few months of meditating, this idea rocked my world. My negative
 emotions came from a realization that my actions were not in line with my
@@ -80,14 +80,19 @@ I understand where it comes from, and how to move forward. I can let my ideas
 go. I can consider ideas critically. I can make changes and adjustments if the
 ideas are not working.
 
-I recently decided to write up what I've been learning. I wanted to always be
-able to look back and remember what I've learned. That write-up was the seed for
-my new book, Convincing Coworkers. I explain the lessons learned from
-implementing a half dozen major technical changes, and how I learned to lead
-without letting my ego cloud my thinking.
+This summer I decided to write up my learning. I wanted to always be able to
+look back and remember these important lessons. My write-up was the seed for the
+book [Convincing Coworkers](https://leanpub.com/convincingcoworkers). I explain
+the lessons learned from implementing a half dozen major technical changes, and
+how I learned to lead without letting my ego cloud my thinking.
 
-I highly recommend a practice of daily meditation for anyone wanting to become a
-more effective leader. Meditation gives your mind a chance to deeply consider
-your actions, to reflect on what and why you act. Meditating allows your mind to
-creatively look for ways to improve itself. While rarely comfortable, this
-process can have incredible benefits.
+If you want to become a more effective leader, I highly recommend a practice of
+daily meditation. Meditation gives your mind a chance to deeply consider your
+actions and values. It allows your subconscious to reflect on what and why you
+act.
+
+Not every one will struggle from the same issues as me. Every leader has a
+different set of challenges and situations. Meditation lets your mind analyze
+your unique weaknesses and strengths, coming up with a tailored perspective.
+Meditating allows your mind to creatively look for ways to improve itself. While
+rarely comfortable, this process can have incredible benefits.
