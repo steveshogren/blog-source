@@ -102,20 +102,10 @@ rarely comfortable, this process can have incredible benefits.
 ## Appendix: "I'm uncomfortable with the connotations of meditation"
 
 You may feel uncomfortable with meditation because of its current strong
-associations with Indian religions. On further research, I found that meditation
-is something that has been taught and practiced by most major religions.
-Buddhism, Catholicism, Christianity, Hinduism, Islam, Judaism, and Taoism all
-have rich meditation traditions. While some religions have stopped teaching
-meditation in the last hundred years, it does not mean it is inappropriate to
-practice it. If you are religious, chances are you will be reconnecting with
-traditions that were practiced by your religion for hundreds of generations.
-
-Additionally, meditation is not inherently religious. I consider meditation like
-an exercise routine for the mind. If you are religious, and exercise your body
-as a form of religious expression, it is a religious practice. If you are
-not, and exercise to improve your health and well-being, it is a secular
-practice. Simple as that. Meditation is a tool, and the tool wielder determines
-its use.
-
-Don't let a fear of the connotations of meditation stop you from experiencing
-improved leadership, creativity, and focus!
+associations with Indian religions. Meditation is not inherently religious. I
+consider meditation like an exercise routine for the mind. If you are religious,
+and exercise your body as a form of religious expression, it is a religious
+practice. If you are not, and exercise to improve your health and well-being, it
+is a secular practice. Simple as that. Meditation is a tool, and the tool
+wielder determines its use. Don't let a fear of the connotations of meditation
+stop you from experiencing improved leadership, creativity, and focus!
