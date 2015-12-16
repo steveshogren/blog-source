@@ -8,7 +8,7 @@ categories:
 published: true
 ---
 
-A couple years ago, a coworker told me a success story about daily meditation.
+A couple years ago, a coworker told me a success story about mindful meditation.
 He explained how his wife took a class that required an hour of daily meditation
 for a whole month. He reported that she found it uncomfortable, but the effects
 were astounding. She claimed to feel more relaxed, more focused, and more
@@ -16,10 +16,12 @@ were astounding. She claimed to feel more relaxed, more focused, and more
 trying to write for years, and started a business. After that business failed,
 she started another, this time successfully.
 
-Immediately convinced, I started by listening to a guided meditation on YouTube
-and phone apps. After a couple days of that, I started just doing breathing
-exercises while sitting listening to rain sounds. I made a habit of doing it for
-about an hour every day on my lunch break. A few months later, I hated it.
+Immediately convinced, I started by listening to guided
+[mindfulness meditations](https://en.wikipedia.org/wiki/Mindfulness#Mindfulness_meditation)
+on YouTube and [phone apps](https://www.headspace.com/science). After a couple
+weeks of that, I started doing breathing exercises on my own while sitting
+listening to rain sounds. I made a habit of doing it for about an hour every day
+on my lunch break. A few months later, I hated it.
 
 For whatever reason, after each session I would feel very uncomfortable. I would
 be confronted with emotions that made me feel worthless and embarrassed. My mind
@@ -96,3 +98,21 @@ different set of challenges and situations. Meditation lets your mind analyze
 your unique weaknesses and strengths, coming up with a tailored perspective.
 Meditating allows your mind to creatively look for ways to improve itself. While
 rarely comfortable, this process can have incredible benefits.
+
+## "I'm uncomfortable with meditation for religious/secular reasons"
+
+You may feel uncomfortable with meditation because of its current strong
+associations with Buddhism. On further research, I found that meditation is
+something that has been taught and practiced by most major religions. Buddhism,
+Catholicism, Christianity, Hinduism, Islam, and Judaism all have strong
+meditation traditions. While some religions have stopped teaching meditation in
+the last couple generations, it does not mean it is wrong to practice it. You
+will be reconnecting with traditions that were practiced by your religion for
+hundreds of generations.
+
+Additionally, meditation does not have to have a religious connotation. I
+consider meditation like an exercise routine for the mind. If you are religious,
+and exercise as a form of religious expression, then it is a religious practice.
+If you are not, and exercise to improve your health and well-being, it is not a
+religious practice. Simple as that. Meditation is a tool, and the tool wielder
+determines its use.
