@@ -104,8 +104,9 @@ rarely comfortable, this process can have incredible benefits.
 You may feel uncomfortable with meditation because of its current strong
 associations with Indian religions. Meditation is not inherently religious. I
 consider meditation like an exercise routine for the mind. If you are religious,
-and exercise your body as a form of religious expression, it is a religious
-practice. If you are not, and exercise to improve your health and well-being, it
-is a secular practice. Simple as that. Meditation is a tool, and the tool
-wielder determines its use. Don't let a fear of the connotations of meditation
-stop you from experiencing improved leadership, creativity, and focus!
+and exercise your body as a form of religious expression, exercise is a
+religious practice. If you are not religious, and you exercise to improve your
+health and well-being, exercise is a secular practice. Simple as that.
+Meditation is a tool, and the tool wielder determines its use. Don't let a fear
+of the connotations of meditation stop you from experiencing improved
+leadership, creativity, and focus!
