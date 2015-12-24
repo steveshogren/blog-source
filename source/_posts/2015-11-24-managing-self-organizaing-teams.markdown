@@ -16,8 +16,8 @@ expectations.
 
 Each individual is expected to work a strict 40 hour week. You should
 confidently leave at eight hours sharp. Overtime in our office is not considered
-a virtue. The negative side-effects losing our business time and money over the
-long term. Overtime for the sake of "signaling to management" is not rewarded.
+a virtue. The negative side-effects over the long term lose our business time
+and money. Overtime for the sake of "signaling to management" is not rewarded.
 You are expected to come in and work as hard as you can such that you are "done"
 at the end of an eight hour day and could perform no additional effort. In the
 rare event that overtime is required, it will be clearly stated and have clearly
@@ -44,10 +44,9 @@ multi-session refactoring is acceptable, but should have clear end goals.
 
 The individual is expected to mentor every other developer in all areas
 technical, social, and collaborative. No one is exempt from the duty of gently
-correcting another who is incorrect. Everyone is expected to take correction or
-suggestions seriously, regardless of their source. If the most junior developer
-corrects the most senior, the most senior is expected to treat it as seriously
-as possible.
+correcting another. Everyone is expected to take correction or suggestions
+seriously, regardless of their source. If the most junior developer corrects the
+most senior, the most senior is expected to treat it seriously.
 
 You are expected to behave in a manner fitting for a professional. Profanity,
 coarse joking, or sexual innuendo are commonly considered to be inappropriate
@@ -55,17 +54,34 @@ behavior for an American professional. The individual is expected to call out
 their teammates for such behavior with a firm comment immediately, e.g. "that is
 inappropriate for a professional."
 
-Retrospectives are mandatory, as they are the primary way for the team to
-improve and communicate issues. If you do not approve of the format or the
-frequency, convince the team to make a change.
+The more experienced the developer, the more they are expected to demonstrate
+these tenants. A less experienced developer is afforded more obstinance and
+single-mindedness, but the most experienced are expected to weigh every option
+and lead by example in every way.
+
+Leadership is driven through consensus. If a developer wishes to make a change,
+they must build consensus with the team and get a majority vote. If a majority
+vote cannot be made, the onus is on the individual to modify their suggestion to
+make it more acceptable or drop the suggestion.
+
+### Development Team Expectations
+
+The most powerful tool we have are retrosepectives. Retrospectives are
+mandatory, as they are the primary way for the team to improve and communicate
+issues. If you do not approve of the format or the frequency, convince the team
+to make a change.
 
 Team formation and working agreements are decided on by the team, with the whole
 development staff providing insight. No new team may form without the consent of
-the development staff at large. The team's working agreements must adhere to the
-common goals of information sharing, training, high code quality, low defect
-rates, automated regression, and regular automated builds and deployment. Pair
-programming is not mandatory by a team, but can be replaced with alternate
-working agreements that are approved by the larger technical staff.
+the development staff at large. All teams must have working agreements that
+adhere to the goals of: information sharing, rapid training, high code quality,
+low defect rates, automated regression, and regular automated builds and
+deployment.
+
+The "default" method for every team should be pair programming and TDD. These
+are not mandatory, but can be replaced with alternate working agreements if
+approved by the larger technical staff. Any deviations from the default should
+be documented and reviewed regularly.
 
 ### Development Manager Expectations
 
@@ -90,7 +106,7 @@ handled by the business experts. Work is assigned to the development team, which
 is expected to organize around those proirities.
 
 Additionally development managers interact with recruiters and coordinate HR
-related functions and documentation.
-
-(All these great ideas, but no one is listening? Check out my
-book: [Convincing Coworkers](https://leanpub.com/convincingcoworkers))
+related functions and documentation. All work that infringes on the the time of
+the development staff should be handled by the development manager. Timesheets,
+vacation tracking, interaction with recruiters, and project managment should be
+kept from the development staff.
