@@ -1,12 +1,14 @@
 ---
 layout: post
-title: "Daily Meditation Improved My Technical Leadership"
+title: "How Daily Meditation Improved My Technical Leadership"
 date: 2015-12-14 07:50:38 -0500
 comments: true
 categories: 
 - Meta Game
 published: true
 ---
+
+{% img right emailImage /images/meditation.jpg 200 'meditation' 'meditation' %}
 
 A couple years ago, a coworker told me a success story about mindful meditation.
 He explained how his wife took a class that required an hour of daily meditation

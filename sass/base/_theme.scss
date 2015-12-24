@@ -8,14 +8,25 @@ $link-color-visited: adjust-color($link-color, $hue: 80, $lightness: -4) !defaul
 $link-color-active: adjust-color($link-color-hover, $lightness: -15) !default;
 
 // Main Section Colors
-$main-bg: #f8f8f8 !default;
-$page-bg: #252525 !default;
+//$main-bg: #f8f8f8 !default;
+$main-bg: white !default;
+//$page-bg: #252525 !default;
+$page-bg: white !default;
 $article-border: #eeeeee !default;
 
-$header-bg: #333 !default;
-$header-border: lighten($header-bg, 15) !default;
-$title-color: #f2f2f2 !default;
-$subtitle-color: #aaa !default;
+//$norm-bg: #f2f2f2 !default;
+$norm-bg: #white !default;
+$header-bg: white !default;
+$header-bg: $norm-bg !default;
+$title-color: #222 !default;
+$subtitle-color: #222 !default;
+
+/* $norm-bg: white !default; */
+
+/* $header-bg: #333 !default; */
+/* $header-border: lighten($norm-bg, 15) !default; */
+/* $title-color: #f2f2f2 !default; */
+/* $subtitle-color: #aaa !default; */
 
 $text-color: #222 !default;
 $text-color-light: #aaa !default;
@@ -24,7 +35,8 @@ $type-border: #ddd !default;
 /* Navigation */
 $nav-bg: #ccc !default;
 $nav-bg-front: image-url('noise.png') !default;
-$nav-bg-back: linear-gradient(lighten($nav-bg, 8), $nav-bg, darken($nav-bg, 11)) !default;
+//$nav-bg-back: linear-gradient(lighten($nav-bg, 8), $nav-bg, darken($nav-bg, 11)) !default;
+$nav-bg-back: white !default;
 $nav-color: darken($nav-bg, 38) !default;
 $nav-color-hover: darken($nav-color, 25) !default;
 $nav-placeholder: desaturate(darken($nav-bg, 10), 15) !default;
@@ -35,7 +47,8 @@ $nav-border-left: darken($nav-bg, 11) !default;
 $nav-border-right: lighten($nav-bg, 7) !default;
 
 /* Sidebar colors */
-$sidebar-bg: #f2f2f2 !default;
+/* $sidebar-bg: #f2f2f2 !default; */
+$sidebar-bg: white !default;
 $sidebar-link-color: $text-color !default;
 $sidebar-link-color-hover: $link-color-hover !default;
 $sidebar-link-color-active: $link-color-active !default;

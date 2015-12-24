@@ -63,3 +63,30 @@ td.tdname {
     color: white;
     font-size: 0.9em;
 }
+
+.bookclass {
+    border:1px solid #222 !important;
+}
+header {
+    text-align: center !important;
+}
+.search {
+    background-color: white !important; 
+}
+
+article header {
+    font-size: .75em !important;
+}
+@media only screen and (max-width: 480px){
+    article header {
+        padding: .5em !important;
+        margin: .5em !important;
+        font-size: .5em !important;
+        line-height: .5em !important;
+    }
+    .emailImage{
+        height:auto !important;
+        max-width:600px !important;
+        width: 100% !important;
+    }
+}
