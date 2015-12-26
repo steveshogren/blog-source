@@ -85,8 +85,7 @@ happens because the person who makes the call on whether or not to implement
 agile falsely believes themselves (and the team) to be "good enough to not need
 it".
 
-* **Low <a href="http://www.joelonsoftware.com/articles/fog0000000043.html">Joel
-Test</a> score.** The Joel Test remains a great indicator of institutional ego.
+* **Low <a href="http://www.joelonsoftware.com/articles/fog0000000043.html">Joel Test</a> score.** The Joel Test remains a great indicator of institutional ego.
 A team that scores low on the Joel Test does so because someone along the way
 decided that, "nah, we don't need that here, we are special", and almost
 certainly they are not. I have yet to hear of a team with a legitimate reason
@@ -102,8 +101,7 @@ remaining in a positon where you are underpaid.
 Ego driven development is unfortunately self-reinforcing. Much of it is caused
 by individual pride, and usually it is driven by someone towards the top of the
 chain of command. While it can be a <a
-href="http://en.wikipedia.org/wiki/Virtuous_circle_and_vicious_circle#Vicious_circle_2">vicious
-cycle</a> trickling down, it is possible to break out of the loop by fighting
+href="http://en.wikipedia.org/wiki/Virtuous_circle_and_vicious_circle#Vicious_circle_2">vicious cycle</a> trickling down, it is possible to break out of the loop by fighting
 back against EDD with humility and an attitude of just doing what's best for the
 team. I have seen managers take tremendous crap from above, and never let a bit
 of it touch those below them. Those managers were heroes we all fought to
