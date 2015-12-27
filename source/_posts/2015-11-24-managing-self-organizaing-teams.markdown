@@ -4,7 +4,7 @@ title: "Managing Self-Organizaing Teams"
 date: 2015-11-24 07:39:03 -0500
 comments: true
 categories: 
-- Meta Game
+- meta game
 published: false
 ---
 

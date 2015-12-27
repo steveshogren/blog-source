@@ -4,13 +4,11 @@ title: "Six Unusual Reasons Why Clojure Is a Delight"
 date: 2015-02-09 11:36
 comments: false
 categories: 
-- Clojure
+- clojure
 - Technical Skills
-- Lisp
 - Unit Testing
 tags:
 - programming
-categories: 
 published: true
 ---
 

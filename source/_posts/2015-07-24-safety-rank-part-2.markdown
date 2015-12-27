@@ -5,7 +5,6 @@ date: 2015-07-24 10:13
 comments: true
 categories: 
 - Technical Skills
-- Meta Game
 type: post
 published: true
 ---

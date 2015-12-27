@@ -5,6 +5,7 @@ date: 2015-11-18 11:19:10 -0500
 comments: true
 categories: 
 - Meta Game
+- clojure
 published: true
 ---
 

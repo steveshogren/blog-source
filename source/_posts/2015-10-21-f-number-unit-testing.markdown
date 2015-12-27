@@ -4,6 +4,8 @@ title: "F# Unit Testing with SimpleMock"
 date: 2015-10-21 16:41
 comments: true
 categories: 
+- f#
+- unit testing
 - Technical Skills
 ---
 

@@ -4,7 +4,7 @@ title: "Interview Humiliation"
 date: 2015-10-29 19:01
 comments: true
 categories: 
-- Meta Game
+- meta game
 published: true
 ---
 
