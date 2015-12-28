@@ -4,6 +4,10 @@ title: "Language Safety Score Mark 2"
 date: 2015-07-24 10:13
 comments: true
 categories: 
+- haskell
+- clojure
+- f#
+- c#
 - Technical Skills
 type: post
 published: true
