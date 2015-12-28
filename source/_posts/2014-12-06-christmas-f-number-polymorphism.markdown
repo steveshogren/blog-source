@@ -5,6 +5,7 @@ date: 2014-12-06 13:37
 comments: true
 categories: 
 - Technical Skills
+- f#
 type: post
 status: publish
 published: true

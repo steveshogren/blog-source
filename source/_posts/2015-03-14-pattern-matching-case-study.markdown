@@ -5,6 +5,8 @@ date: 2015-03-14 09:42
 comments: true
 categories: 
 - Technical Skills
+- f#
+- c#
 type: post
 ---
 

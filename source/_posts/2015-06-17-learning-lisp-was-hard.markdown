@@ -4,6 +4,7 @@ title: "Learning Lisp Was Hard"
 date: 2015-06-17 07:02
 comments: true
 categories: 
+- clojure
 - Meta Game
 ---
 
