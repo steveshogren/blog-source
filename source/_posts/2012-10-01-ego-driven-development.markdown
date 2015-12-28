@@ -3,6 +3,7 @@ layout: post
 title: Ego Driven Development
 categories:
 - Meta Game
+- management
 status: publish
 type: post
 published: true

@@ -5,6 +5,8 @@ date: 2015-10-29 19:01
 comments: true
 categories: 
 - meta game
+- interviews
+- management
 published: true
 ---
 

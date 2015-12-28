@@ -5,6 +5,7 @@ date: 2015-11-24 07:39:03 -0500
 comments: true
 categories: 
 - meta game
+- management
 published: false
 ---
 

@@ -6,6 +6,7 @@ comments: true
 categories: 
 - Technical Skills
 - Meta Game
+- management
 type: post
 ---
 

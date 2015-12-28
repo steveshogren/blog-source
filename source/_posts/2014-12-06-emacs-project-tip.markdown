@@ -5,6 +5,7 @@ date: 2014-12-06 08:45
 comments: true
 categories: 
 - Technical Skills
+- emacs
 type: post
 published: true
 ---
