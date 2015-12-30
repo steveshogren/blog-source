@@ -29,34 +29,7 @@ The following code sample shows a real (but sanitized) class that was not unit
 tested. The dependencies are in-line, since there is no need to replace them for
 polymorphism or unit test mocking.
 
-```csharp
-
-public class User {
-    private string name;
-    private int id;
-    private boolean isCustomer;
-    private DateTime conversionDate = null;
-
-    public User(int id, string name) {
-        this.name = name;
-        this.id = id;
-        this.isCustomer = false;
-    }
-
-    public string MakeDropDownHtml() {
-        if(isCustomer == true) {
-            return String.Format("<option id="{0}">*{1}*</option>", id, name);
-        }
-        return String.Format("<option id="{0}">{1}</option>", id, name);
-    }
-
-    public void ConvertToCustomer() {
-        this.isCustomer = true;
-        this.conversionDate = DateTime.Now;
-        new Notifier().Broadcast("CustomerConverted", this.Id);
-    }
-}
-```
+{% include_code [Normal OOP] lang:csharp betterOOP-normal.cs %}
 
 This class is very difficult to test. Code that is hard to test also is harder
 to reuse. Consider the function ```MakeDropDownHtml```. It cannot be reused
@@ -67,105 +40,34 @@ called ```ConvertToCustomer```, which directly appears to broadcast a message.
 The tests become more complicated and harder to get right.
 
 The typical response to the above code is to inject the "verbs" via an
-interface. This is a worse design for three main reasons. One, interfaces are
-only used for unit testing, instead of for actual polymorphism. Two, neither
-function inside of the ```User``` class can be reused. Three, we've allowed
-testing concerns to mix in with our production code. Instead of polymorphism and
-code reuse, we have tight coupling and polluted code.
+interface. This produces very little benefit for three main reasons. One,
+interfaces become primarily used for unit testing, instead of for actual
+polymorphism. Two, neither function inside of the ```User``` class can be
+reused. Three, we've allowed testing concerns to mix in with our production
+code. Instead of polymorphism and code reuse, we have tight coupling and
+polluted code.
 
-```csharp
-pubic interface INotifier {
-    void Broadcast(String type, int id);
-}
-public class User {
-    private string name;
-    private int id;
-    private boolean isCustomer;
-    private DateTime conversionDate = null;
-    private INotifier notifier;
-
-    // INotifier interface only has one concrete implementor
-    // and is hard-coded inside the class
-    public User(int id, string name) : this(id, name, new Notifier()) {}
-
-    public User(int id, string name, INotifier n) {
-        this.name = name;
-        this.id = id;
-        this.isCustomer = false;
-        this.notifier = n;
-    }
-
-    public string MakeDropDownHtml() {
-        if(isCustomer == true) {
-            return String.Format("<option id="{0}">*{1}*</option>", id, name);
-        }
-        return String.Format("<option id="{0}">{1}</option>", id, name);
-    }
-
-    public void ConvertToCustomer() {
-        this.isCustomer = true;
-        this.conversionDate = DateTime.Now;
-        this.notifier.Broadcast("CustomerConverted", this.Id);
-    }
-}
-```
+{% include_code [OOP With DI] lang:csharp betterOOP-DI.cs %}
 
 Better Unit Testing Design
 
-* 1- Depend on Functions Over Interfaces
-* 2- Interface Nouns Over Verbs
-* 3- Separate Nouns From Verbs Via Interfaces
-* 4- Verbs Depend on Nouns
-* 5- Composition Over Inheritance
+* **Depend on Functions Over Interfaces** - Replace "verb" interfaces with
+  function signatures, exampled in the
+  [SimpleMock](http://deliberate-software.com/simplemock-unit-test-mocking/)
+  pattern. By relying on the function signature, we reduce test-only interfaces.
+* **Interface Nouns Over Verbs** - Instead of interfacing "verb" functions and
+  injecting them into a "noun" class, put interfaces on "nouns" and pass to
+  "verbs" which operate on interfaces only. This allows enormous reuse of code.
+  Any data structure that "fits" can re-use that behavior.
 
 Here is the same class, broken up for unit testing following the "Better Unit
 Testing Design"
 
-```csharp
-public interface DropDownItem {
-    string Name {get;}
-    int Id {get;}
-    boolean MarkPreferred {get;}
-}
-// 2- Interface Nouns Over Verbs
-// 3- Separate Nouns From Verbs Via Interfaces
-public class User : DropDownItem {
-    public string Name {get; private set;}
-    public int Id {get; private set;}
-    public boolean MarkPreferred {get { return this.IsCustomer;}}
-    public boolean IsCustomer;
-    public DateTime ConversionDate;
+{% include_code [Better OOP] lang:csharp betterOOP-better.cs %}
 
-    public User(int id, string name, boolean isCustomer, DateTime converstionDate) {
-        this.Name = name;
-        this.Id = id;
-        this.IsCustomer = isCustomer;
-        this.ConverstionDate = converstionDate;
-    }
-}
-
-public class HtmlHelpers {
-    // 3- Separate Nouns From Verbs Via Interfaces
-    // 4- Verbs Depend on Nouns
-    public string MakeDropDownHtml(DropDownItem item) {
-        if(item.MarkPreferred == true) {
-            return String.Format("<option id="{0}">*{1}*</option>", item.Id, item.Name);
-        }
-        return String.Format("<option id="{0}">{1}</option>", item.Id, item.Name);
-    }
-}
-
-public class CustomerConverter {
-    // 1- Depend on Functions Over Interfaces
-    // 5- Composition Over Inheritance
-    internal Action<string, int> broadcast = new Notifier().Broadcast;
-
-    // 4- Verbs Depend on Nouns
-    public void ConvertToCustomer(User user) {
-        user.IsCustomer = true;
-        user.ConversionDate = DateTime.Now;
-        broadcast("CustomerConverted", user.Id);
-    }
-}
-```
-
+While this inversion of nouns and verbs seems counter to traditional OOP advice,
+it is better suited to model the domain. In our example, a real life ```User```
+would not know how to convert itself to a ```Customer```. A ```User``` would not
+know they had to broadcast their updated status, or that the date is important
+to record. It even follows a more English pattern: "I want to convert a User"
+instead of, "I want to User convert".
