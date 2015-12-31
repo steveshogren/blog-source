@@ -1,4 +1,4 @@
-public interface IPotentialCustomer {
+public interface ISalesLead {
     string IsCustomer {set;}
     DateTime ConversionDate {set;}
     int Id {get;}
@@ -10,7 +10,7 @@ public interface IDropDownItem {
 }
 // 2- Interface Nouns Over Verbs
 // 3- Separate Nouns From Verbs Via Interfaces
-public class User : IDropDownItem, IPotentialCustomer {
+public class User : IDropDownItem, ISalesLead {
     public string Name {get; private set;}
     public int Id {get; private set;}
     public boolean MarkPreferred {get { return this.IsCustomer;}}
@@ -42,7 +42,7 @@ public class SalesRepresentative {
     internal Action<string, int> broadcast = new Notifier().Broadcast;
 
     // 4- Verbs Depend on Nouns
-    public void ConvertToCustomer(IPotentialCustomer c) {
+    public void ConvertToCustomer(ISalesLead c) {
         c.IsCustomer = true;
         c.ConversionDate = DateTime.Now;
         broadcast("CustomerConverted", c.Id);
