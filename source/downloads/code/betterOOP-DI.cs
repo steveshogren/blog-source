@@ -1,4 +1,4 @@
-pubic interface INotifier {
+public interface INotifier {
     void Broadcast(String type, int id);
 }
 public class User {
@@ -9,7 +9,8 @@ public class User {
     private INotifier notifier;
 
     // INotifier interface only has one concrete implementor
-    // and is hard-coded inside the class
+    // and is hard-coded inside the class, which is
+    // still a tight coupling, the interface is only used for testing
     public User(int id, string name) : this(id, name, new Notifier()) {}
 
     public User(int id, string name, INotifier n) {

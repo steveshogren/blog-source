@@ -1,33 +1,19 @@
 ---
 layout: post
-title: "Better OOP Design"
+title: "Improving SOLID OOP Design"
 date: 2015-12-28 17:43:04 -0500
 comments: true
 categories: 
 - technical skills
 ---
 
-Unit testing in C# forces a functional program architecture. The architecture
-and design of a unit-tested C# codebase will have more in common with a Lisp
-codebase than with a Java codebase. While this may seem unwanted, it actually is
-a indication of a design that is easier to test and understand.
+The SOLID patterns are not sufficient to design a reusable and easy to test code
+base. While still useful, a few minor adjustments make a huge difference in the
+ability to write truly reusable code.
 
-Let's first agree on the terms. Pulled from the Wikipedia page on [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming#Encapsulation).
-
-* **Encapsulation** - When a class disallows calling code from accessing
-  internal object data and forces access through methods only.
-* **Composition** - Objects can contain other objects in their instance
-  variables; this is known as object composition.
-* **Inheritance** - This allows classes to be arranged in a hierarchy that
-  represents "is-a-type-of" relationships. All the data and methods available to
-  the parent class also appear in the child class with the same names.
-* **Polymorphism** - Subtyping, a form of polymorphism, is when calling code can
-  be agnostic as to whether an object belongs to a parent class or one of its
-  descendants.
-
-The following code sample shows a real (but sanitized) class that was not unit
-tested. The dependencies are in-line, since there is no need to replace them for
-polymorphism or unit test mocking.
+The following code sample shows a real (but sanitized) class. The dependencies
+are in-line. The class clearly violates Single Responsibility Principle by
+mixing display logic with business logic.
 
 {% include_code [Normal OOP] lang:csharp betterOOP-normal.cs %}
 
@@ -54,11 +40,15 @@ Better Unit Testing Design
 * **Depend on Functions Over Interfaces** - Replace "verb" interfaces with
   function signatures, exampled in the
   [SimpleMock](http://deliberate-software.com/simplemock-unit-test-mocking/)
-  pattern. By relying on the function signature, we reduce test-only interfaces.
-* **Interface Nouns Over Verbs** - Instead of interfacing "verb" functions and
+  pattern. By relying on the function signature, we reduce test-only interfaces
+  and allow the code to have only the functions it needs, rather than everything
+  from the interface.
+* **Interface Nouns Before Verbs** - Instead of interfacing "verb" functions and
   injecting them into a "noun" class, put interfaces on "nouns" and pass to
-  "verbs" which operate on interfaces only. This allows enormous reuse of code.
+  "verbs" which operate on interfaces only. This allows complete reuse of code.
   Any data structure that "fits" can re-use that behavior.
+* **Verbs Operate On Interfaces** - Verbs are not passed to nouns, verbs are
+  given interfaces to perform their work.
 
 Here is the same class, broken up for unit testing following the "Better Unit
 Testing Design"
