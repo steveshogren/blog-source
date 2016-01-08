@@ -12,7 +12,7 @@ After my post [Interview Humiliation](http://deliberate-software.com/on-defeat/)
 people have asked me how I interview compassionately. I strive to make my interviews as
 stress-free and respectful as possible while still rendering a yes/no at the end.
 
-Any good interview process needs to start with good goals:
+Any good interview process needs to start with goals:
 
   * The candidate should learn as much as possible about working here, good and bad
   * Respect the candidate's time
@@ -21,9 +21,9 @@ Any good interview process needs to start with good goals:
   * Both passing and failing candidates should leave wishing they could work here
   * We should render the same decision if the interview is repeated multiple
   times
-  * The candidate should know the process in advance and not need to "cram" in
-    any way
-  * Candidate should feel we are working "side-by-side" instead of "face-to-face"
+  * The candidate should know the process in advance and not improve with "cramming"
+  * The candidate should feel they are working collaboratively with us instead
+    of us against them
 
 ## The Ideal Candidate
 
@@ -33,10 +33,18 @@ memorization. We care more about "ability to grow" than "current skills". Our
 job does not involve whiteboard coding, puzzle questions, or anything that can
 be discovered with a decent IDE, so those are left out.
 
+We care a lot about "no jerks". We want our workplace to be fun, relaxing, and
+as devoid of social tensions as possible. We want candidates who are comfortable
+being wrong and corrected regularly, and can correct others politely.
+
 We do not care about any question that could be easily be answered by Google. If
 an internet search can easily answer the question, it is pointless to care if
 the human in front of me happens to know it. Given the search revolution of the
-last decade, the value of memorized facts falls to almost zero. 
+last decade, the value of memorized facts falls to almost zero. Facts as a proxy
+for actual job skill probably used to be pretty accurate until the internet
+allowed every interview question to be public record.
+
+## Scoring
 
 I'd love to believe that a perfect productivity score can be invented.
 Unfortunately, measuring developer productivity needs to be solved first.
@@ -44,25 +52,28 @@ Counting bugs, features, correct answers, etc, are all proxies that poorly
 represent actual productivity. If those actually worked, why don't we use them
 for raises, bonuses, and reviews? Because. They. Do. Not. Work.
 
-Rubrics do work. A rubric is a way of measuring the "un-measurable". You
-probably have seen them in year-end reviews. A grid with categories on one side,
-and a 0-4 score with a paragraph explanation for each. We only score what has to
-be explained with a several paragraph description from the interviewers.
+A well-designed rubric _can_ work. A rubric is a way of measuring the
+"un-measurable". You probably have seen them in year-end reviews. A grid with
+categories on one side, and a 0-4 score with a paragraph explanation for each.
+We only score what has to be explained with a description from the interviewers.
 
 > "How was the candidate's communication skills?"
 
 > "They misunderstood me only a few times, and I only had trouble understanding
-> them once or twice. Between our best communicator and worst, they were
-> definitely above average: 3/4."
+> them once or twice. The watchers all felt like the communication was pretty
+> good. Between our best communicator and worst, they were definitely above
+> average: 3/4."
 
 > "Abstraction design skills?"
 
-> "They were able to clearly design this abstraction here, -shows code-, notice
-> how they added this value to the function? The other interviewers really
-> thought that this change over there added a lot of value as well. They also
-> seemed to deeply understand passing functions as values, notice how this takes
-> a function to demonstrate polymorphism? All said, they did most of the heavy
-> lifting for this whole project, and it is superbly designed: 4/4"
+> "They were able to clearly design this abstraction here, -code-, notice how
+> they added this value to the function? The other interviewers really thought
+> that this other change over there added a lot of value as well. They also
+> seemed to deeply understand passing functions as values, see how this takes a
+> function for polymorphism? We prodded a bit, and they were able to give a
+> couple other ways to achieve the same behavior. We all agreed it was best the
+> way it was. All said, they did most of the heavy lifting for this whole
+> project, and it is superbly designed: 4/4"
 
 ## Our Process
 
@@ -79,9 +90,11 @@ rotate watching silently. The watchers are expected to stay quiet, to prevent
 confusion.
 
 Before the first interview, the candidate is sent something very much like this
-document. From our position, it appears there is no way someone could "fake us
-out" on any criteria. The things we look for take years to practice and
-cultivate, so "cramming" should not help much (if at all).
+document. We think there is no way someone could "fake us out" on any criteria.
+The things we look for take years to practice and cultivate, so "cramming"
+should not help much (if at all). If they have never heard of Test Driven
+Development, we do recommend they Google it for a few minutes, since that could
+help.
 
 ### Phone Screen
 
@@ -148,13 +161,16 @@ the most nervous candidate. All the thoughts of nerves turn into a concrete
 We like this process because it is exactly what our job is like. We pair program
 for a lot of work, and the interview is meant to give candidates a sample of
 that. No one should show up for their first day of work and say, "wait, I
-actually hate pair programming."
+actually hate pair programming." By thinking through our goals and an "ideal
+candidate", we were able to design a process that meets those goals.
 
-By thinking through our goals and an "ideal candidate", we were able to design a
-process that meets those goals. I recommend you take an hour to write out your
-goals and needs. Then see how your interview process matches. Are you looking
-for a "human Google"? Does your job involve whiteboard coding? Would telling the
-candidate the exact process in advance
+I recommend you take an hour to write out your goals and needs. Then see how
+your interview process matches. Are you looking for a "human Google"? Does your
+job involve whiteboard coding? Would telling the candidate the exact process in
+advance with all the questions let them game the system? Because every single
+interview question I've seen is up on Google to be found and memorized on easy
+to read lists. Does your process require them to spend a lot of time at home?
+Does it take weeks? You might be surprised at what you find!
 
 
 
