@@ -14,16 +14,18 @@ stress-free and respectful as possible while still rendering a yes/no at the end
 
 Any good interview process needs to start with goals:
 
-  * The candidate should learn as much as possible about working here, good and bad
+  * Both parties should learn as much as possible about each other, good and bad
   * Respect the candidate's time
   * Make the candidate comfortable
   * Under-skilled candidates should feel no shame
-  * Both passing and failing candidates should leave wishing they could work here
+  * Both passing and failing candidates should leave and want to tell their
+    friends to apply
   * We should render the same decision if the interview is repeated multiple
-  times
-  * The candidate should know the process in advance and not improve with "cramming"
-  * The candidate should feel they are working collaboratively with us instead
-    of us against them
+  times (with different exercises each time)
+  * The candidate should know the process in advance and not be able to earn a
+    pass through short term "cramming"
+  * The candidate should feel we are all working collaboratively, instead of us
+    against them
 
 ## The Ideal Candidate
 
@@ -34,21 +36,20 @@ job does not involve whiteboard coding, puzzle questions, or anything that can
 be discovered with a decent IDE, so those are left out.
 
 We care a lot about "no jerks". We want our workplace to be fun, relaxing, and
-as devoid of social tensions as possible. We want candidates who are comfortable
-being wrong and corrected regularly, and can correct others politely.
+supportive. We want candidates who are comfortable being wrong and corrected
+regularly, and can correct others politely.
 
 We do not care about any question that could be easily be answered by Google. If
 an internet search can easily answer the question, it is pointless to care if
 the human in front of me happens to know it. Given the search revolution of the
 last decade, the value of memorized facts falls to almost zero. Facts as a proxy
 for actual job skill probably used to be pretty accurate until the internet
-allowed every interview question to be public record.
+allowed every interview question to become public record.
 
 ## Scoring
 
-I'd love to believe that a perfect productivity score can be invented.
-Unfortunately, measuring developer productivity needs to be solved first.
-Counting bugs, features, correct answers, etc, are all proxies that poorly
+I wish someone will one day invent a perfect productivity score. For now,
+counting bugs, features, correct answers, etc, are all proxies that poorly
 represent actual productivity. If those actually worked, why don't we use them
 for raises, bonuses, and reviews? Because. They. Do. Not. Work.
 
@@ -64,7 +65,7 @@ We only score what has to be explained with a description from the interviewers.
 > good. Between our best communicator and worst, they were definitely above
 > average: 3/4."
 
-> "Abstraction design skills?"
+> "How about design skills?"
 
 > "They were able to clearly design this abstraction here, -code-, notice how
 > they added this value to the function? The other interviewers really thought
@@ -92,24 +93,20 @@ confusion.
 Before the first interview, the candidate is sent something very much like this
 document. We think there is no way someone could "fake us out" on any criteria.
 The things we look for take years to practice and cultivate, so "cramming"
-should not help much (if at all). If they have never heard of Test Driven
-Development, we do recommend they Google it for a few minutes, since that could
-help.
+should not help much (if at all). The one exception to that is if they have
+never heard of Test Driven Development, we do recommend they Google it for a few
+minutes, as prior knowledge helps smooth the phone screen considerably.
 
 ### Phone Screen
 
-We pair program over the internet using a shared programming environment
-called [Cloud9](c9.io). We (currently) have projects set up for Java,
-Javascript, Python, Ruby, and C#. The candidate may choose their desired
-language. We then pair program using Test Driven Development to build out a
-well defined exercise. The candidate may entirely verbally "navigate", while
-one of our programmers entirely "drives" and types out the code. This is
-acceptable. The ideal candidate will be able to demonstrate comfort with
-programming concepts and abstraction design.
+We pair program over the internet using a shared programming environment called
+[Cloud9](c9.io). We (currently) have projects set up for Java, Javascript,
+Python, Ruby, and C#. The candidate may choose their desired language. We then
+pair program using Test Driven Development to build out a well defined exercise.
+The candidate may entirely verbally "navigate", while one of our programmers
+entirely "drives" and types out the code. This is acceptable.
 
-Most programmers will have not seen Test Driven Development, and as such will
-have to "learn" it while we work on the project. This is acceptable. If the
-candidate has never seen any of those languages, Google or asking the
+If the candidate has never seen any of those languages, Google or asking the
 interviewer is totally fair game, and does not count against them. If the
 candidate has completely no idea, the interviewer is expected to politely
 complete the task while keeping the candidate engaged.
@@ -121,18 +118,21 @@ process is like. We attempt to answer clearly and honestly, both good and bad.
 
 ### In-Person
 
-At the start of the day, we spend 30 minutes chatting and asking questions
-back and forth. Our questions are meant to tell us about the candidate's
-background and "programming philosophy": books read, favorite languages,
-interesting projects they've worked on, etc. 
+The in-person interview is from 9:30 to 3:00. We are not thrilled with how much
+time it takes and would like to shorten it, but so far have no superior
+alternatives.
+
+At the start of the day, we spend 30 minutes chatting and asking questions back
+and forth. Our questions are meant to tell us about the candidate's background
+and "programming philosophy": books read, favorite languages, interesting
+projects they've worked on, etc. We allow them as many questions as they would
+like.
 
 The rest of the day is very much like a "typical day at work", but with
 programming exercises instead of production code. We pair program on the
-exercises, following the same idea from the phone screen. The exercises have
-no "tricks", they are reasonably straightforward and don't require any prior
-domain or CS theory knowledge. The candidate may pick their preferred language
-and environment (we have several pre-setup). We pair like that all day, with a
-break for lunch. Throughout the day, the candidate is free to get food,
+exercises, following the same flow from the phone screen. The exercises have no
+"tricks", they are reasonably straightforward and don't require any prior domain
+or CS theory knowledge. Throughout the day, the candidate is free to get food,
 drinks, and run to the restroom.
 
 The developer who is pairing has a primary role of making the candidate feel
@@ -169,11 +169,5 @@ your interview process matches. Are you looking for a "human Google"? Does your
 job involve whiteboard coding? Would telling the candidate the exact process in
 advance with all the questions let them game the system? Because every single
 interview question I've seen is up on Google to be found and memorized on easy
-to read lists. Does your process require them to spend a lot of time at home?
-Does it take weeks? You might be surprised at what you find!
-
-
-
-
-
-
+to read lists. Does your interview process have a fixed amount of time? Does it
+take weeks? You might be surprised at what you find!
