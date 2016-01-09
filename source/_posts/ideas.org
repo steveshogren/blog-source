@@ -39,3 +39,290 @@ environment.
 * Safety Score
 ** Exceptions (checked, unchecked)
 ** variable shadowing 
+* Type-saft Dispach Proposal
+Recently, I've learned the power of pattern matching and discriminated unions
+for clarifying the domain while also code that is easier to refactor. If these
+concepts are new to you, I suggest you check out some of my other posts about
+pattern matching before continuing:
+
+x* [Programming Language Safety Score](http://deliberate-software.com/programming-language-safety-algorithm/)
+* Typing Saves You Time
+
+I used to hate type systems. As a junior programmer, I did most of my
+work in Perl and PHP, so working in C#/Java always felt so
+overwrought. In Java especially, one has to write out the type of the
+variable almost every time you use it, which explodes the amount of
+busywork the developer must do.
+
+Unit tests are a poor man's type system.
+
+There, I said it. You know why I think this? Becuase I just took (am
+taking?) over a legacy codebase. You know what makes that way easier?
+Typing.
+* DI Is a Hack
+
+Every codebase I have seen or heard of that uses dependency injection
+for all dependencies also performs strict unit testing. Why is that?
+What about unit testing and DI are so linked?
+
+You cannot have unit testing in Java/C# without dependency injection.
+
+If you have ever seen a codebase in Java/C# that has ten injected
+classes, right there, you have a codebase that does heavy unit
+testing. If you are deep into the unit testing culture, you will have
+been taught that it is a good design to use DI everywhere. Is it
+really? Do the contortions required to do DI make your code easier to
+use/reuse/refactor? Or do you do it because you have to? Can you think
+of a single time where DI made anything easier?
+
+The TDD proponents realized that you cannot reasonably perform unit
+testing without DI in Java/C#, and so they have argued that a
+completely dependency injected codebase is a good design. In reality,
+DI for unit testing is a hack because Java/C# are so ill-suited to
+unit testing.
+
+For example, how would we unit test a function that talks to the
+database in C# without a framework that requires mappings and global
+singletons? We would put an interface around the database connection,
+then pass it into the constructor through an optional parameter. Our
+test would then make another implementor of that interface, and pass
+it in when testing. This is par for the course in Java as well.
+
+``` csharp
+// DBConnection.cs
+public interface IDBConnection { }
+public class DBConnection : IDBConnection{ }
+
+// RepositoryFactory.cs
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using Helpers;
+
+namespace Repositories
+{
+	public class RepositoryFactory {
+		IDBConnection con;
+		public RepositoryFactory(IDBConnection con) {
+			this.con = con;
+		}
+		public RepositoryFactory() : this(new DBConnection()) { }
+        public void Insert(string sql) {
+            this.con.Execute(sql);
+        }
+	}
+}
+``` 
+
+Tests grow in maintenance difficulty with the size of the function
+being tested. Often this leads to a design with many small
+one-function classes. This is actually not a bad thing! Rather than
+having a single reason to change, these classes have a single reason
+to "test". Usually, such a design will have several classes in a row
+that each only calls the next. This "chain" of classes together are
+cohesive, but instead of being a single class together, they are all
+split apart. Such a functional design would normally be fine, except
+every function needs a twenty line wrapper of namespaces, imports,
+interfaces, and constructors.
+
+Comparatively, in languages like Javascript, Ruby, and Clojure,
+replacing a function for testing is easy! Every function does not need
+a twenty-line wrapper, instead we simply replace the function we want
+to "inject" with a new function. Here is an example in Javascript:
+
+``` javascript
+function Insert(sql) { getConnection().Execute(sql);}
+function getConnection() { return new DatabaseConnection(); }
+
+// "Mock" the getConnection function in a unit test
+getConnection = function() { return { Execute: function(sql) {}}};
+```
+
+I am now able to test my "Insert" function without it calling the real
+dependencies. My design can take whatever shape best fits the problem,
+
+
+without constraining itself to "what works for testing".
+* Software Is Too Hard
+
+I think I have figured out why everyone hates everyone else's code.
+
+### Humans do not have the mental capacity to write good software. 
+
+"But wait, Steve, I am awesome at what I do! I know all the patterns,
+follow all the trends, and read all the blogs. Don't lump me in with
+the slackers, the architecture astronauts, the language enthusiasts!"
+
+I promise you I can find other equally good developers who will hate
+your code.
+
+As an industry, we all muddle along, and most of the time, we can
+produce more value than we consume. I personally know I have been
+profitable to my employers for a while now. This is a good thing, to
+be profitable. 
+
+We don't have be good at software to be profitable.
+
+Don't take it the wrong way, we get a lot done. We solve so many
+problems, and manage to produce so much good. No offense intended,
+but, let's be honest, how many of us are confident in everything we
+have written? Did it scale, was it easy to hand-off, was it tested,
+was it secure, did it come out in time? Chances are, no, it didn't.
+
+So, programming is too hard for humans. Now what? I think we need to
+start simplifying the craft. Accepting our limitations is the first
+step to working around them. The developer who doesn't trust their own
+abilites to build "good software" will take even greater care. The
+humble developer keeps up with good practices, keeps refining their
+understanding of what makes code "good" and keeps 
+* Managing Self Organizaing Teams
+
+Self organizing teams are a complex topic. I believe they have very clear pros
+and cons. At my work, I manage a self organizing team which has a unique set of
+expectations.
+
+### Individual Expectations
+
+Each individual is expected to work a strict 40 hour week. You should
+confidently leave at eight hours sharp. Overtime in our office is not considered
+a virtue. The negative side-effects over the long term lose our business time
+and money. Overtime for the sake of "signaling to management" is not rewarded.
+You are expected to come in and work as hard as you can such that you are "done"
+at the end of an eight hour day and could perform no additional effort. In the
+rare event that overtime is required, it will be clearly stated and have clearly
+defined goals: e.g. solving a critical and time-sensitive customer issue. Your
+manager should know and approve of the overtime. In these circumstances it is
+expected that you will come in later the next day to make up for it.
+
+Each individual expected to be responsible for the quality and productivity of
+the development team. If someone is late consistently, has poor hygiene, or is
+not performing their duties sufficiently, you are expected to bring it up to
+them privately. If they continue, bring it up in a retrospective or let their
+manager know. If you see someone doing anything illegal or performing
+harassment, immediately let their manager know. Common sense should dictate when
+it is a "business issue" or a "legality issue".
+
+Each developer shares the responsibility for the quality of the entire code base
+of the office. Since teams move and reform fluidly, you might be maintaining a
+new code base at any given time. Behaving as a good citizen of this office means
+always doing everything possible to have your code ready to hand off at a
+moments notice. Long branches, commented out code, failing tests, and broken
+builds all should be dealt with as the highest priority. Refactoring projects
+should be completed by the individual or group who "champions" it. Undertaking a
+multi-session refactoring is acceptable, but should have clear end goals.
+
+The individual is expected to mentor every other developer in all areas
+technical, social, and collaborative. No one is exempt from the duty of gently
+correcting another. Everyone is expected to take correction or suggestions
+seriously, regardless of their source. If the most junior developer corrects the
+most senior, the most senior is expected to treat it seriously.
+
+You are expected to behave in a manner fitting for a professional. Profanity,
+coarse joking, or sexual innuendo are commonly considered to be inappropriate
+behavior for an American professional. The individual is expected to call out
+their teammates for such behavior with a firm comment immediately, e.g. "that is
+inappropriate for a professional."
+
+The more experienced the developer, the more they are expected to demonstrate
+these tenants. A less experienced developer is afforded more obstinance and
+single-mindedness, but the most experienced are expected to weigh every option
+and lead by example in every way.
+
+Leadership is driven through consensus. If a developer wishes to make a change,
+they must build consensus with the team and get a majority vote. If a majority
+vote cannot be made, the onus is on the individual to modify their suggestion to
+make it more acceptable or drop the suggestion.
+
+### Development Team Expectations
+
+The most powerful tool we have are retrosepectives. Retrospectives are
+mandatory, as they are the primary way for the team to improve and communicate
+issues. If you do not approve of the format or the frequency, convince the team
+to make a change.
+
+Team formation and working agreements are decided on by the team, with the whole
+development staff providing insight. No new team may form without the consent of
+the development staff at large. All teams must have working agreements that
+adhere to the goals of: information sharing, rapid training, high code quality,
+low defect rates, automated regression, and regular automated builds and
+deployment.
+
+The "default" method for every team should be pair programming and TDD. These
+are not mandatory, but can be replaced with alternate working agreements if
+approved by the larger technical staff. Any deviations from the default should
+be documented and reviewed regularly.
+
+### Development Manager Expectations
+
+Primarily, the development manager is charged with ensuring a culture that
+attracts and enriches high quality talent. This can be accomplished though team
+empowerment, regular mentoring, and conflict resolution. Their goal is to build
+a team of individuals and trust them to perform with excellence.
+
+The manager should be consistently watching for cultural dividers who cause the
+teams to excessively fight or grow negative. These dividers should be given
+feedback with the goal of improvement or "managing out". Dividers often cause a
+toxic culture to form, which destroys morale.
+
+Development managers are the last stop when the team is unable to correct the
+behavior of an individual. They are to freely allow teams to reorganize and
+develop working agreements as long as they are in line with meeting the needs of
+the business.
+
+The development manager holds no technical authority over the development staff,
+nor handles prioritization and assignment of work. The work priorities are to be
+handled by the business experts. Work is assigned to the development team, which
+is expected to organize around those proirities.
+
+Additionally development managers interact with recruiters and coordinate HR
+related functions and documentation. All work that infringes on the the time of
+the development staff should be handled by the development manager. Timesheets,
+vacation tracking, interaction with recruiters, and project managment should be
+kept from the development staff.
+
+* Development Dissappointment Disorder
+
+You just finished this really hard feature. It's taken you a lot longer than
+expected. The whole thing was a lot harder than anyone realized. Not only that,
+but the feature wasn't clearly explained, so you lost time churning on the
+actual requirements. Despite all the confusion, iteration, and technical
+challenges, you managed to get it working! You look back, and realize how much
+you have learned and grown.
+
+You show it off to the product owner. The product owner barely seems to hear
+you, their shoulders slump in disappointment. "Great, but we are still four
+weeks behind."
+
+If this sounds familiar, your team is infected with Development Disappointment
+Disorder.
+
+It looks different in every team, but Development Disappointment Disorder is
+incredibly common. I've seen it manifest in many different ways. It can be the
+manager who sets unreasonable deadlines then demands everyone work overtime to
+meet it. The project manager who gets angry at every little thing. The
+developers who feel they need to point fingers to shift the blame. The boss who
+is never happy no matter what is achieved. The team that feels they have never
+had a successful release.
+
+## Causes
+
+Development Disappointment Disorder is caused by unreasonable expectations.
+Someone thinks, hopes, or wishes they can get 100 units of productivity from a
+team and co debase that only can sustain 30-40 units. What they want just isn't
+possible, and no amount of cajoling, pressuring, yelling, or passive aggressive
+comments is going to change that.
+
+Productivity is ultimately not really a people problem. There is an upper limit
+to what any given team can ever produce. The human mind has very real
+boundaries, and when combined with a team size and existing codebase, very real
+limits exist.
+
+You cannot rush software development without incurring significant decreases in
+quality, stability, or maintainability. The work is so complex and notoriously
+difficult, that every expert in our field agrees with adages like, "adding
+developers to a late project makes it later." What adds to the complexity is
+many types of development projects are very difficult to predict.
+
+## Alternatives
+
+If you manage a development team, you need to consider 
