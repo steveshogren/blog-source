@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Designing A Compassionate Interview For A High Performing Individual"
-date: 2015-11-10 17:01:58 -0500
+date: 2016-1-11 07:01:58 -0500
 comments: true
 categories: 
 - Meta Game
@@ -14,14 +14,13 @@ stress-free and respectful as possible while still rendering a yes/no at the end
 
 Any good interview process needs to start with goals:
 
-  * Both parties should learn as much as possible about each other, good and bad
   * Respect the candidate's time
   * Make the candidate comfortable
   * Under-skilled candidates should feel no shame
-  * Both passing and failing candidates should leave and want to tell their
-    friends to apply
+  * Both passing and failing candidates should want to tell their friends to
+    apply
   * We should render the same decision if the interview is repeated multiple
-  times (with different exercises each time)
+    times (with different exercises each time)
   * The candidate should know the process in advance and not be able to earn a
     pass through short term "cramming"
   * The candidate should feel we are all working collaboratively, instead of us
@@ -29,52 +28,52 @@ Any good interview process needs to start with goals:
 
 ## The Ideal Candidate
 
-We want to hire for high-level skills. Fast learning, strategic thinking,
-abstraction design, and emotional intelligence are more important than rote
-memorization. We care more about "ability to grow" than "current skills". Our
-job does not involve whiteboard coding, puzzle questions, or anything that can
-be discovered with a decent IDE, so those are left out.
+We want to hire for high-level skills. Fast learning, strategic thinking, good
+design, and emotional intelligence are more important than rote memorization. We
+care more about "ability to grow" than "current skills". Our job does not
+involve whiteboard coding, puzzle questions, or anything that can be discovered
+with a decent IDE, so those are left out.
 
 We care a lot about "no jerks". We want our workplace to be fun, relaxing, and
 supportive. We want candidates who are comfortable being wrong and corrected
-regularly, and can correct others politely.
+regularly, and who can correct others politely.
 
 We do not care about any question that could be easily be answered by Google. If
 an internet search can easily answer the question, it is pointless to care if
 the human in front of me happens to know it. Given the search revolution of the
 last decade, the value of memorized facts falls to almost zero. Facts as a proxy
-for actual job skill probably used to be pretty accurate until the internet
-allowed every interview question to become public record.
+for actual job skill probably used to be accurate until the internet allowed
+every interview question to become public record.
 
 ## Scoring
 
-I wish someone will one day invent a perfect productivity score. For now,
-counting bugs, features, correct answers, etc, are all proxies that poorly
-represent actual productivity. If those actually worked, why don't we use them
-for raises, bonuses, and reviews? Because. They. Do. Not. Work.
+I hope someone one day invents a perfect productivity score! For now, counting
+bugs, features, correct answers, etc, are all proxies that poorly represent
+actual productivity. If those actually worked, why don't we use them for raises,
+bonuses, and reviews? Because. They. Do. Not. Work.
+
+> Counting bugs, features, correct answers, etc, are all proxies that poorly
+> represent actual productivity
 
 A well-designed rubric _can_ work. A rubric is a way of measuring the
 "un-measurable". You probably have seen them in year-end reviews. A grid with
-categories on one side, and a 0-4 score with a paragraph explanation for each.
+categories on one side, and a 1-5 score with a paragraph explanation for each.
 We only score what has to be explained with a description from the interviewers.
 
 > "How was the candidate's communication skills?"
 
 > "They misunderstood me only a few times, and I only had trouble understanding
 > them once or twice. The watchers all felt like the communication was pretty
-> good. Between our best communicator and worst, they were definitely above
-> average: 3/4."
+> good. They were definitely above average: 3/4."
 
 > "How about design skills?"
 
-> "They were able to clearly design this abstraction here, -code-, notice how
-> they added this value to the function? The other interviewers really thought
-> that this other change over there added a lot of value as well. They also
-> seemed to deeply understand passing functions as values, see how this takes a
-> function for polymorphism? We prodded a bit, and they were able to give a
-> couple other ways to achieve the same behavior. We all agreed it was best the
-> way it was. All said, they did most of the heavy lifting for this whole
-> project, and it is superbly designed: 4/4"
+> "They were able to clearly design every abstraction. They deeply understood
+> passing functions as values, see how this takes a function for polymorphism?
+> We prodded a bit, and they were able to give a couple other ways to achieve
+> the same behavior. We all agreed it was best the way it was. All said, they
+> did most of the heavy lifting for this whole project, and it is superbly
+> designed: 4/4"
 
 ## Our Process
 
@@ -85,22 +84,21 @@ us to see how known good developers perform when way out of their element and
 uncomfortable.
 
 All interviews are assigned to developers randomly, and all are expected to
-participate. The candidate should have at a minimum two developers around at all
-time, to prevent bias by any individual. Usually, one will pair while others
-rotate watching silently. The watchers are expected to stay quiet, to prevent
-confusion.
+participate. The candidate should have two developers around at all time, to
+prevent bias by any individual. One pairs while the others rotate watching
+silently. The watchers are expected to stay quiet, to prevent confusion.
 
 Before the first interview, the candidate is sent something very much like this
 document. We think there is no way someone could "fake us out" on any criteria.
-The things we look for take years to practice and cultivate, so "cramming"
-should not help much (if at all). The one exception to that is if they have
-never heard of Test Driven Development, we do recommend they Google it for a few
-minutes, as prior knowledge helps smooth the phone screen considerably.
+The things we look for take years of practice to cultivate, so "cramming" should
+not help much (if at all). The one exception to that is if they have never heard
+of Test Driven Development, we do recommend they Google it for a few minutes, as
+prior knowledge helps smooth the phone screen considerably.
 
 ### Phone Screen
 
 We pair program over the internet using a shared programming environment called
-[Cloud9](c9.io). We (currently) have projects set up for Java, Javascript,
+[Cloud9](c9.io). We (currently) have projects set up for Java, JavaScript,
 Python, Ruby, and C#. The candidate may choose their desired language. We then
 pair program using Test Driven Development to build out a well defined exercise.
 The candidate may entirely verbally "navigate", while one of our programmers
@@ -169,5 +167,6 @@ your interview process matches. Are you looking for a "human Google"? Does your
 job involve whiteboard coding? Would telling the candidate the exact process in
 advance with all the questions let them game the system? Because every single
 interview question I've seen is up on Google to be found and memorized on easy
-to read lists. Does your interview process have a fixed amount of time? Does it
-take weeks? You might be surprised at what you find!
+to read lists. How much time does your process take? Could it be shortened? Does
+it require the candidate to spend a lot of time at home? You might be surprised
+at what you find!
