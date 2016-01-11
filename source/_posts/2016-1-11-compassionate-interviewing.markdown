@@ -8,6 +8,8 @@ categories:
 published: true
 ---
 
+{% img right emailImage /images/2.Why_Algorithm_Important.png 400 'finding' 'finding' %}
+
 After my post [Interview Humiliation](http://deliberate-software.com/on-defeat/), a number of
 people have asked me how I interview compassionately. I strive to make my interviews as
 stress-free and respectful as possible while still rendering a yes/no at the end.
@@ -27,6 +29,8 @@ Any good interview process needs to start with goals:
     against them
 
 ## The Ideal Candidate
+
+{% img right emailImage /images/whiteboards2.jpg 400 'whiteboard 'whiteboard' %}
 
 We want to hire for high-level skills. Fast learning, strategic thinking, good
 design, and emotional intelligence are more important than rote memorization. We
