@@ -308,9 +308,9 @@ expectations.
 
 ### Individual Expectations
 
-Each individual is expected to work a strict 40 hour week. You should
+Each individual is expected to work a strict 40 hour work week. You should
 confidently leave at eight hours sharp. Overtime in our office is not considered
-a virtue. The negative side-effects over the long term lose our business time
+a virtue. The negative side-effects compound over the long term lose our business time
 and money. Overtime for the sake of "signaling to management" is not rewarded.
 You are expected to come in and work as hard as you can such that you are "done"
 at the end of an eight hour day and could perform no additional effort. In the
@@ -349,9 +349,9 @@ their teammates for such behavior with a firm comment immediately, e.g. "that is
 inappropriate for a professional."
 
 The more experienced the developer, the more they are expected to demonstrate
-these tenants. A less experienced developer is afforded more obstinance and
-single-mindedness, but the most experienced are expected to weigh every option
-and lead by example in every way.
+these tenants. A less experienced developer is afforded more single-mindedness,
+but the most experienced are expected to weigh every option and lead by example
+in every way.
 
 Leadership is driven through consensus. If a developer wishes to make a change,
 they must build consensus with the team and get a majority vote. If a majority
@@ -360,7 +360,7 @@ make it more acceptable or drop the suggestion.
 
 ### Development Team Expectations
 
-The most powerful tool we have are retrosepectives. Retrospectives are
+Retrospectives are one of the most powerful tools we have. Retrospectives are
 mandatory, as they are the primary way for the team to improve and communicate
 issues. If you do not approve of the format or the frequency, convince the team
 to make a change.
@@ -397,15 +397,15 @@ the business.
 The development manager holds no technical authority over the development staff,
 nor handles prioritization and assignment of work. The work priorities are to be
 handled by the business experts. Work is assigned to the development team, which
-is expected to organize around those proirities.
+is expected to organize around those priorities.
 
-Additionally development managers interact with recruiters and coordinate HR
-related functions and documentation. All work that infringes on the the time of
-the development staff should be handled by the development manager. Timesheets,
-vacation tracking, interaction with recruiters, and project managment should be
+Development managers interact with recruiters and coordinate HR related
+functions and documentation. All work that infringes on the time of the
+development staff should be handled by the development manager. Time sheets,
+vacation tracking, interaction with recruiters, and project management should be
 kept from the development staff.
 
-* Development Dissappointment Disorder
+* Development Disappointment Disorder
 
 You just finished this really hard feature. It's taken you a lot longer than
 expected. The whole thing was a lot harder than anyone realized. Not only that,
@@ -422,12 +422,12 @@ If this sounds familiar, your team is infected with Development Disappointment
 Disorder.
 
 It looks different in every team, but Development Disappointment Disorder is
-incredibly common. I've seen it manifest in many different ways. It can be the
-manager who sets unreasonable deadlines then demands everyone work overtime to
-meet it. The project manager who gets angry at every little thing. The
-developers who feel they need to point fingers to shift the blame. The boss who
-is never happy no matter what is achieved. The team that feels they have never
-had a successful release.
+incredibly common. I've seen it manifest in many ways. It can be the manager who
+sets unreasonable deadlines then demands everyone work overtime to meet it. The
+project manager who gets angry at every little thing. The developers who feel
+they need to point fingers to shift the blame. The boss who is never happy no
+matter what is achieved. The team that feels they have never had a successful
+release.
 
 ## Causes
 
