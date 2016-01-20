@@ -308,45 +308,46 @@ expectations.
 
 ### Individual Expectations
 
-Each individual is expected to work a strict 40 hour work week. You should
+We expect each individual to work a strict 40 hour work week. You should
 confidently leave at eight hours sharp. Overtime in our office is not considered
-a virtue. The negative side-effects compound over the long term lose our business time
-and money. Overtime for the sake of "signaling to management" is not rewarded.
-You are expected to come in and work as hard as you can such that you are "done"
-at the end of an eight hour day and could perform no additional effort. In the
-rare event that overtime is required, it will be clearly stated and have clearly
-defined goals: e.g. solving a critical and time-sensitive customer issue. Your
-manager should know and approve of the overtime. In these circumstances it is
-expected that you will come in later the next day to make up for it.
+a virtue. The negative side-effects compound over the long term lose our
+business time and money. Overtime for the sake of "signaling to management" is
+not rewarded. You are to come in and work as hard as you can such that you are
+"done" at the end of an eight hour day and could perform no additional effort.
+In the rare event that overtime is required, it will be clearly stated and have
+clearly defined goals: e.g. solving a critical and time-sensitive customer
+issue. Your manager should know and approve of the overtime. In these
+circumstances it is expected that you will come in later the next day to make up
+for it.
 
-Each individual expected to be responsible for the quality and productivity of
-the development team. If someone is late consistently, has poor hygiene, or is
-not performing their duties sufficiently, you are expected to bring it up to
-them privately. If they continue, bring it up in a retrospective or let their
-manager know. If you see someone doing anything illegal or performing
-harassment, immediately let their manager know. Common sense should dictate when
-it is a "business issue" or a "legality issue".
+Each individual must be responsible for the quality and productivity of the
+development team. If a team member is consistently late, has poor hygiene, or is
+not performing their duties sufficiently, you should bring it up to them
+privately. If they continue, bring it up in a retrospective or let their manager
+know. If you see someone doing anything illegal or performing harassment,
+immediately let their manager know. Common sense should dictate when it is a
+"business issue" or a "legality issue".
 
 Each developer shares the responsibility for the quality of the entire code base
-of the office. Since teams move and reform fluidly, you might be maintaining a
-new code base at any given time. Behaving as a good citizen of this office means
+of the office. Teams move and reform fluidly - you might be maintaining a new
+code base at any given time. Behaving as a good citizen of this office means
 always doing everything possible to have your code ready to hand off at a
 moments notice. Long branches, commented out code, failing tests, and broken
 builds all should be dealt with as the highest priority. Refactoring projects
 should be completed by the individual or group who "champions" it. Undertaking a
 multi-session refactoring is acceptable, but should have clear end goals.
 
-The individual is expected to mentor every other developer in all areas
-technical, social, and collaborative. No one is exempt from the duty of gently
-correcting another. Everyone is expected to take correction or suggestions
-seriously, regardless of their source. If the most junior developer corrects the
-most senior, the most senior is expected to treat it seriously.
+You should mentor every other developer in all areas technical, social, and
+collaborative. No one is exempt from the duty of gently correcting another.
+Everyone should take correction or suggestions seriously, regardless of their
+source. If the most junior developer corrects the most senior, the most senior
+must treat it seriously.
 
-You are expected to behave in a manner fitting for a professional. Profanity,
-coarse joking, or sexual innuendo are commonly considered to be inappropriate
-behavior for an American professional. The individual is expected to call out
-their teammates for such behavior with a firm comment immediately, e.g. "that is
-inappropriate for a professional."
+You should behave in a manner fitting for a professional. Profanity, coarse
+joking, or sexual innuendo are commonly considered to be inappropriate behavior
+for an American professional. You should call out your teammates for such
+behavior with a firm comment immediately, e.g. "that is inappropriate for a
+professional."
 
 The more experienced the developer, the more they are expected to demonstrate
 these tenants. A less experienced developer is afforded more single-mindedness,
@@ -451,3 +452,9 @@ many types of development projects are very difficult to predict.
 ## Alternatives
 
 If you manage a development team, you need to consider 
+* Co-op Reading List
+** http://gitimmersion.com/
+** Clean Code
+** Code Complete
+** Art of Agile Development
+** 
