@@ -300,6 +300,23 @@ step to working around them. The developer who doesn't trust their own
 abilites to build "good software" will take even greater care. The
 humble developer keeps up with good practices, keeps refining their
 understanding of what makes code "good" and keeps 
+* Proposal: Efficiency & Excellence Team
+
+Since v5 is getting larger and larger, I have felt a decrease in energy. Each
+new member to the team contributes to a perception of lower energy and say. I
+think we should start a practice of an Efficiency & Excellence team. This team
+will have rotating members, two new members each week. This team will only work
+on one thing for the week. They will be chosen at the start of the week and
+given a broad technical task to accomplish.
+
+Some examples are: a 10 minute V5 build. Halving the proxies generation (or
+removing the need for it). A better local check-in task. Removing Identifier
+throughout the system. Splitting Core and ORM classes into two projects. A 1
+hour entirely automated release process for all products. A small set of
+automated performance tests owned by v5.
+
+
+
 * Managing Self Organizaing Teams
 
 Self organizing teams are a complex topic. I believe they have very clear pros
