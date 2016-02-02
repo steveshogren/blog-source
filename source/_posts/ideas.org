@@ -315,9 +315,28 @@ throughout the system. Splitting Core and ORM classes into two projects. A 1
 hour entirely automated release process for all products. A small set of
 automated performance tests owned by v5.
 
+* Three Years of Self Organizing Teams
+
+> "Great, now instead of programmers, we are politicians"
+
+A self organizing team can be one of the most effective ways to build a team of
+high quality professionals. It can also be one of the most inefficient
+structures ever devised.
+
+I have been managing several teams of "self-organizing" developers over the last
+few years. They are expected to follow these tenants:
+
++ The whole team organizes themselves to best meet the business needs
++ Each team chooses their practices and working agreements
++ All technical and organization decisions are driven through consensus
++ No team may determine business priority
++ All staff participates in a culture of high quality development
++ Systems and practices are designed for greatest productivity across the next decade
 
 
-* Managing Self Organizaing Teams
+
+
+* Code of Conduct for this Self Organizing Team 
 
 Self organizing teams are a complex topic. I believe they have very clear pros
 and cons. At my work, I manage a self organizing team which has a unique set of
