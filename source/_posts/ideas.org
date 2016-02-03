@@ -315,7 +315,7 @@ throughout the system. Splitting Core and ORM classes into two projects. A 1
 hour entirely automated release process for all products. A small set of
 automated performance tests owned by v5.
 
-* Three Years of Self Organizing Teams
+* Are Self Organizing Teams Right For Us?
 
 > "Great, now instead of programmers, we are politicians"
 
@@ -323,15 +323,15 @@ A self organizing team can be one of the most effective ways to build a team of
 high quality professionals. It can also be one of the most inefficient
 structures ever devised.
 
-## Tenets
+## What Are Self-Organizing Teams?
 
 I have been managing several teams of "self-organizing" developers over the last
 few years. They are expected to follow these tenets:
 
-+ The whole team organizes themselves to best meet the business needs
++ The whole office organizes themselves to best meet the business needs
 + Each team chooses their practices and working agreements
 + All technical and organization decisions are driven through consensus
-+ No team may determine business priority
++ Only product owners may determine "what" happens, the team determines "how"
 + All staff participates in a culture of high quality development
 + Systems and practices are designed for greatest productivity across the next decade
 
@@ -339,8 +339,9 @@ few years. They are expected to follow these tenets:
 
 + Small teams
 + Highly skilled (re: expensive) workers
-+ High quality software needs
++ High quality software a must
 + Need for continuous and stable productivity for 5+ years
++ Buy-in from management that "productivity is worth feeling out of control"
 
 Self organizing teams work exceptionally well with small groups of highly driven
 developers. It fits best when most people on your team are chomping at the bit
@@ -360,16 +361,29 @@ We share in the work of designing security, authentication, query performance,
 ORM's, system design, UI technologies, language paradigms, installers, run time
 characteristics, "pop culture architecture", CI build systems, configuration
 tooling, over two dozen business modules, and roughly 700KLOC per developer. No
-single person has to be a point of failure or bottleneck for all these subjects,
-instead each developer has specialized in a few. If any one person leaves, a few
-others have enough knowledge to fill in any gaps while learning more.
+single person is a point of failure or bottleneck for these subjects, instead
+each developer has specialized in a few. If any one person leaves or is out, a
+few others have enough knowledge to fill in any gaps while learning more.
 
 ## When It Is Less Effective
 
 + Large, distributed teams
-+ Commodity talent
++ Average talent
 + Software with low quality needs
-+ Productivity next year needs to be sacrificed for features this month
++ Business requires short term productivity at any cost to long term productivity
++ Management that wants to be able to control the situation
+
+At a previous role, management asked me to train offshore teams to do my team's
+jobs. We legitimately did our best, including sending our best teachers overseas
+to transmit as much information as we could. We attempted to setup a
+self-organizing team there, and had a number of difficulties. The developers
+were actually quite talented, but it became very difficult for us to
+self-organize across oceans. We eventually gave up and silo-ed them off into
+their own code base. 
+
+The management of that team wanted a lot of control, and eventually they
+dissolved into "manager hands out tickets". While they certainly learned the
+code base, they needed architecture guidance from other developers on our teams.
 
 
 * Pop Culture Architecture
