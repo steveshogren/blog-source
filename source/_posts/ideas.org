@@ -323,8 +323,10 @@ A self organizing team can be one of the most effective ways to build a team of
 high quality professionals. It can also be one of the most inefficient
 structures ever devised.
 
+## Tenets
+
 I have been managing several teams of "self-organizing" developers over the last
-few years. They are expected to follow these tenants:
+few years. They are expected to follow these tenets:
 
 + The whole team organizes themselves to best meet the business needs
 + Each team chooses their practices and working agreements
@@ -333,8 +335,45 @@ few years. They are expected to follow these tenants:
 + All staff participates in a culture of high quality development
 + Systems and practices are designed for greatest productivity across the next decade
 
+## When It Works Well
+
++ Small teams
++ Highly skilled (re: expensive) workers
++ High quality software needs
++ Need for continuous and stable productivity for 5+ years
+
+Self organizing teams work exceptionally well with small groups of highly driven
+developers. It fits best when most people on your team are chomping at the bit
+to do more, be more, and learn more. These "self-actualized" developers will
+find a single leader to be a bottleneck, and it will impair their abilities to
+grow.
+
+In any other company, our least experienced developers would be team leads and
+architects; and our most experienced developers would be leading organizations.
+They've gotten this experience by living it. Each member of our teams is
+responsible for "being the lead" in certain ways. Their own interests guide them
+to become experts across a wide variety of subjects. By being an expert, others
+listen to them, so they often have a wide audience when speaking on their
+specialties.
+
+We share in the work of designing security, authentication, query performance,
+ORM's, system design, UI technologies, language paradigms, installers, run time
+characteristics, "pop culture architecture", CI build systems, configuration
+tooling, over two dozen business modules, and roughly 700KLOC per developer. No
+single person has to be a point of failure or bottleneck for all these subjects,
+instead each developer has specialized in a few. If any one person leaves, a few
+others have enough knowledge to fill in any gaps while learning more.
+
+## When It Is Less Effective
+
++ Large, distributed teams
++ Commodity talent
++ Software with low quality needs
++ Productivity next year needs to be sacrificed for features this month
 
 
+* Pop Culture Architecture
+> "microservices are so hot right now!"
 
 * Code of Conduct for this Self Organizing Team 
 
@@ -386,7 +425,7 @@ behavior with a firm comment immediately, e.g. "that is inappropriate for a
 professional."
 
 The more experienced the developer, the more they are expected to demonstrate
-these tenants. A less experienced developer is afforded more single-mindedness,
+these tenets. A less experienced developer is afforded more single-mindedness,
 but the most experienced are expected to weigh every option and lead by example
 in every way.
 
