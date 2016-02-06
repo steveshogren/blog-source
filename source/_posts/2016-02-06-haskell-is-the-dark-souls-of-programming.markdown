@@ -16,11 +16,11 @@ already.
 
 I decided to start the next version of my safety score posts. This time,
 however, I decided to do it in Haskell. I love Haskell for the same reasons I
-love Dark Souls. Fantasic and inscrutable lore, a great <del>combat</del> type
+love Dark Souls. Fantastic and inscrutable lore, a great <del>combat</del> type
 system, a cliff-wall difficulty curve, and unending punishment.
 
-I want to collect a some statistics from the GitHub API. Follow along as I
-retrace my steps attempting the Tomb of the Dread HTTPS GET Request.
+I want to collect some statistics from the GitHub API. Watch as I retrace my
+steps attempting the Tomb of the Dread HTTPS GET Request.
 
 ### Step One - Stack (aka Pride Comes Before The Fall)
 
@@ -61,6 +61,8 @@ User-Agent: steveshogren
 Authorization: token PUT_TOKEN_HERE
 ```
 
+> {.. "total_count": 354}
+
 Easy life. Now how do you GET a resource in Haskell? Ah,
 [Network.HTTP](https://hackage.haskell.org/package/HTTP-4000.3.2/docs/Network-HTTP.html)!
 I copy the front page sample into ```src/Lib.hs```
@@ -77,7 +79,7 @@ someFunc =
    print x
 ```
 
-So simple! This is why laugh at my NodeJS loving friends! What a bunch of Cretans.
+So simple! This is why laugh at my NodeJS loving friends! What a bunch of cretins.
 
 ```
 > stack build
@@ -108,8 +110,8 @@ src/Lib.hs:5:77: Not in scope: ‘getResponseBody’
 Compilation failed.
 ```
 
-Oh, derp, I'd need an import. (WHY ISN'T THIS IN THE CODE SAMPLE?!). Also, print
-doesn't work, I need putStrLn.
+Oh, durp, I'd need an import. (WHY ISN'T THIS IN THE CODE SAMPLE?!) Also, print
+doesn't work, I need ```putStrLn```.
 
 ``` haskell
 import Network.HTTP
@@ -127,17 +129,16 @@ Here goes!!!
 github-stats-exe: user error (https not supported)
 ```
 
-
-Wat. Further inspection of the docs shows a line in paragraph 5. 
-
+Wat. Further inspection of the docs shows a line WAAY DOWN in paragraph 5. 
 
 > NOTE: This package only supports HTTP;
 
 {% img center giants /images/nope_better.gif 250 'giants' 'giants' %}
 
-When <del>playing Dark Souls</del>programming Haskell, sometimes the best move is to run
-away. I search again. ```haskell https request``` comes up with "http-conduit".
-After adding http-conduit to my cabal, I come up with this beast:
+When <del>playing Dark Souls</del>programming Haskell, sometimes the best move
+is to run away. I search again. ```haskell https request``` returns
+"http-conduit" as the best choice. After adding http-conduit to my cabal, I come
+up with this beast without any surprises:
 
 ``` haskell
 query :: IO String
@@ -161,12 +162,15 @@ someFunc = do
 
 Huzzah! Results! I'm getting back a monster string of json data.
 
+> "\"{\\\"total_count\\\":66, ....}\"
+
 {% img center solaire /images/praisethesun.gif 150 'solaire' 'solaire' %}
 
 ### Step Three - Parsing JSON
 
-Now how to parse this. Aeson seems to be the biggest contender. To use Aeson and
-get the total_count value, I needed the following additions:
+Time to parse this mega JSON string. Aeson seems to be the biggest contender. To
+use Aeson and get the total_count value from the return, I needed the following
+additions:
 
 ``` haskell
 {-# LANGUAGE OverloadedStrings #-}
@@ -232,8 +236,8 @@ totally different count.
 
 {% img center solaire /images/come_at_me_bro.gif 400 'solaire' 'solaire' %}
 
-Maybe the query request isn't correct? Adding a "print request" after building
-the request shows:
+Maybe the query request isn't correct? Adding a ```print request``` on line 31
+after building the request shows:
 
 ```
 Request {
