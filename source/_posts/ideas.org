@@ -481,6 +481,10 @@ development staff should be handled by the development manager. Time sheets,
 vacation tracking, interaction with recruiters, and project management should be
 kept from the development staff.
 * Better OO Design
+* When to Use Clojure
+* Building A Career
+* Office Productivity
+* How to Best Teach Programming
 * Co-op Reading List
 ** http://gitimmersion.com/
 ** Clean Code
