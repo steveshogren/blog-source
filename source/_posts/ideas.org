@@ -699,7 +699,11 @@ Request {
 
 Crap, that queryString isn't right!
 "?q=tetris%2Blanguage%3Aassembly&order=desc&sort=stars" It encoded my "+"
-and ":"!! 
+and ":"! After an hour of reading through docs and researching URL encoding
+specs, it dawns on me. "+" is an encoded space. I change my query to ```("q",
+Just "tetris+language:assembly")```
+and it works!
+
 
 
 
