@@ -256,8 +256,7 @@ Request {
 }
 ```
 
-The queryString isn't right!
-```?q=tetris%2Blanguage%3Aassembly&order=desc&sort=stars``` It encoded my ```+``` 
+The queryString isn't right! ```?q=tetris%2Blanguage%3Aassembly&order=desc&sort=stars``` It encoded my ```+``` 
 and ```:```! After an hour of reading through docs and researching URL encoding
 specs, it dawns on me. ```+``` is an encoded whitespace.
 
@@ -272,6 +271,47 @@ GitHub and parses it into an Int. After over four hours of <del>Dark
 Souls</del>Haskell punishment, we deserve to enjoy a bonfire!
 
 {% img center solaire /images/solaire_sitting.gif 400 'solaire' 'solaire' %}
+
+## Edit: Bonus Round!
+
+Thanks to
+[Chris Allen](http://bitemyapp.com/posts/2016-02-06-haskell-is-not-trivial-not-unfair.html)
+and
+[/u/JeanParker](https://www.reddit.com/r/programming/comments/44hdl6/haskell_is_the_dark_souls_of_programming/czqaxfu)
+for pointing me towards [wreq](http://www.serpentine.com/wreq/), which weirdly
+didn't come up when I looked around for libs yesterday. Yep, it was 6th on the
+Google when searching for ```haskell https get```. ```Network.HTTP``` is the
+top three results, and that doesn't even _do_ https.
+
+¯\\_(ツ)_/¯
+
+Armed with their helpful suggestions, I knocked this out this morning.
+
+``` haskell
+import Network.Wreq
+import Control.Lens
+import Data.Aeson
+import Data.Aeson.Lens
+import qualified Data.Text as T
+import qualified Data.ByteString.Char8 as BS
+
+opts :: String -> String -> Options
+opts lang token = defaults & param "q" .~ [T.pack $ "tetris language:" ++ lang]
+                        & param "order" .~ ["desc"]
+                        & param "sort" .~ ["stars"]
+                        & header "Authorization" .~ [BS.pack $ "token " ++ token]
+
+query lang = do
+    token <- readFile "token"
+    r <- getWith (opts lang token) "https://api.github.com/search/repositories"
+    return $ r ^? responseBody . key "total_count" . _Number
+```
+
+MUCH better. This includes reading my token from file called "token" so I don't
+accidentally commit it. Also includes building up the different query options
+based on inputs, which was the next step. Thanks y'all.
+
+{% img center solaire /images/solaire_idle.gif 200 'solaire' 'solaire' %}
 
 > Pixel gifs sourced from
 > [zedotagger](http://zedotagger.deviantart.com/gallery/54317550/Dark-Souls) on
