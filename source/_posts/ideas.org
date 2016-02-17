@@ -373,7 +373,57 @@ have enough knowledge to fill in any gaps while learning more.
 + Management that wants to be able to control the situation
 
 * Pop Culture Architecture
-> "microservices are so hot right now!"
+> "Microservices are so hot right now!"
+
+A good architect will make most developers unhappy. 
+
+I've met many passionate and well-read developers. We work hard to "stay
+current" by reading books and blogs, attending conferences (even paying for
+ourselves), and learning new technologies. Knowing cool new things to signal
+your worth in an interview helps defend against job loss.
+
+What does an architect do? In my opinion, a great architect does all that, and
+they protect the codebase from the developers who want to practice cool new
+things.
+
+Why does the codebase need protecting? Aren't the developers passionate and
+well-read? Developers want to accomplish a lot of business value, right? They
+want to learn the fastest and best tools to do the job. Learning the fastest
+tools should accomplish the most business value. But it rarely does. Using the
+newest tools only makes sense when they are the right tool for the job. Often
+that means greenfield development projects or project rewrites.
+
+The business' goals and the developers' goals diverge as soon as the newest tool
+isn't the right tool for the job.
+
+Enter "Pop Culture Architecture"
+
+Pop Culture Architecture is the current "fad" of the day. I have seen it be
+microservices, business capabilities, CQRS, test driven development,
+service-oriented architecture, ORMs, ActiveRecord, etc. Some of these, like test
+driven development, are thought of as practices, but still influence every
+aspect of your code.
+
+The problem with "Pop Culture Architecture" is that it often is about fashion,
+not about practicality. A developer or architect reads about a new architecture,
+and rather than selecting it for its value, select it to get a chance to learn
+it. When then the original decision maker leaves, the pain of maintaining the
+system either causes a massive restructuring or cries for a "rewrite".
+
+## Example: Microservices
+
+Currently, I believe microservices fits this perfectly. Microservices have very
+clear pros and cons. If you need the ability to have a huge team that doesn't
+want to work in a single codebase or language, you will be willing to pay the
+hefty costs: loss of strong consistency, a far more complex operational
+footprint and deployment, and a codebase that takes longer to program. If you
+need a huge team of experts, it might be more effective to pay the significant
+costs. If you have a small team, microservices is unlikely to solve your
+communication or trust issues. You will be spending a dollar on deployment,
+consistency issues, distributed debugging, and programming just to save a penny
+on communication.
+
+The problem is when faced with this, and the logical conclusion is microservices do
 
 * Code of Conduct for this Self Organizing Team 
 
