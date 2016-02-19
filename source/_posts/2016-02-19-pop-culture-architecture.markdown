@@ -14,8 +14,8 @@ published: true
 
 Pop Culture Architecture is the current "fad" of the day. I have seen it be
 microservices, business capabilities, CQRS, service-oriented architecture,
-Domain-Driven Design, and MVC. Each of these have been fashionable at some
-point.
+Domain-Driven Design, test driven development, ORMs, ActiveRecord, and MVC. Each
+of these have been fashionable at some point.
 
 Fashion is ultimately a signaling mechanism for status. We are attracted to
 fashionable architectures because they signal we have worked on elite teams. The
