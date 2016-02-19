@@ -3,7 +3,7 @@ layout: post
 title: "Pop Culture Architecture"
 date: 2016-02-19 06:55:30 -0500
 comments: true
-categories: 
+categories:
 - architecture
 - Technical Skills
 - Meta game
@@ -39,11 +39,11 @@ issues, distributed debugging, and basic programming just to save a penny on
 communication and teamwork.
 [(2)](http://www.stackbuilders.com/news/the-hidden-costs-of-microservices)
 
-For most teams the logical conclusion should be: a microservice architecture
-solves problems we don't have.
+For most teams, the logical conclusion probably will be: a microservice
+architecture solves problems we don't have.
 
-Microservices are fashionable because they indicate work at the size and scale
-of a handful of elite companies. You would only likely encounter a couple
+Microservices remain fashionable because they indicate work at the size and
+scale of a handful of elite companies. You would only likely encounter a couple
 hundred companies in the world that have a development staff so large or loads
 so high as to truly require such a system. Because of the rarity of actual need,
 it is a perfect signaling mechanism for status.
