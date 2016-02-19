@@ -13,9 +13,9 @@ published: true
 > "ActiveRecord is so hot right now!" - comment in 2006
 
 Pop Culture Architecture is the current "fad" of the day. I have seen it be
-microservices, business capabilities, CQRS, test driven development,
-service-oriented architecture, ORMs, and ActiveRecord. Each of these have been
-fashionable at some point.
+microservices, business capabilities, CQRS, service-oriented architecture,
+Domain-Driven Design, and MVC. Each of these have been fashionable at some
+point.
 
 Fashion is ultimately a signaling mechanism for status. We are attracted to
 fashionable architectures because they signal we have worked on elite teams. The
