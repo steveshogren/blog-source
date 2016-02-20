@@ -1,29 +1,38 @@
 ---
-layout: default
+layout: page
+title: ""
+date:
+footer: false
+sharing: false
 ---
 
+<h2>My Philosophy</h2>
+<table>
+    <tr>
+        <td>XP</td>
+        <td>snad adlja a;ljadf adf;l</td>
+    </tr>
+    <tr>
+        <td>TDD</td>
+    </tr>
+</table>
+
+{% img center people /images/icons/1455995805_group.png 50 'people' 'people' %}
+
+<div>Kanban</div>
+<div>Self-Organizing Teams</div>
+<div>Polyglot Development</div>
+<div>Continuous Delivery</div>
+<div>Consistent Improvement</div>
+<div>TDD</div>
+<div>Pair Programming</div>
+
 <div class="blog-index">
-  {% assign index = true %}
-  {% for post in paginator.posts %}
-  {% assign content = post.content %}
-    <article>
-      {% include article.html %}
-    </article>
-  {% endfor %}
-  <div class="pagination">
-    {% if paginator.next_page %}
-      <a class="prev" href="{{paginator.next_page_path}}">&larr; Older</a>
-    {% endif %}
-    <a href="/blog/archives">Blog Archives</a>
-    {% if paginator.previous_page %}
-    <a class="next" href="{{paginator.previous_page_path}}">Newer &rarr;</a>
-    {% endif %}
-  </div>
+    What are you interested in?
+    <div>Clojure</div>
+    <div>Unit Testing</div>
+    <div>F#</div>
+    <div>Emacs</div>
+    <div>Technical Leadership</div>
+    <div>People Management</div>
 </div>
-<aside class="sidebar">
-  {% if site.blog_index_asides.size %}
-    {% include_array blog_index_asides %}
-  {% else %}
-    {% include_array default_asides %}
-  {% endif %}
-</aside>
